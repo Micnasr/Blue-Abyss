@@ -7,9 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Land Movement")]
     public float moveSpeed;
-
+    public float gravity;
     public float groundDrag;
-
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
@@ -17,9 +16,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Water Movement")]
     public float swimSpeed;
-
-
-    public Transform target;
     public bool isSwimming;
 
     [Header("Keybinds")]
@@ -54,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isSwimming)
         {
-            MovePlayer();
+            MoveGround();
         }
         else
         {
@@ -98,16 +94,12 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void MovePlayer()
+    private void MoveGround()
     {
-        // If we are on the ground then gravity should be on
-        if (rb.useGravity == false)
-        {
-            rb.useGravity = true;
-        }
+        ApplyCustomGravity();
 
         moveDirection = orientation.forward * verticalInput + orientation.right * horizonInput;
-
+        
         // On ground
         if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
@@ -132,7 +124,6 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
@@ -143,12 +134,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveSwim()
     {
-        //Disable Gravity in Water
-        if (rb.useGravity == true)
-        {
-            rb.useGravity = false;
-        }
-
         moveDirection = orientation.forward * verticalInput + orientation.right * horizonInput;
 
         // Apply swim movement force
@@ -170,15 +155,21 @@ public class PlayerMovement : MonoBehaviour
     private void SwimUp()
     {
         // Move the player upwards
-        Vector3 swimUpForce = transform.up * swimSpeed;
+        Vector3 swimUpForce = transform.up * swimSpeed/2;
         rb.AddForce(swimUpForce, ForceMode.Acceleration);
     }
 
     private void SwimDown()
     {
         // Move the player downwards
-        Vector3 swimDownForce = -transform.up * swimSpeed;
+        Vector3 swimDownForce = -transform.up * swimSpeed/4;
         rb.AddForce(swimDownForce, ForceMode.Acceleration);
+    }
+
+    private void ApplyCustomGravity()
+    {
+        Vector3 gravityForce = -transform.up * gravity / 2;
+        rb.AddForce(gravityForce, ForceMode.Acceleration);
     }
 
 

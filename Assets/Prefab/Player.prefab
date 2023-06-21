@@ -165,7 +165,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
@@ -183,10 +183,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 150
+  gravity: 30
   groundDrag: 5
   jumpForce: 200
-  jumpCooldown: 1
-  airMultiplier: 0.4
+  jumpCooldown: 0.6
+  airMultiplier: 0.3
+  swimSpeed: 60
+  isSwimming: 0
   jumpKey: 32
   playerHeight: 1.8
   whatIsGround:
