@@ -5,7 +5,7 @@ using UnityEngine.XR;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement")]
+    [Header("Land Movement")]
     public float moveSpeed;
 
     public float groundDrag;
@@ -14,6 +14,13 @@ public class PlayerMovement : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
+
+    [Header("Water Movement")]
+    public float swimSpeed;
+
+
+    public Transform target;
+    public bool isSwimming;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -40,24 +47,37 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
 
         readyToJump = true;
+        isSwimming = false;
     }
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        if (!isSwimming)
+        {
+            MovePlayer();
+        }
+        else
+        {
+            MoveSwim();
+        }
     }
 
     private void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.4f, whatIsGround);
         myInput();
-        SpeedControl();
 
-        // Handle Drag
-        if (grounded)
-            rb.drag = groundDrag;
-        else
-            rb.drag = groundDrag/2;
+        // Check if we are on the ground
+        if (!isSwimming)
+        {
+            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+            SpeedControl();
+
+            // Handle Drag
+            if (grounded)
+                rb.drag = groundDrag;
+            else
+                rb.drag = groundDrag / 2;
+        }
         
     }
 
@@ -66,7 +86,8 @@ public class PlayerMovement : MonoBehaviour
         horizonInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        // Handle Jump Logic
+        if (Input.GetKey(jumpKey) && readyToJump && grounded && !isSwimming)
         {
             readyToJump = false;
 
@@ -79,13 +100,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
+        // If we are on the ground then gravity should be on
+        if (rb.useGravity == false)
+        {
+            rb.useGravity = true;
+        }
+
         moveDirection = orientation.forward * verticalInput + orientation.right * horizonInput;
 
-        //on ground
+        // On ground
         if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
-        //if in the air
+        // If in the air
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
     }
@@ -114,4 +141,46 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
     }
 
+    private void MoveSwim()
+    {
+        //Disable Gravity in Water
+        if (rb.useGravity == true)
+        {
+            rb.useGravity = false;
+        }
+
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizonInput;
+
+        // Apply swim movement force
+        rb.AddForce(moveDirection.normalized * swimSpeed * 10f, ForceMode.Force);
+
+        // Check for swim up input to move towards the surface
+        if (Input.GetKey(jumpKey))
+        {
+            SwimUp();
+        }
+
+        // Check for dive input to move downwards
+        if (Input.GetKey(KeyCode.C))
+        {
+            SwimDown();
+        }
+    }
+
+    private void SwimUp()
+    {
+        // Move the player upwards
+        Vector3 swimUpForce = transform.up * swimSpeed;
+        rb.AddForce(swimUpForce, ForceMode.Acceleration);
+    }
+
+    private void SwimDown()
+    {
+        // Move the player downwards
+        Vector3 swimDownForce = -transform.up * swimSpeed;
+        rb.AddForce(swimDownForce, ForceMode.Acceleration);
+    }
+
+
 }
+
