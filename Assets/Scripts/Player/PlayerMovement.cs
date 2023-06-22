@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
     private void SwimUp()
     {
         // Move the player upwards
-        Vector3 swimUpForce = transform.up * swimSpeed/2;
+        Vector3 swimUpForce = transform.up * swimSpeed/1.5f;
         rb.AddForce(swimUpForce, ForceMode.Acceleration);
     }
 
