@@ -971,9 +971,16 @@ MonoBehaviour:
     type: 3}
   flockSize: 20
   spawnBounds: {x: 10, y: 5, z: 10}
-  minSpeed: 1
-  maxSpeed: 1
+  _minSpeed: 2
+  _maxSpeed: 1
   _cohesionDistance: 5
+  _avoidanceDistance: 2
+  _alignmentDistance: 2
+  _boundsDistance: 10
+  _cohesionWeight: 2
+  _avoidanceWeight: 1
+  _alignmentWeight: 1
+  _boundsWeight: 1
 --- !u!4 &551276357
 Transform:
   m_ObjectHideFlags: 0
