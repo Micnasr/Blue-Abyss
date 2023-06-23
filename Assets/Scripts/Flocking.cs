@@ -32,6 +32,10 @@ public class Flocking : MonoBehaviour
     [SerializeField] private float _alignmentDistance;
     public float alignmentDistance { get { return _alignmentDistance; } }
 
+    [Range(0, 10)]
+    [SerializeField] private float _obstacleDistance;
+    public float obstacleDistance { get { return _obstacleDistance; } }
+
     [Range(0, 100)]
     [SerializeField] private float _boundsDistance;
     public float boundsDistance { get { return _boundsDistance; } }
@@ -52,9 +56,16 @@ public class Flocking : MonoBehaviour
     [SerializeField] private float _alignmentWeight;
     public float alignmentWeight { get { return _alignmentWeight; } }
 
+    // Bound is how far the fish can swim to
     [Range(0, 10)]
     [SerializeField] private float _boundsWeight;
     public float boundsWeight { get { return _boundsWeight; } }
+
+    [Range(0, 10)]
+    [SerializeField] private float _obstacleWeight;
+    public float obstacleWeight { get { return _obstacleWeight; } }
+
+
 
 
     public FlockUnit[] allUnits { get; set; }
