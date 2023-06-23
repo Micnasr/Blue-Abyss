@@ -1070,27 +1070,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &629349336 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 942630516093076900, guid: b5c90b3168c6d304b87f8c1058557487,
-    type: 3}
-  m_PrefabInstance: {fileID: 2415784337216675761}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &629349340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 629349336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 015db423c06914f4c92a284760520a71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxOxygen: 100
-  oxygenDepletionRate: 1
-  oxygenRegenRate: 2
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,9 +2502,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 942630516093076900, guid: b5c90b3168c6d304b87f8c1058557487,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 629349340}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5c90b3168c6d304b87f8c1058557487, type: 3}

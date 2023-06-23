@@ -8,21 +8,18 @@ public class OxygenController : MonoBehaviour
     public float oxygenRegenRate = 2f;
 
     private float currentOxygen;
-    private bool isUnderwater;
 
-    private PlayerMovement underwaterDetection;
+    public bool isHeadAboveWater = false;
 
     private void Start()
     {
         currentOxygen = maxOxygen;
-        underwaterDetection = GetComponent<PlayerMovement>();
     }
 
     private void Update()
     {
-        isUnderwater = underwaterDetection.isSwimming;
-
-        if (isUnderwater)
+        // Head under the water
+        if (isHeadAboveWater == false)
         {
             // Deplete oxygen over time
             currentOxygen -= oxygenDepletionRate * Time.deltaTime;

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3513052647204077285}
   - component: {fileID: 244468702031392094}
   - component: {fileID: 603366072591318878}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 6357236219538041072}
   - component: {fileID: 5135001688982826863}
   - component: {fileID: 5295021318065392763}
+  - component: {fileID: 6995076460426175063}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -197,6 +198,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   orientation: {fileID: 7687243092260039680}
+--- !u!114 &6995076460426175063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942630516093076900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015db423c06914f4c92a284760520a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxOxygen: 100
+  oxygenDepletionRate: 1
+  oxygenRegenRate: 2
+  isHeadAboveWater: 0
 --- !u!1 &6690070888239028603
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,9 +289,10 @@ GameObject:
   - component: {fileID: 247792847185893797}
   - component: {fileID: 2558970574876043080}
   - component: {fileID: 822525217232812650}
+  - component: {fileID: 3455411823506007225}
   m_Layer: 0
   m_Name: PlayerCam
-  m_TagString: MainCamera
+  m_TagString: PlayerHead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -412,3 +430,24 @@ MonoBehaviour:
   sensX: 400
   sensY: 400
   orientation: {fileID: 7687243092260039680}
+--- !u!65 &3455411823506007225
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7435267725630004910}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}

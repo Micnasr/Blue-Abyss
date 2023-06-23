@@ -8,10 +8,15 @@ public class Water : MonoBehaviour
     {
         Transform parent = other.transform.parent;
 
-        if (parent.CompareTag("Player") && other.GetComponentInParent<PlayerMovement>() != null)
+        if (parent.CompareTag("Player") && other.GetComponentInParent<PlayerMovement>() != null && !other.CompareTag("PlayerHead"))
         {
             PlayerMovement movement = other.GetComponentInParent<PlayerMovement>();
             movement.isSwimming = true;
+        } 
+        else if (other.CompareTag("PlayerHead"))
+        {
+            OxygenController oxygenScript = other.GetComponentInParent<OxygenController>();
+            oxygenScript.isHeadAboveWater = false;
         }
     }
 
@@ -19,10 +24,18 @@ public class Water : MonoBehaviour
     {
         Transform parent = other.transform.parent;
 
-        if (parent.CompareTag("Player") && other.GetComponentInParent<PlayerMovement>() != null)
+        // If Body leaves the water then we are NO longer swimming
+        if (parent.CompareTag("Player") && other.GetComponentInParent<PlayerMovement>() != null && !other.CompareTag("PlayerHead"))
         {
+            Debug.Log(other.gameObject.name);
             PlayerMovement movement = other.GetComponentInParent<PlayerMovement>();
             movement.isSwimming = false;
+        }
+        // If head leaves the water only then we can breath
+        else if (other.CompareTag("PlayerHead"))
+        {
+            OxygenController oxygenScript = other.GetComponentInParent<OxygenController>();
+            oxygenScript.isHeadAboveWater = true;
         }
     }
 }
