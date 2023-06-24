@@ -1,23 +1,33 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OxygenController : MonoBehaviour
 {
-    public float maxOxygen = 100f;
-    public float oxygenDepletionRate = 1f;
-    public float oxygenRegenRate = 2f;
+    public float maxOxygen;
+    public float oxygenDepletionRate;
+    public float oxygenRegenRate;
 
     private float currentOxygen;
 
-    public bool isHeadAboveWater = false;
+    public bool isHeadAboveWater;
+
+    public Slider oxygenMeter;
 
     private void Start()
     {
         currentOxygen = maxOxygen;
+        oxygenMeter.maxValue = maxOxygen;
+
+        // Player starts on land
+        isHeadAboveWater = true;
     }
 
     private void Update()
     {
+        // Update UI
+        oxygenMeter.value = currentOxygen;
+
         // Head under the water
         if (isHeadAboveWater == false)
         {

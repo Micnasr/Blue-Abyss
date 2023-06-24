@@ -27,7 +27,6 @@ public class Water : MonoBehaviour
         // If Body leaves the water then we are NO longer swimming
         if (parent.CompareTag("Player") && other.GetComponentInParent<PlayerMovement>() != null && !other.CompareTag("PlayerHead"))
         {
-            Debug.Log(other.gameObject.name);
             PlayerMovement movement = other.GetComponentInParent<PlayerMovement>();
             movement.isSwimming = false;
         }
