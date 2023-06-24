@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14e8c07efd01f194096d33768f369b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flockUnitPrefab: {fileID: 5729563550784090938, guid: b1a52364405b5744385d0958112c53da,
+  flockUnitPrefab: {fileID: 2229133211678033367, guid: fcb7262b9ce9a5d48baa8427477362d3,
     type: 3}
   flockSize: 20
   spawnBounds: {x: 10, y: 5, z: 10}

@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode diveKey = KeyCode.C;
 
 
     [Header("Ground Check")]
@@ -146,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Check for dive input to move downwards
-        if (Input.GetKey(KeyCode.C))
+        if (Input.GetKey(diveKey))
         {
             SwimDown();
         }
