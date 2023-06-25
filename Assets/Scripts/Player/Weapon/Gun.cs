@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] GunData gunData;
+    [SerializeField] Transform muzzle;
+
+    public Camera playerCam;
+
+    public Animator spoolAnimator;
 
     float timeSinceLastShot;
 
@@ -15,28 +21,28 @@ public class Gun : MonoBehaviour
         PlayerShoot.shootInput += Shoot;
     }
 
-    private bool CanShoot() => !gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f);
+    private bool CanShoot() => timeSinceLastShot > 1f / (gunData.fireRate / 60f);
+
     public void Shoot()
     {
         if (CanShoot())
         {
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, gunData.maxDistance))
+
+            RaycastHit hitInfo;
+
+            if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hitInfo, gunData.maxDistance))
             {
                 Debug.Log(hitInfo.transform.name);
             }
 
             timeSinceLastShot = 0;
-            OnGunShot();
+
+            spoolAnimator.Play("BasicHarpoonShoot", 0, 0);
         }
     }
 
     private void Update()
     {
         timeSinceLastShot += Time.deltaTime;
-    }
-
-    private static void OnGunShot()
-    {
-        
     }
 }
