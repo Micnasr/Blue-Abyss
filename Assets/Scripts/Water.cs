@@ -17,6 +17,8 @@ public class Water : MonoBehaviour
         {
             OxygenController oxygenScript = other.GetComponentInParent<OxygenController>();
             oxygenScript.isHeadAboveWater = false;
+
+            RenderSettings.fog = true;
         }
     }
 
@@ -35,6 +37,8 @@ public class Water : MonoBehaviour
         {
             OxygenController oxygenScript = other.GetComponentInParent<OxygenController>();
             oxygenScript.isHeadAboveWater = true;
+
+            RenderSettings.fog = false;
         }
     }
 }

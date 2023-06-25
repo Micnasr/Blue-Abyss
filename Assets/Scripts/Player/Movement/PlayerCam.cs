@@ -13,8 +13,6 @@ public class PlayerCam : MonoBehaviour
     float xRotation;
     float yRotation;
 
-
-
     void Start()
     {
         //Lock Cursor & Visibility 
