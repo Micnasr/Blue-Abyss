@@ -7,7 +7,9 @@ public class Gun : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] GunData gunData;
-    [SerializeField] Transform muzzle;
+    public GameObject hitOnEffect;
+
+    public Transform muzzle;
 
     public Camera playerCam;
 
@@ -38,6 +40,8 @@ public class Gun : MonoBehaviour
             timeSinceLastShot = 0;
 
             spoolAnimator.Play("BasicHarpoonShoot", 0, 0);
+
+            Instantiate(hitOnEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
         }
     }
 

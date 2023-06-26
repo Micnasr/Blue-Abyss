@@ -763,6 +763,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: bb4983ddd2603f3438d978b96d14e482, type: 2}
+  hitOnEffect: {fileID: 8226690080474338650, guid: 585e7307f3e998b4681f382cd08e5c30,
+    type: 3}
   muzzle: {fileID: 1128077903629659498}
   playerCam: {fileID: 2423798104463690300}
   spoolAnimator: {fileID: 5466449204410511317}
