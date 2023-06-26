@@ -34,14 +34,15 @@ public class Gun : MonoBehaviour
 
             if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hitInfo, gunData.maxDistance))
             {
+                // Create Hit on Effect
+                Instantiate(hitOnEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
                 Debug.Log(hitInfo.transform.name);
             }
 
             timeSinceLastShot = 0;
 
+            // Play Animation
             spoolAnimator.Play("BasicHarpoonShoot", 0, 0);
-
-            Instantiate(hitOnEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
         }
     }
 
