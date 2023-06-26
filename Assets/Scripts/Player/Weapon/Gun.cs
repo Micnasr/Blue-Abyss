@@ -30,13 +30,19 @@ public class Gun : MonoBehaviour
         if (CanShoot())
         {
 
-            RaycastHit hitInfo;
+            RaycastHit[] hitInfo;
 
-            if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hitInfo, gunData.maxDistance))
+            // Raycast Goes Through Everything
+            hitInfo = Physics.RaycastAll(playerCam.transform.position, playerCam.transform.forward, gunData.maxDistance);
+
+            for (int i = 0; i < hitInfo.Length; i++)
             {
-                // Create Hit on Effect
-                Instantiate(hitOnEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-                Debug.Log(hitInfo.transform.name);
+                if (!hitInfo[i].transform.CompareTag("WaterCollider"))
+                {
+                    // Create Hit on Effect
+                    Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
+                    Debug.Log(hitInfo[i].transform.name);
+                }
             }
 
             timeSinceLastShot = 0;
