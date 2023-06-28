@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 5295021318065392763}
   - component: {fileID: 6995076460426175063}
   - component: {fileID: 2845071954360440733}
+  - component: {fileID: 8381478848916375725}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -262,6 +263,7 @@ MonoBehaviour:
   maxOxygen: 20
   oxygenDepletionRate: 1
   oxygenRegenRate: 5
+  suffocateDamage: 15
   isHeadAboveWater: 1
   oxygenMeter: {fileID: 0}
 --- !u!114 &2845071954360440733
@@ -276,6 +278,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d15b27b25683043943a74313689c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8381478848916375725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942630516093076900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64d2d9a51a257643b4fad43d8fb3101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  healthMeter: {fileID: 0}
 --- !u!1 &2855930086129952155
 GameObject:
   m_ObjectHideFlags: 0

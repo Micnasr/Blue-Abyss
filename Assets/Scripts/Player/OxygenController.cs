@@ -4,15 +4,19 @@ using UnityEngine.UI;
 
 public class OxygenController : MonoBehaviour
 {
+    [Header("Oxygen Properties")]
     public float maxOxygen;
     public float oxygenDepletionRate;
     public float oxygenRegenRate;
+    public float suffocateDamage;
 
     private float currentOxygen;
 
     public bool isHeadAboveWater;
 
     public Slider oxygenMeter;
+
+    HealthManager healthManager;
 
     private void Start()
     {
@@ -21,6 +25,8 @@ public class OxygenController : MonoBehaviour
 
         // Player starts on land
         isHeadAboveWater = true;
+
+        healthManager = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthManager>();
     }
 
     private void Update()
@@ -49,6 +55,19 @@ public class OxygenController : MonoBehaviour
 
     private void HandleOutOfOxygen()
     {
-        Debug.Log("DROWNING");
+        SuffocateDamage();
+    }
+
+    private void SuffocateDamage()
+    {
+        if (healthManager != null)
+        {
+            float damage = suffocateDamage * Time.deltaTime;
+            healthManager.TakeDamage(damage);
+        } 
+        else
+        {
+            Debug.LogError("Player Not Found - Health Manager");
+        }
     }
 }
