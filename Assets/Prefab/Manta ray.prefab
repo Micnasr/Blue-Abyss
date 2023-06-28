@@ -364,6 +364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7575330500591073933}
   - component: {fileID: 7838914777460047927}
+  - component: {fileID: 4103867201197148841}
   m_Layer: 0
   m_Name: Manta ray
   m_TagString: Untagged
@@ -401,14 +402,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
-  turningSpeed: 1
+  turningSpeed: 0.6
   movementSpeed: 5
   threshold: 4
-  raycastDistance: 10
+  angleCheck: 20
+  raycastDistance: 15
   avoidanceDistance: 10
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 512
+--- !u!95 &4103867201197148841
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5120298219583916112}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 22dbd45ce809b5d4b896a7846af1179c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6146987654120202195
 GameObject:
   m_ObjectHideFlags: 0

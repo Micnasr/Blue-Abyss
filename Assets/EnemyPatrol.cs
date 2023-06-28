@@ -6,10 +6,13 @@ public class EnemyPatrol : MonoBehaviour
     public List<Transform> waypoints;
     private Transform currentWaypoint;
 
+    [Header("Movement")]
     public float turningSpeed;
     public float movementSpeed;
     public float threshold;
 
+    [Header("Collision Detection")]
+    public float angleCheck;
     public float raycastDistance;
     public float avoidanceDistance;
 
@@ -54,12 +57,22 @@ public class EnemyPatrol : MonoBehaviour
         Vector3 direction = targetPosition - transform.position;
         direction.y = 0;
 
-        RaycastHit hit;
-        bool obstacleDetected = Physics.Raycast(transform.position, transform.forward, out hit, raycastDistance, obstacleLayer);
+        RaycastHit[] hits = new RaycastHit[3];
+        bool[] obstacleDetected = new bool[3];
 
-        if (obstacleDetected)
+        // Perform raycasts in the middle, left, and right directions
+        Vector3[] raycastDirections = { transform.forward, Quaternion.AngleAxis(-angleCheck, transform.up) * transform.forward, Quaternion.AngleAxis(angleCheck, transform.up) * transform.forward };
+
+        // Shoot a raycast in 3 directions
+        for (int i = 0; i < raycastDirections.Length; i++)
         {
-            // Perform a 360-degree rotation while scanning for an empty spot ~MN PATENTED :)
+            obstacleDetected[i] = Physics.Raycast(transform.position, raycastDirections[i], out hits[i], raycastDistance, obstacleLayer);
+        }
+
+        // If one of the 3 directions are obstructed
+        if (obstacleDetected[0] || obstacleDetected[1] || obstacleDetected[2])
+        {
+            // Perform a 360-degree rotation while scanning for an empty spot
             float angleStep = 10f;
             float maxAngle = 360f;
             float currentAngle = 0f;
@@ -68,12 +81,12 @@ public class EnemyPatrol : MonoBehaviour
             while (currentAngle < maxAngle)
             {
                 // Calculate the next rotation angle
-                float angle = currentAngle * Mathf.Deg2Rad;
-                Vector3 rotationVector = new Vector3(Mathf.Sin(angle), 0f, Mathf.Cos(angle));
                 Vector3 rotatedDirection = Quaternion.AngleAxis(currentAngle, transform.up) * direction;
 
-                // Perform a raycast in the rotated direction
-                if (!Physics.Raycast(transform.position, rotatedDirection, raycastDistance, obstacleLayer))
+                // Perform 3 raycasts in the rotated direction
+                if (!Physics.Raycast(transform.position, rotatedDirection, raycastDistance, obstacleLayer) &&
+                    !Physics.Raycast(transform.position, Quaternion.AngleAxis(-angleCheck, transform.up) * rotatedDirection, raycastDistance, obstacleLayer) &&
+                    !Physics.Raycast(transform.position, Quaternion.AngleAxis(angleCheck, transform.up) * rotatedDirection, raycastDistance, obstacleLayer))
                 {
                     // Found an empty spot to navigate through
                     targetPosition = transform.position + rotatedDirection * raycastDistance;
@@ -85,11 +98,12 @@ public class EnemyPatrol : MonoBehaviour
                 currentAngle += angleStep;
             }
 
-            // If no empty spot was found, fallback to avoidance behavior
+            // If no empty spot was found throw an error
             if (!foundEmptySpot)
             {
                 Vector3 avoidanceDirection = Vector3.Cross(transform.up, direction.normalized).normalized;
                 targetPosition = transform.position + avoidanceDirection * avoidanceDistance;
+                Debug.LogError("Stuck in all directions!!!!");
             }
         }
 
@@ -99,5 +113,10 @@ public class EnemyPatrol : MonoBehaviour
 
         // Move towards the target position
         transform.position += transform.forward * Time.deltaTime * movementSpeed;
+
+        // Draw debug rays
+        Debug.DrawRay(transform.position, transform.forward * raycastDistance, Color.red);
+        Debug.DrawRay(transform.position, Quaternion.AngleAxis(-angleCheck, transform.up) * transform.forward * raycastDistance, Color.green);
+        Debug.DrawRay(transform.position, Quaternion.AngleAxis(angleCheck, transform.up) * transform.forward * raycastDistance, Color.blue);
     }
 }
