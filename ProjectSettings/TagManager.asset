@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerHead
   - WaterCollider
+  - waypoint
   layers:
   - Default
   - TransparentFX
