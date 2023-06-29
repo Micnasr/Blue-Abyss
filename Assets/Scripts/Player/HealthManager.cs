@@ -16,7 +16,6 @@ public class HealthManager : MonoBehaviour
         healthMeter.maxValue = maxHealth;
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Update UI

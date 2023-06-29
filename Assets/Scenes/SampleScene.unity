@@ -978,26 +978,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 540777976}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &692159430 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 942630516093076900, guid: b5c90b3168c6d304b87f8c1058557487,
-    type: 3}
-  m_PrefabInstance: {fileID: 2415784337216675761}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &692159436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692159430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b64d2d9a51a257643b4fad43d8fb3101, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  healthMeter: {fileID: 1792514602}
 --- !u!1 &759088484
 GameObject:
   m_ObjectHideFlags: 0
@@ -2841,6 +2821,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 942630516093076900, guid: b5c90b3168c6d304b87f8c1058557487,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6357236219538041072, guid: b5c90b3168c6d304b87f8c1058557487,
         type: 3}
       propertyPath: m_RootOrder
@@ -2901,19 +2886,20 @@ PrefabInstance:
       propertyPath: oxygenMeter
       value: 
       objectReference: {fileID: 1704678147}
-    - target: {fileID: 6995076460426175063, guid: b5c90b3168c6d304b87f8c1058557487,
+    - target: {fileID: 8381478848916375725, guid: b5c90b3168c6d304b87f8c1058557487,
         type: 3}
-      propertyPath: suffocateDamage
-      value: 15
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8381478848916375725, guid: b5c90b3168c6d304b87f8c1058557487,
+        type: 3}
+      propertyPath: healthMeter
+      value: 
+      objectReference: {fileID: 1792514602}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 942630516093076900, guid: b5c90b3168c6d304b87f8c1058557487,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 692159436}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5c90b3168c6d304b87f8c1058557487, type: 3}
 --- !u!1001 &5633820390672361636
 PrefabInstance:
