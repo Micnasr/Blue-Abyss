@@ -10,10 +10,17 @@ public class HealthManager : MonoBehaviour
     private float currentHealth;
     public Slider healthMeter;
 
+    [Header("Healing Properties")]
+    public float healingAmount;
+    public float timeToStartHealing;
+
+    private float timeSinceLastDamage;
+
     void Start()
     {
         currentHealth = maxHealth;
         healthMeter.maxValue = maxHealth;
+        timeSinceLastDamage = 0f;
     }
 
     void Update()
@@ -25,12 +32,30 @@ public class HealthManager : MonoBehaviour
         {
             HandleDeath();
         }
+
+        // Check if healing should start
+        if (Time.time - timeSinceLastDamage >= timeToStartHealing)
+        {
+            StartHealingOverTime();
+        }
     }
 
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        timeSinceLastDamage = Time.time;
+    }
+
+    private void StartHealingOverTime()
+    {
+        // Check if healing is needed
+        if (currentHealth < maxHealth)
+        {
+            currentHealth += healingAmount * Time.deltaTime;
+            currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        }
     }
 
     public void HandleDeath()

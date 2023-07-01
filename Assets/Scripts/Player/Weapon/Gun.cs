@@ -37,11 +37,18 @@ public class Gun : MonoBehaviour
 
             for (int i = 0; i < hitInfo.Length; i++)
             {
-                if (!hitInfo[i].transform.CompareTag("WaterCollider"))
+                // Create Hit on Effect
+                Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
+                Debug.Log(hitInfo[i].transform.name);
+
+                // Grab FishHealthManager script
+                FishHealthManager healthManager = hitInfo[i].transform.GetComponent<FishHealthManager>();
+
+                // Check if FishHealthManager script exists
+                if (healthManager != null)
                 {
-                    // Create Hit on Effect
-                    Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
-                    Debug.Log(hitInfo[i].transform.name);
+                    // Call TakeDamage function
+                    healthManager.TakeDamage(gunData.damage);
                 }
             }
 

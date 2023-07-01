@@ -83,6 +83,16 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6258126930464584737, guid: 8f53e32fbc54d7a4389e0e22c768cbdf,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6258126930464584737, guid: 8f53e32fbc54d7a4389e0e22c768cbdf,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8f53e32fbc54d7a4389e0e22c768cbdf,
         type: 3}
       propertyPath: m_Name
@@ -104,6 +114,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8172150109918521266}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8f53e32fbc54d7a4389e0e22c768cbdf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4825782725706505131}
   m_SourcePrefab: {fileID: 100100000, guid: 8f53e32fbc54d7a4389e0e22c768cbdf, type: 3}
 --- !u!1 &6024966233444046854 stripped
 GameObject:
@@ -175,3 +189,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.20135824, y: 1.0396786, z: 1.5174509}
   m_Center: {x: -0.000021134812, y: 0.019839207, z: -0.2587236}
+--- !u!114 &4825782725706505131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6024966233444046854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0747cc7cdfda4604f9ea807bc48b4234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  fishRenderer: {fileID: 0}
+  deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
+  height: 0
+  deathMax: 10
+  deathMin: 0
+  noiseStrength: 0.25
+  duration: 1
