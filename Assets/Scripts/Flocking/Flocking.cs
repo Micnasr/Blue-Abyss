@@ -75,17 +75,6 @@ public class Flocking : MonoBehaviour
         GenerateUnits();
     }
 
-    private void Update()
-    {
-        for (int i = 0; i < allUnits.Length; i++)
-        {
-            if (allUnits[i] != null) // Check if the unit is still alive
-            {
-                allUnits[i].MoveUnit();
-            }
-        }
-    }
-
     private void GenerateUnits()
     {
         allUnits = new FlockUnit[flockSize];

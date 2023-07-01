@@ -2821,11 +2821,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 942630516093076900, guid: b5c90b3168c6d304b87f8c1058557487,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6357236219538041072, guid: b5c90b3168c6d304b87f8c1058557487,
         type: 3}
       propertyPath: m_RootOrder
@@ -2888,24 +2883,9 @@ PrefabInstance:
       objectReference: {fileID: 1704678147}
     - target: {fileID: 8381478848916375725, guid: b5c90b3168c6d304b87f8c1058557487,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8381478848916375725, guid: b5c90b3168c6d304b87f8c1058557487,
-        type: 3}
       propertyPath: healthMeter
       value: 
       objectReference: {fileID: 1792514602}
-    - target: {fileID: 8381478848916375725, guid: b5c90b3168c6d304b87f8c1058557487,
-        type: 3}
-      propertyPath: healingAmount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8381478848916375725, guid: b5c90b3168c6d304b87f8c1058557487,
-        type: 3}
-      propertyPath: timeToStartHealing
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

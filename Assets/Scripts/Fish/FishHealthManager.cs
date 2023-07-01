@@ -11,8 +11,11 @@ public class FishHealthManager : MonoBehaviour
     [Header("Dead Properties")]
     public Renderer fishRenderer;
     public Material deathMaterial;
+    public float shaderTopThreshold;
+    public float shaderBottomThreshold;
 
-    public float height = 0;
+    // Only for flocks
+    private FlockUnit flockUnit;
 
     [SerializeField] private float noiseStrength = 0.25f;
     [SerializeField] private float duration = 1.0f;
@@ -29,6 +32,8 @@ public class FishHealthManager : MonoBehaviour
         {
             Debug.LogError("FishHealthManager: Renderer component not found!");
         }
+
+        flockUnit = GetComponent<FlockUnit>();
     }
 
     void Update()
@@ -67,14 +72,21 @@ public class FishHealthManager : MonoBehaviour
 
         fishRenderer.sharedMaterials = materials;
 
+        if (flockUnit != null)
+        {
+            flockUnit.enabled = false;
+        }
+
         // Start Dissolving Animation
         StartCoroutine(DissolveHeightTransition(uniqueDeathMaterial));
     }
 
     private IEnumerator DissolveHeightTransition(Material uniqueDeathMaterial)
     {
-        float startHeight = transform.position.y + 0.2f;
-        float endHeight = startHeight - 0.5f;
+        float startHeight = transform.position.y + shaderTopThreshold;
+        float endHeight = startHeight - shaderBottomThreshold;
+
+        float height;
 
         float elapsedTime = 0f;
 

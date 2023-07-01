@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class FlockUnit : MonoBehaviour
 {
@@ -28,6 +27,11 @@ public class FlockUnit : MonoBehaviour
     private void Awake()
     {
         myTransform = transform;
+    }
+
+    private void Update()
+    {
+        MoveUnit();
     }
 
     public void AssignFlock(Flocking flock)

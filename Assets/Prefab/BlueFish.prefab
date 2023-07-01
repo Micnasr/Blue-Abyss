@@ -204,8 +204,8 @@ MonoBehaviour:
   maxHealth: 3
   fishRenderer: {fileID: 0}
   deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
+  shaderTopThreshold: 0.2
+  shaderBottomThreshold: 0.7
   height: 0
-  deathMax: 10
-  deathMin: 0
   noiseStrength: 0.25
   duration: 1
