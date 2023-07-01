@@ -46,6 +46,7 @@ public class FlockUnit : MonoBehaviour
 
     public void MoveUnit()
     {
+        CheckNULL();
         FindNeighbours();
         CalculateSpeed();
 
@@ -63,6 +64,33 @@ public class FlockUnit : MonoBehaviour
 
         myTransform.forward = moveVector;
         myTransform.position += moveVector * Time.deltaTime;
+    }
+
+    private void CheckNULL()
+    {
+        for (int i = 0; i < cohesionNeighbours.Count; i++)
+        {
+            if (cohesionNeighbours[i] == null)
+            {
+                cohesionNeighbours.RemoveAt(i);
+            }
+        }
+
+        for (int i = 0; i < avoidanceNeighbours.Count; i++)
+        {
+            if (avoidanceNeighbours[i] == null)
+            {
+                avoidanceNeighbours.RemoveAt(i);
+            }
+        }
+
+        for (int i = 0; i < alignmentNeighbours.Count; i++)
+        {
+            if (alignmentNeighbours[i] == null)
+            {
+                alignmentNeighbours.RemoveAt(i);
+            }
+        }
     }
 
     private void FindNeighbours()

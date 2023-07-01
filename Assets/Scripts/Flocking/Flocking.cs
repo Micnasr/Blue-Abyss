@@ -75,6 +75,22 @@ public class Flocking : MonoBehaviour
         GenerateUnits();
     }
 
+    private void Update()
+    {
+        CheckNULL();
+    }
+
+    private void CheckNULL()
+    {
+        List<FlockUnit> unitList = new List<FlockUnit>(allUnits);
+
+        // Iterate over the list and remove null elements
+        unitList.RemoveAll(unit => unit == null);
+
+        // Convert the list back to an array
+        allUnits = unitList.ToArray();
+    }
+
     private void GenerateUnits()
     {
         allUnits = new FlockUnit[flockSize];
