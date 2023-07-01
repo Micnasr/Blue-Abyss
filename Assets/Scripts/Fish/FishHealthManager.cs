@@ -17,6 +17,9 @@ public class FishHealthManager : MonoBehaviour
     // Only for flocks
     private FlockUnit flockUnit;
 
+    // Only for non flocks
+    private EnemyPatrol enemyPatrol;
+
     [SerializeField] private float noiseStrength = 0.25f;
     [SerializeField] private float duration = 1.0f;
 
@@ -34,6 +37,7 @@ public class FishHealthManager : MonoBehaviour
         }
 
         flockUnit = GetComponent<FlockUnit>();
+        enemyPatrol = GetComponent<EnemyPatrol>();
     }
 
     void Update()
@@ -72,9 +76,14 @@ public class FishHealthManager : MonoBehaviour
 
         fishRenderer.sharedMaterials = materials;
 
+        // Disable the respective movement script
         if (flockUnit != null)
         {
             flockUnit.enabled = false;
+        }
+        else if (enemyPatrol != null)
+        {
+            enemyPatrol.enabled = false;
         }
 
         // Start Dissolving Animation
@@ -102,7 +111,7 @@ public class FishHealthManager : MonoBehaviour
         SetHeight(uniqueDeathMaterial, endHeight);
 
         // Remove The Fish
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     private void SetHeight(Material uniqueDeathMaterial, float height)

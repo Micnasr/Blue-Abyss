@@ -44,7 +44,12 @@ public class Gun : MonoBehaviour
                 // Grab FishHealthManager script
                 FishHealthManager healthManager = hitInfo[i].transform.GetComponent<FishHealthManager>();
 
-                // Check if FishHealthManager script exists
+                // If script does not exist, try to get from parent
+                if (healthManager == null)
+                {
+                    healthManager = hitInfo[i].transform.GetComponentInParent<FishHealthManager>();
+                }
+
                 if (healthManager != null)
                 {
                     // Call TakeDamage function

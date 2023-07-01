@@ -365,6 +365,7 @@ GameObject:
   - component: {fileID: 7575330500591073933}
   - component: {fileID: 7838914777460047927}
   - component: {fileID: 4103867201197148841}
+  - component: {fileID: 2855165530815692680}
   m_Layer: 0
   m_Name: Manta ray
   m_TagString: Untagged
@@ -432,6 +433,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2855165530815692680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5120298219583916112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0747cc7cdfda4604f9ea807bc48b4234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  fishRenderer: {fileID: 0}
+  deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
+  shaderTopThreshold: 0.2
+  shaderBottomThreshold: 0.7
+  noiseStrength: 0.25
+  duration: 1
 --- !u!1 &6146987654120202195
 GameObject:
   m_ObjectHideFlags: 0

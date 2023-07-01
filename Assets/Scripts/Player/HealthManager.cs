@@ -60,6 +60,6 @@ public class HealthManager : MonoBehaviour
 
     public void HandleDeath()
     {
-        Debug.Log("DEAD!");
+        Debug.Log(" Player DEAD!");
     }
 }

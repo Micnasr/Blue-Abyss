@@ -1290,7 +1290,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &855072801
 GameObject:
@@ -2798,11 +2798,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueFishFlock
       objectReference: {fileID: 0}
-    - target: {fileID: 7365322717057424214, guid: 42ef5741b5efdb64a97c251cf30ffb4a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2820,11 +2815,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2402512798355941109, guid: b5c90b3168c6d304b87f8c1058557487,
-        type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6357236219538041072, guid: b5c90b3168c6d304b87f8c1058557487,
         type: 3}
@@ -2904,25 +2894,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1360302851948373122, guid: 14303c7a08247434cbce26244024b09b,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450503188877770620, guid: 14303c7a08247434cbce26244024b09b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261093721966868460, guid: 14303c7a08247434cbce26244024b09b,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3373531262138725050, guid: 14303c7a08247434cbce26244024b09b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3373531262138725050, guid: 14303c7a08247434cbce26244024b09b,
         type: 3}
@@ -2974,40 +2949,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3921268756704890087, guid: 14303c7a08247434cbce26244024b09b,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3987782281464920085, guid: 14303c7a08247434cbce26244024b09b,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4928096913167087635, guid: 14303c7a08247434cbce26244024b09b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5792444289557000207, guid: 14303c7a08247434cbce26244024b09b,
         type: 3}
       propertyPath: m_Name
       value: MantaRay-Spawner
-      objectReference: {fileID: 0}
-    - target: {fileID: 5792444289557000207, guid: 14303c7a08247434cbce26244024b09b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6916273737480061826, guid: 14303c7a08247434cbce26244024b09b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7711895415743778366, guid: 14303c7a08247434cbce26244024b09b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
