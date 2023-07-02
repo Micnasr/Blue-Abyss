@@ -45,14 +45,6 @@ public class EnemyPatrol : MonoBehaviour
             // Check if Player is In the Range and Not on Ground
             if (PlayerInRange(aggressiveDistance) && !playerMovement.grounded)
             {
-                timer -= Time.deltaTime;
-
-                if (timer <= 0)
-                {
-                    BitePlayer();
-                    timer = biteTimer;
-                }
-
                 // Chase Player Down
                 MoveTowardsPlayer();
             }
@@ -228,7 +220,7 @@ public class EnemyPatrol : MonoBehaviour
 
         // Rotate towards the target position
         Quaternion rotation = Quaternion.LookRotation(targetPosition - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turningSpeed*2f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turningSpeed * 2f);
 
         if (PlayerInRange(stopDistance))
         {
@@ -254,11 +246,5 @@ public class EnemyPatrol : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, player.position);
         return distance <= range;
-    }
-
-    private void BitePlayer()
-    {
-        Debug.Log("Biting the player!");
-        // Add your bite logic here
     }
 }

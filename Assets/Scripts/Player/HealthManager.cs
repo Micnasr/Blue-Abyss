@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,24 +12,26 @@ public class HealthManager : MonoBehaviour
     [Header("Healing Properties")]
     public float healingAmount;
     public float timeToStartHealing;
+    public float updateDuration = 0.5f;
 
     private float timeSinceLastDamage;
 
-    void Start()
+    private void Start()
     {
         currentHealth = maxHealth;
+
         healthMeter.maxValue = maxHealth;
+        healthMeter.value = currentHealth;
+        
         timeSinceLastDamage = 0f;
     }
 
-    void Update()
+    private void Update()
     {
-        // Update UI
-        healthMeter.value = currentHealth;
-
         if (currentHealth <= 0f)
         {
             HandleDeath();
+            return;
         }
 
         // Check if healing should start
@@ -46,6 +47,9 @@ public class HealthManager : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
         timeSinceLastDamage = Time.time;
+
+        // Start the coroutine to smoothly update the health meter
+        StartCoroutine(UpdateHealthMeter(currentHealth));
     }
 
     private void StartHealingOverTime()
@@ -55,11 +59,31 @@ public class HealthManager : MonoBehaviour
         {
             currentHealth += healingAmount * Time.deltaTime;
             currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+            // Start the coroutine to smoothly update the health meter
+            StartCoroutine(UpdateHealthMeter(currentHealth));
         }
+    }
+
+    private IEnumerator UpdateHealthMeter(float targetValue)
+    {
+        float initialValue = healthMeter.value;
+        float timer = 0f;
+
+        while (timer <= updateDuration)
+        {
+            timer += Time.deltaTime;
+            float currentValue = Mathf.Lerp(initialValue, targetValue, timer / updateDuration);
+            healthMeter.value = currentValue;
+            yield return null;
+        }
+
+        // Ensure the final value is set accurately
+        healthMeter.value = targetValue;
     }
 
     public void HandleDeath()
     {
-        Debug.Log(" Player DEAD!");
+        Debug.Log("Player DEAD!");
     }
 }
