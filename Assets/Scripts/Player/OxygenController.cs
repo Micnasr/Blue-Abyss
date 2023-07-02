@@ -60,6 +60,7 @@ public class OxygenController : MonoBehaviour
 
     private void SuffocateDamage()
     {
+        Debug.Log("SUFFOCATING");
         if (healthManager != null)
         {
             float damage = suffocateDamage * Time.deltaTime;

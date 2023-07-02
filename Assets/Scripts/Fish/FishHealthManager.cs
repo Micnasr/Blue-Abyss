@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -52,6 +53,20 @@ public class FishHealthManager : MonoBehaviour
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        if (enemyPatrol != null)
+        {
+            StartCoroutine(RunAway());
+        }
+    }
+
+    private IEnumerator RunAway()
+    {
+        enemyPatrol.movementSpeed *= 2f;
+
+        yield return new WaitForSeconds(5f);
+
+        enemyPatrol.movementSpeed /= 2f;
     }
 
     public void HandleDeath()

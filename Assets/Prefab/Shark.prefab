@@ -517,7 +517,7 @@ MonoBehaviour:
   aggressiveDistance: 20
   biteTimer: 2
   stopDistance: 4.5
-  surfaceLevel: -1
+  surfaceLevel: -2
   chaseMovementSpeed: 8
 --- !u!95 &1229730717537197492
 Animator:

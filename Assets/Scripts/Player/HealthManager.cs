@@ -34,7 +34,7 @@ public class HealthManager : MonoBehaviour
             return;
         }
 
-        // Check if healing should start
+        // Check if healing should start && CHECK FOR COMBAT STATE (FUTURE)
         if (Time.time - timeSinceLastDamage >= timeToStartHealing)
         {
             StartHealingOverTime();

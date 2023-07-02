@@ -50,7 +50,6 @@ public class Gun : MonoBehaviour
 
                 // Create Hit on Effect
                 Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
-                Debug.Log(hitInfo[i].transform.name);
 
                 // Add the hit object to the list
                 hitObjects.Add(hitObject);
