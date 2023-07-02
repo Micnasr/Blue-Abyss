@@ -9,7 +9,7 @@ public class FishHealthManager : MonoBehaviour
     private float currentHealth;
 
     [Header("Dead Properties")]
-    public Renderer fishRenderer;
+    private Renderer fishRenderer;
     public Material deathMaterial;
     public float shaderTopThreshold;
     public float shaderBottomThreshold;

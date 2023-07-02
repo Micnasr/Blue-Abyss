@@ -29,25 +29,39 @@ public class Gun : MonoBehaviour
     {
         if (CanShoot())
         {
-
             RaycastHit[] hitInfo;
 
             // Raycast Goes Through Everything
             hitInfo = Physics.RaycastAll(playerCam.transform.position, playerCam.transform.forward, gunData.maxDistance);
 
+            List<GameObject> hitObjects = new List<GameObject>(); // List to store already hit objects
+
             for (int i = 0; i < hitInfo.Length; i++)
             {
+
+                GameObject hitObject = hitInfo[i].transform.gameObject;
+
+                // Check if the same object has been hit before
+                if (hitObjects.Contains(hitObject))
+                {
+                    // Skip so we dont apply damage twice
+                    continue;
+                }
+
                 // Create Hit on Effect
                 Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
                 Debug.Log(hitInfo[i].transform.name);
 
+                // Add the hit object to the list
+                hitObjects.Add(hitObject);
+
                 // Grab FishHealthManager script
-                FishHealthManager healthManager = hitInfo[i].transform.GetComponent<FishHealthManager>();
+                FishHealthManager healthManager = hitObject.GetComponent<FishHealthManager>();
 
                 // If script does not exist, try to get from parent
                 if (healthManager == null)
                 {
-                    healthManager = hitInfo[i].transform.GetComponentInParent<FishHealthManager>();
+                    healthManager = hitObject.GetComponentInParent<FishHealthManager>();
                 }
 
                 if (healthManager != null)
@@ -63,6 +77,7 @@ public class Gun : MonoBehaviour
             spoolAnimator.Play("BasicHarpoonShoot", 0, 0);
         }
     }
+
 
     private void Update()
     {
