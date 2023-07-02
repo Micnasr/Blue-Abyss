@@ -56,18 +56,18 @@ public class Gun : MonoBehaviour
                 hitObjects.Add(hitObject);
 
                 // Grab FishHealthManager script
-                FishHealthManager healthManager = hitObject.GetComponent<FishHealthManager>();
+                FishHealthManager fishHealthManager = hitObject.GetComponent<FishHealthManager>();
 
                 // If script does not exist, try to get from parent
-                if (healthManager == null)
+                if (fishHealthManager == null)
                 {
-                    healthManager = hitObject.GetComponentInParent<FishHealthManager>();
+                    fishHealthManager = hitObject.GetComponentInParent<FishHealthManager>();
                 }
 
-                if (healthManager != null)
+                if (fishHealthManager != null)
                 {
                     // Call TakeDamage function
-                    healthManager.TakeDamage(gunData.damage);
+                    fishHealthManager.TakeDamage(gunData.damage);
                 }
             }
 

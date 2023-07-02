@@ -488,7 +488,7 @@ Transform:
   - {fileID: 2751680530958928257}
   - {fileID: 6794787255382895810}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4838212377244212670
 MonoBehaviour:
@@ -503,8 +503,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
-  turningSpeed: 0.5
-  movementSpeed: 7
+  turningSpeed: 1
+  movementSpeed: 5
   threshold: 8
   angleCheck: 20
   raycastDistance: 15
@@ -512,6 +512,11 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 512
+  isAggressive: 1
+  aggressiveDistance: 20
+  biteTimer: 2
+  stopDistance: 4.5
+  surfaceLevel: -1
 --- !u!95 &1229730717537197492
 Animator:
   serializedVersion: 5
