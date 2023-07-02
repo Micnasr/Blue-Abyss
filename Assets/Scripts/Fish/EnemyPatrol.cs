@@ -24,21 +24,26 @@ public class EnemyPatrol : MonoBehaviour
     public float biteTimer;
     public float stopDistance;
     public float surfaceLevel;
+    public float chaseMovementSpeed;
 
     private float timer;
     private Transform player;
+    private PlayerMovement playerMovement;
 
     private void Start()
     {
         SetRandomWaypoint();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        playerMovement = player.GetComponent<PlayerMovement>();
     }
 
     private void Update()
     {
         if (isAggressive)
         {
-            if (PlayerInRange(aggressiveDistance))
+            // Check if Player is In the Range and Not on Ground
+            if (PlayerInRange(aggressiveDistance) && !playerMovement.grounded)
             {
                 timer -= Time.deltaTime;
 
@@ -212,7 +217,7 @@ public class EnemyPatrol : MonoBehaviour
             {
                 Vector3 avoidanceDirection = Vector3.Cross(transform.up, direction.normalized).normalized;
                 targetPosition = transform.position + avoidanceDirection * avoidanceDistance;
-                Debug.LogError("Stuck in all directions!!!!");
+                Debug.LogError("Stuck in all directions!!!! " + gameObject.transform.name);
             }
         }
 
@@ -223,7 +228,7 @@ public class EnemyPatrol : MonoBehaviour
 
         // Rotate towards the target position
         Quaternion rotation = Quaternion.LookRotation(targetPosition - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turningSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turningSpeed*2f);
 
         if (PlayerInRange(stopDistance))
         {
@@ -232,7 +237,7 @@ public class EnemyPatrol : MonoBehaviour
         }
 
         // Move towards the target position
-        transform.position += transform.forward * Time.deltaTime * movementSpeed;
+        transform.position += transform.forward * Time.deltaTime * chaseMovementSpeed;
 
         // Draw debug rays
         Debug.DrawRay(transform.position, transform.forward * raycastDistance, Color.red);

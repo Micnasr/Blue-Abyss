@@ -411,7 +411,12 @@ MonoBehaviour:
   avoidanceDistance: 10
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
+  isAggressive: 0
+  aggressiveDistance: 0
+  biteTimer: 0
+  stopDistance: 0
+  surfaceLevel: 0
 --- !u!95 &4103867201197148841
 Animator:
   serializedVersion: 5
@@ -446,7 +451,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
-  fishRenderer: {fileID: 0}
   deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
   shaderTopThreshold: 0.2
   shaderBottomThreshold: 0.7

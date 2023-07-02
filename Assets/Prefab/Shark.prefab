@@ -237,10 +237,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.2226958
+  m_Radius: 1.3579884
   m_Height: 5.271789
   m_Direction: 1
-  m_Center: {x: 0.01888907, y: -4.645886, z: 0.15450288}
+  m_Center: {x: 0.020715714, y: -4.645886, z: 0.15450288}
 --- !u!65 &8670384353033644602
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -281,8 +281,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0858879, y: 1.896744, z: 1.0737234}
-  m_Center: {x: -0.060998917, y: 5.013562, z: -0.15640211}
+  m_Size: {x: 1.2907753, y: 1.896744, z: 1.0737234}
+  m_Center: {x: -0.029424667, y: 5.013562, z: -0.15640211}
 --- !u!65 &4034671827186932057
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -302,8 +302,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4080696, y: 1.4478894, z: 1.5428677}
-  m_Center: {x: -0.09049034, y: 6.706516, z: 0.09012521}
+  m_Size: {x: 0.62257767, y: 1.4478894, z: 1.5428677}
+  m_Center: {x: -0.114255905, y: 6.706594, z: 0.09012521}
 --- !u!65 &5433122169523981937
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -511,12 +511,13 @@ MonoBehaviour:
   avoidanceDistance: 10
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
   isAggressive: 1
   aggressiveDistance: 20
   biteTimer: 2
   stopDistance: 4.5
   surfaceLevel: -1
+  chaseMovementSpeed: 8
 --- !u!95 &1229730717537197492
 Animator:
   serializedVersion: 5
