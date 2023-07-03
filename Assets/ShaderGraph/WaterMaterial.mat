@@ -83,7 +83,7 @@ Material:
     m_Ints: []
     m_Floats:
     - Boolean_8f755de89e184da894125981c4c0ba78: 0
-    - Depth_Fade: 13.3
+    - Depth_Fade: 14
     - Smooth: 1
     - Speed: 1.1
     - Vector1_309cb8b1b2a4466aa02e543ab0c85a6e: 1
@@ -91,7 +91,7 @@ Material:
     - Vector1_97655d08d61e40ffa24ba5dfb2fb2508: 2.69
     - Vector1_a1303d1858b74dc3808d8b7858823843: -11.1
     - Vector1_b477c45853f247c4b3ec903cfac6b438: 3
-    - Vector1_c892da3e47c54e8a865a0935bf75ad0a: 0.005
+    - Vector1_c892da3e47c54e8a865a0935bf75ad0a: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

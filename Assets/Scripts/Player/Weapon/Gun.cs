@@ -41,12 +41,16 @@ public class Gun : MonoBehaviour
 
                 GameObject hitObject = hitInfo[i].transform.gameObject;
 
+                // Check if the hit object has a parent
+                if (hitInfo[i].transform.parent != null)
+                    hitObject = hitInfo[i].transform.parent.gameObject;
+                
+
+                Debug.Log(hitObject.name);
+
                 // Check if the same object has been hit before
                 if (hitObjects.Contains(hitObject))
-                {
-                    // Skip so we dont apply damage twice
                     continue;
-                }
 
                 // Create Hit on Effect
                 Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
