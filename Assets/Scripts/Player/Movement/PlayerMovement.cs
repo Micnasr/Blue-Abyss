@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
+    OxygenController oxygenController;
 
     
     void Start()
@@ -46,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
 
         readyToJump = true;
         isSwimming = false;
+
+        oxygenController = GetComponent<OxygenController>();
     }
 
     private void FixedUpdate()

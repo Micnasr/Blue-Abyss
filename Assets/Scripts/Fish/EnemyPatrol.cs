@@ -134,7 +134,6 @@ public class EnemyPatrol : MonoBehaviour
             {
                 Vector3 avoidanceDirection = Vector3.Cross(transform.up, direction.normalized).normalized;
                 targetPosition = transform.position + avoidanceDirection * avoidanceDistance;
-                Debug.LogError("Stuck in all directions!!!!");
             }
         }
 
@@ -203,7 +202,6 @@ public class EnemyPatrol : MonoBehaviour
             {
                 Vector3 avoidanceDirection = Vector3.Cross(transform.up, direction.normalized).normalized;
                 targetPosition = transform.position + avoidanceDirection * avoidanceDistance;
-                Debug.LogError("Stuck in all directions!!!! " + gameObject.transform.name);
             }
         }
 
