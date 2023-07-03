@@ -27,7 +27,6 @@ public class EnemyPatrol : MonoBehaviour
     public float chaseMovementSpeed;
     public LayerMask landLayer;
 
-    private float timer;
     private Transform player;
 
     private void Start()

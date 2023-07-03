@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 6338329273313182283}
   - component: {fileID: 1067960578090165581}
   - component: {fileID: 8971167735657698425}
-  - component: {fileID: 859261629891019966}
+  - component: {fileID: 6418490584086187685}
+  - component: {fileID: 995198149823794592}
   m_Layer: 0
   m_Name: Crab
   m_TagString: Untagged
@@ -84,7 +85,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &859261629891019966
+--- !u!114 &6418490584086187685
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,25 +94,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 7919411607318185391}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97558b9762f4da468dabccf821973cf, type: 3}
+  m_Script: {fileID: 11500000, guid: b5df72a7a51761c4590ea18c88f80d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
   turningSpeed: 0.6
-  movementSpeed: 5
+  movementSpeed: 1.5
   threshold: 4
-  angleCheck: 20
-  raycastDistance: 15
-  avoidanceDistance: 10
+  raycastDistance: 10
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 768
-  isAggressive: 0
-  aggressiveDistance: 0
-  biteTimer: 0
-  stopDistance: 0
-  surfaceLevel: 0
-  chaseMovementSpeed: 0
-  landLayer:
+--- !u!65 &995198149823794592
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7919411607318185391}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.036025, y: 0.2769827, z: 0.92576164}
+  m_Center: {x: -0.00047302246, y: 0.14635868, z: 0.06368402}

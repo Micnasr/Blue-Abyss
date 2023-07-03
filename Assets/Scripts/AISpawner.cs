@@ -15,12 +15,6 @@ public class AISpawner : MonoBehaviour
         SpawnFish();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void GetWaypoints()
     {
         Transform[] wpList = this.transform.GetComponentsInChildren<Transform>();
@@ -38,6 +32,11 @@ public class AISpawner : MonoBehaviour
         GameObject fish = Instantiate(fishPrefab, transform.position, transform.rotation);
 
         EnemyPatrol fishPatrol = fish.GetComponent<EnemyPatrol>();
-        fishPatrol.waypoints = Waypoints;
+        LandEnemyPatrol landFishPatrol = fish.GetComponent<LandEnemyPatrol>();
+        
+        if (fishPatrol != null )
+            fishPatrol.waypoints = Waypoints;
+        else
+            landFishPatrol.waypoints = Waypoints;
     }
 }
