@@ -25,50 +25,44 @@ public class EnemyPatrol : MonoBehaviour
     public float stopDistance;
     public float surfaceLevel;
     public float chaseMovementSpeed;
+    public LayerMask landLayer;
 
     private float timer;
     private Transform player;
-    private PlayerMovement playerMovement;
 
     private void Start()
     {
         SetRandomWaypoint();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        playerMovement = player.GetComponent<PlayerMovement>();
     }
 
     private void Update()
     {
         if (isAggressive)
         {
-            // Check if Player is In the Range and Not on Ground
-            if (PlayerInRange(aggressiveDistance) && !playerMovement.grounded)
+            // Check if Player is In the Range and not on land
+            if (PlayerInRange(aggressiveDistance) && !IsPlayerOnLand())
             {
                 // Chase Player Down
                 MoveTowardsPlayer();
             }
             else
             {
-                // Check if the fish has reached the current waypoint
                 if (ReachedWaypoint())
                 {
                     SetRandomWaypoint();
                 }
 
-                // Move towards the current waypoint
                 MoveTowardsWaypoint();
             }
         }
         else
         {
-            // Check if the fish has reached the current waypoint
             if (ReachedWaypoint())
             {
                 SetRandomWaypoint();
             }
 
-            // Move towards the current waypoint
             MoveTowardsWaypoint();
         }
     }
@@ -246,5 +240,10 @@ public class EnemyPatrol : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, player.position);
         return distance <= range;
+    }
+
+    private bool IsPlayerOnLand()
+    {
+        return Physics.Raycast(player.transform.position, Vector3.down, 20f, landLayer);
     }
 }

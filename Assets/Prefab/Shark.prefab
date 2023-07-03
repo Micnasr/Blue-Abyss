@@ -517,8 +517,11 @@ MonoBehaviour:
   aggressiveDistance: 20
   biteTimer: 2
   stopDistance: 4.5
-  surfaceLevel: -2
+  surfaceLevel: -1
   chaseMovementSpeed: 8
+  landLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!95 &1229730717537197492
 Animator:
   serializedVersion: 5
