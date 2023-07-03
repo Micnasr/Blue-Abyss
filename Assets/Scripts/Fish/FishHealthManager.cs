@@ -24,6 +24,8 @@ public class FishHealthManager : MonoBehaviour
     [SerializeField] private float noiseStrength = 0.25f;
     [SerializeField] private float duration = 1.0f;
 
+    private float runAwaySpeed;
+
     // Flag to track if the fish has died
     private bool isDead = false;
 
@@ -39,6 +41,9 @@ public class FishHealthManager : MonoBehaviour
 
         flockUnit = GetComponent<FlockUnit>();
         enemyPatrol = GetComponent<EnemyPatrol>();
+
+        if (enemyPatrol != null)
+            runAwaySpeed = enemyPatrol.movementSpeed * 2f;
     }
 
     void Update()
@@ -55,18 +60,16 @@ public class FishHealthManager : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
         if (enemyPatrol != null)
-        {
             StartCoroutine(RunAway());
-        }
     }
 
     private IEnumerator RunAway()
     {
-        enemyPatrol.movementSpeed *= 2f;
+        enemyPatrol.movementSpeed = runAwaySpeed;
 
         yield return new WaitForSeconds(5f);
 
-        enemyPatrol.movementSpeed /= 2f;
+        enemyPatrol.movementSpeed = runAwaySpeed / 2f;
     }
 
     public void HandleDeath()
