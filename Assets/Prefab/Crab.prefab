@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8971167735657698425}
   - component: {fileID: 6418490584086187685}
   - component: {fileID: 995198149823794592}
+  - component: {fileID: 1345136455845752991}
   m_Layer: 0
   m_Name: Crab
   m_TagString: Untagged
@@ -126,3 +127,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.036025, y: 0.2769827, z: 0.92576164}
   m_Center: {x: -0.00047302246, y: 0.14635868, z: 0.06368402}
+--- !u!114 &1345136455845752991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7919411607318185391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0747cc7cdfda4604f9ea807bc48b4234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
+  shaderTopThreshold: 0.2
+  shaderBottomThreshold: 0.7
+  noiseStrength: 0.25
+  duration: 1

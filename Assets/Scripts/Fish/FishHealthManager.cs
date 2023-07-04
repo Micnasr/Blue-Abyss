@@ -18,8 +18,11 @@ public class FishHealthManager : MonoBehaviour
     // Only for flocks
     private FlockUnit flockUnit;
 
-    // Only for non flocks
+    // Only for water animals
     private EnemyPatrol enemyPatrol;
+
+    // Only for land animals
+    private LandEnemyPatrol landEnemyPatrol;
 
     [SerializeField] private float noiseStrength = 0.25f;
     [SerializeField] private float duration = 1.0f;
@@ -41,6 +44,7 @@ public class FishHealthManager : MonoBehaviour
 
         flockUnit = GetComponent<FlockUnit>();
         enemyPatrol = GetComponent<EnemyPatrol>();
+        landEnemyPatrol = GetComponent<LandEnemyPatrol>();
 
         if (enemyPatrol != null)
             runAwaySpeed = enemyPatrol.movementSpeed * 2f;
@@ -102,6 +106,10 @@ public class FishHealthManager : MonoBehaviour
         else if (enemyPatrol != null)
         {
             enemyPatrol.enabled = false;
+        }
+        else if (landEnemyPatrol != null)
+        {
+             landEnemyPatrol.enabled = false;
         }
 
         // Start Dissolving Animation
