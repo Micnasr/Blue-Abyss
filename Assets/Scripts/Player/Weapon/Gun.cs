@@ -34,21 +34,21 @@ public class Gun : MonoBehaviour
             // Raycast Goes Through Everything
             hitInfo = Physics.RaycastAll(playerCam.transform.position, playerCam.transform.forward, gunData.maxDistance);
 
-            List<GameObject> hitObjects = new List<GameObject>(); // List to store already hit objects
+            // List to store already hit objects
+            List<GameObject> hitObjects = new List<GameObject>();
+
+            // Sort the hitInfo array based on hit distance (this helps with rendering effects with superimposed meshes)
+            System.Array.Sort(hitInfo, (a, b) => a.distance.CompareTo(b.distance));
 
             for (int i = 0; i < hitInfo.Length; i++)
             {
-
                 GameObject hitObject = hitInfo[i].transform.gameObject;
 
                 // Check if the hit object has a parent
                 if (hitInfo[i].transform.parent != null)
                     hitObject = hitInfo[i].transform.parent.gameObject;
-                
 
-                Debug.Log(hitObject.name);
-
-                // Check if the same object has been hit before
+                // Check if the same object has been hit before at the same hit point
                 if (hitObjects.Contains(hitObject))
                     continue;
 
