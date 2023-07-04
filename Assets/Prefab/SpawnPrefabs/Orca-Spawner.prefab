@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eefb5ec2d39d31246aca167a713970d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishPrefab: {fileID: 1976717971576196030, guid: fea3d241ded457c4fb9d880ed6e1111c,
+  fishPrefab: {fileID: 2562173551058248641, guid: fea3d241ded457c4fb9d880ed6e1111c,
     type: 3}
   Waypoints: []
 --- !u!1 &5508019258677380306
