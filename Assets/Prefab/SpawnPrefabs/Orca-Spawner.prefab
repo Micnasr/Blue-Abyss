@@ -107,7 +107,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3241292024932365475}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.7192087, y: -8.1, z: 226.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eefb5ec2d39d31246aca167a713970d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishPrefab: {fileID: 975466895343880120, guid: d75dc2f4d561f2d4daa0b6d629a1098e,
+  fishPrefab: {fileID: 1976717971576196030, guid: fea3d241ded457c4fb9d880ed6e1111c,
     type: 3}
   Waypoints: []
 --- !u!1 &5508019258677380306
