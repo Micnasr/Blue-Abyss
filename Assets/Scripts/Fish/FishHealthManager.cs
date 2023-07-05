@@ -69,11 +69,40 @@ public class FishHealthManager : MonoBehaviour
 
     private IEnumerator RunAway()
     {
+        float originalSpeed = enemyPatrol.movementSpeed;
+        float elapsedTime = 0f;
+        float accelerationDuration = 0.7f;
+        float decelerationDuration = 1f;
+
+        while (elapsedTime < accelerationDuration)
+        {
+            // Calculate the t value for interpolation (acceleration)
+            float t = elapsedTime / accelerationDuration;
+            enemyPatrol.movementSpeed = Mathf.Lerp(originalSpeed, runAwaySpeed, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the fish reaches the runaway speed
         enemyPatrol.movementSpeed = runAwaySpeed;
 
         yield return new WaitForSeconds(5f);
 
-        enemyPatrol.movementSpeed = runAwaySpeed / 2f;
+        elapsedTime = 0f;
+
+        while (elapsedTime < decelerationDuration)
+        {
+            // Calculate the t value for interpolation (deceleration)
+            float t = elapsedTime / decelerationDuration;
+            enemyPatrol.movementSpeed = Mathf.Lerp(runAwaySpeed, originalSpeed, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the fish reaches the original speed
+        enemyPatrol.movementSpeed = originalSpeed;
     }
 
     public void HandleDeath()

@@ -72,7 +72,4 @@ public class LandEnemyPatrol : MonoBehaviour
         // Draw debug rays
         Debug.DrawRay(raycastOrigin, -transform.up * raycastDistance, Color.yellow);
     }
-
-
-
 }
