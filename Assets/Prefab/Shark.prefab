@@ -522,6 +522,7 @@ MonoBehaviour:
   landLayer:
     serializedVersion: 2
     m_Bits: 256
+  animatorDistance: 90
 --- !u!95 &1229730717537197492
 Animator:
   serializedVersion: 5

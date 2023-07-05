@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class FlockUnit : MonoBehaviour
 {
@@ -22,6 +23,12 @@ public class FlockUnit : MonoBehaviour
     private Vector3 currentObstacleAvoidanceVector;
     private float speed;
 
+    [Header("Performance")]
+    public float animatorDistance = 40f;
+    private Animator animator;
+
+    private Transform player;
+
     public Transform myTransform { get; set; }
 
     private void Awake()
@@ -29,9 +36,16 @@ public class FlockUnit : MonoBehaviour
         myTransform = transform;
     }
 
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>();
+    }
+
     private void Update()
     {
         MoveUnit();
+        PerformanceAnimations();
     }
 
     public void AssignFlock(Flocking flock)
@@ -271,5 +285,27 @@ public class FlockUnit : MonoBehaviour
     private bool IsInFOV(Vector3 position)
     {
         return Vector3.Angle(myTransform.forward, position - myTransform.position) <= FOVAngle;
+    }
+
+    private bool PlayerInRange(float range)
+    {
+        if (player == null)
+        {
+            return false;
+        }
+
+        float distance = Vector3.Distance(transform.position, player.position);
+        return distance <= range;
+    }
+
+    private void PerformanceAnimations()
+    {
+        if (animator != null)
+        {
+            if (!PlayerInRange(animatorDistance))
+                animator.enabled = false;
+            else
+                animator.enabled = true;
+        }
     }
 }

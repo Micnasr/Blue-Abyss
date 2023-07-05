@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class EnemyPatrol : MonoBehaviour
 {
@@ -27,12 +28,17 @@ public class EnemyPatrol : MonoBehaviour
     public float chaseMovementSpeed;
     public LayerMask landLayer;
 
+    [Header("Performance")]
+    public float animatorDistance = 90f;
+    private Animator animator;
+
     private Transform player;
 
     private void Start()
     {
         SetRandomWaypoint();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -64,6 +70,8 @@ public class EnemyPatrol : MonoBehaviour
 
             MoveTowardsWaypoint();
         }
+
+        PerformanceAnimations();
     }
 
     private void SetRandomWaypoint()
@@ -243,4 +251,16 @@ public class EnemyPatrol : MonoBehaviour
     {
         return Physics.Raycast(player.transform.position, Vector3.down, 20f, landLayer);
     }
+
+    private void PerformanceAnimations()
+    {
+        if (animator != null)
+        {
+            if (!PlayerInRange(animatorDistance))
+                animator.enabled = false;
+            else
+                animator.enabled = true;
+        }
+    }
+
 }

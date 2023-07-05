@@ -17,10 +17,8 @@ public class FishHealthManager : MonoBehaviour
 
     // Only for flocks
     private FlockUnit flockUnit;
-
     // Only for water animals
     private EnemyPatrol enemyPatrol;
-
     // Only for land animals
     private LandEnemyPatrol landEnemyPatrol;
 
