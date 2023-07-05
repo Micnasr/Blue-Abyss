@@ -138,7 +138,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 755658171415758426}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 121e6ddaa3e68414caf02e2f3904618d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -247,6 +247,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
+  grounded: 0
   orientation: {fileID: 7687243092260039680}
 --- !u!114 &6995076460426175063
 MonoBehaviour:
@@ -294,6 +295,7 @@ MonoBehaviour:
   healthMeter: {fileID: 0}
   healingAmount: 4
   timeToStartHealing: 5
+  updateDuration: 0.5
 --- !u!1 &2855930086129952155
 GameObject:
   m_ObjectHideFlags: 0
