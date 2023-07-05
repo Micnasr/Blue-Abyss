@@ -10,6 +10,7 @@ public class FishHealthManager : MonoBehaviour
     private float currentHealth;
 
     [Header("Dead Properties")]
+    public int deathPoints;
     private Renderer fishRenderer;
     public Material deathMaterial;
     public float shaderTopThreshold;
@@ -30,6 +31,8 @@ public class FishHealthManager : MonoBehaviour
     // Flag to track if the fish has died
     private bool isDead = false;
 
+    private FishMeter fishMeter;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -44,8 +47,11 @@ public class FishHealthManager : MonoBehaviour
         enemyPatrol = GetComponent<EnemyPatrol>();
         landEnemyPatrol = GetComponent<LandEnemyPatrol>();
 
+        // Calculate Run Away Speed
         if (enemyPatrol != null)
             runAwaySpeed = enemyPatrol.movementSpeed * 2f;
+
+        fishMeter = FindObjectOfType<FishMeter>();
     }
 
     void Update()
@@ -138,6 +144,9 @@ public class FishHealthManager : MonoBehaviour
         {
              landEnemyPatrol.enabled = false;
         }
+
+        // Give Rewards When Dead
+        fishMeter.AddFishDeath(deathPoints);
 
         // Start Dissolving Animation
         StartCoroutine(DissolveHeightTransition(uniqueDeathMaterial));
