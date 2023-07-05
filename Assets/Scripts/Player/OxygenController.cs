@@ -51,6 +51,13 @@ public class OxygenController : MonoBehaviour
             currentOxygen += oxygenRegenRate * Time.deltaTime;
             currentOxygen = Mathf.Clamp(currentOxygen, 0f, maxOxygen);
         }
+
+        // Disable the UI if we are full :)
+        if (currentOxygen >= maxOxygen)
+            oxygenMeter.gameObject.SetActive(false);
+        else
+            oxygenMeter.gameObject.SetActive(true);
+
     }
 
     private void HandleOutOfOxygen()
