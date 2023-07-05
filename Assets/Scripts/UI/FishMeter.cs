@@ -16,6 +16,17 @@ public class FishMeter : MonoBehaviour
     private void Start()
     {
         fishMeter = GetComponent<Slider>();
+
+        if (fishMeter != null)
+        {
+            fishMeter.value = currentCount;
+            fishMeter.maxValue = maxCount;
+            statusText.text = "0/" + maxCount;
+        }
+        else
+        {
+            Debug.LogError("Fish Meter NULL");
+        }
     }
     public void AddFishDeath(int amount)
     {
@@ -29,12 +40,32 @@ public class FishMeter : MonoBehaviour
     {
         if (fishMeter != null)
         {
-            fishMeter.value = currentCount;
             statusText.text = currentCount + "/" + maxCount;
-        } 
-        else
-        {
-            Debug.LogError("Fish Meter NULL");
+
+            // Smoothly Update Slider
+            StartCoroutine(UpdateSliderCoroutine());
         }
+    }
+
+    private IEnumerator UpdateSliderCoroutine()
+    {
+        float duration = 1f; 
+        float elapsed = 0f;
+        float startValue = fishMeter.value;
+        float targetValue = currentCount;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            float interpolatedValue = Mathf.Lerp(startValue, targetValue, t);
+            fishMeter.value = interpolatedValue;
+
+            yield return null;
+        }
+
+        // Ensure the final value is set accurately
+        fishMeter.value = targetValue;
     }
 }
