@@ -20,7 +20,7 @@ public class PlayerCam : MonoBehaviour
         Cursor.visible = false;
     }
 
-    // Update is called once per frame
+    // Update is called once per frame (apparently time.delta time for movement is very bad)
     void Update()
     {
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;

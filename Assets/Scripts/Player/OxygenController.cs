@@ -64,7 +64,7 @@ public class OxygenController : MonoBehaviour
         if (healthManager != null)
         {
             float damage = suffocateDamage * Time.deltaTime;
-            healthManager.TakeDamage(damage);
+            healthManager.TakeDamage(damage, 0f);
         } 
         else
         {

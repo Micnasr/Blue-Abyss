@@ -41,15 +41,22 @@ public class HealthManager : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, float duration = 0.5f)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
         timeSinceLastDamage = Time.time;
 
-        // Start the coroutine to smoothly update the health meter
-        StartCoroutine(UpdateHealthMeter(currentHealth));
+        // Either we want to smoothly update or not
+        if (duration >= 0f)
+        {
+            StartCoroutine(UpdateHealthMeter(currentHealth, duration));
+        }
+        else
+        {
+            healthMeter.value = currentHealth;
+        }
     }
 
     private void StartHealingOverTime()
@@ -60,20 +67,19 @@ public class HealthManager : MonoBehaviour
             currentHealth += healingAmount * Time.deltaTime;
             currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-            // Start the coroutine to smoothly update the health meter
-            StartCoroutine(UpdateHealthMeter(currentHealth));
+            healthMeter.value = currentHealth;
         }
     }
 
-    private IEnumerator UpdateHealthMeter(float targetValue)
+    private IEnumerator UpdateHealthMeter(float targetValue, float duration)
     {
         float initialValue = healthMeter.value;
         float timer = 0f;
 
-        while (timer <= updateDuration)
+        while (timer <= duration)
         {
             timer += Time.deltaTime;
-            float currentValue = Mathf.Lerp(initialValue, targetValue, timer / updateDuration);
+            float currentValue = Mathf.Lerp(initialValue, targetValue, timer / duration);
             healthMeter.value = currentValue;
             yield return null;
         }
