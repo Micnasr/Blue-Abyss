@@ -464,8 +464,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5066504841245488242}
   - component: {fileID: 4838212377244212670}
-  - component: {fileID: 1229730717537197492}
   - component: {fileID: -1736763308955186176}
+  - component: {fileID: 1229730717537197492}
   m_Layer: 0
   m_Name: Shark
   m_TagString: Untagged
@@ -523,6 +523,25 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   animatorDistance: 90
+--- !u!114 &-1736763308955186176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7527021807415265263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0747cc7cdfda4604f9ea807bc48b4234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 8
+  deathPoints: 10
+  deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
+  shaderTopThreshold: 1.2
+  shaderBottomThreshold: 1.7
+  noiseStrength: 0.25
+  duration: 1
 --- !u!95 &1229730717537197492
 Animator:
   serializedVersion: 5
@@ -544,25 +563,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-1736763308955186176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7527021807415265263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0747cc7cdfda4604f9ea807bc48b4234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 8
-  deathPoints: 10
-  deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
-  shaderTopThreshold: 1.2
-  shaderBottomThreshold: 1.7
-  noiseStrength: 0.25
-  duration: 1
 --- !u!1 &7564987289726455152
 GameObject:
   m_ObjectHideFlags: 0

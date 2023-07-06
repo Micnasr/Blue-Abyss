@@ -42,8 +42,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4676919297723324839}
   - component: {fileID: 2877813983504361949}
-  - component: {fileID: 5837924285796106720}
   - component: {fileID: 1972772128812184089}
+  - component: {fileID: 5837924285796106720}
   m_Layer: 0
   m_Name: Orca
   m_TagString: Untagged
@@ -100,7 +100,26 @@ MonoBehaviour:
   landLayer:
     serializedVersion: 2
     m_Bits: 256
-  animatorDistance: 90
+  animatorDistance: 130
+--- !u!114 &1972772128812184089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2562173551058248641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0747cc7cdfda4604f9ea807bc48b4234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  deathPoints: 50
+  deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
+  shaderTopThreshold: 2
+  shaderBottomThreshold: 3
+  noiseStrength: 0.25
+  duration: 1
 --- !u!95 &5837924285796106720
 Animator:
   serializedVersion: 5
@@ -122,25 +141,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1972772128812184089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2562173551058248641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0747cc7cdfda4604f9ea807bc48b4234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 20
-  deathPoints: 50
-  deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
-  shaderTopThreshold: 2
-  shaderBottomThreshold: 3
-  noiseStrength: 0.25
-  duration: 1
 --- !u!1 &2916514693889754953
 GameObject:
   m_ObjectHideFlags: 0
