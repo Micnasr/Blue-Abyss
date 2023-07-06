@@ -287,7 +287,7 @@ public class FlockUnit : MonoBehaviour
         return Vector3.Angle(myTransform.forward, position - myTransform.position) <= FOVAngle;
     }
 
-    private bool PlayerInRange(float range)
+    public bool PlayerInRange(float range)
     {
         if (player == null)
         {

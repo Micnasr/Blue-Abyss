@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Flocking : MonoBehaviour
@@ -14,15 +15,15 @@ public class Flocking : MonoBehaviour
     [Range(0, 10)]
     [SerializeField] private float _minSpeed;
     public float minSpeed { get { return _minSpeed; } }
-    
+
     [Range(0, 10)]
     [SerializeField] private float _maxSpeed;
     public float maxSpeed { get { return _maxSpeed; } }
 
     [Header("Detection Distances")]
-    [Range(0,10)]
+    [Range(0, 10)]
     [SerializeField] private float _cohesionDistance;
-    public float cohesionDistance {  get { return _cohesionDistance; } }
+    public float cohesionDistance { get { return _cohesionDistance; } }
 
     [Range(0, 10)]
     [SerializeField] private float _avoidanceDistance;
@@ -69,15 +70,52 @@ public class Flocking : MonoBehaviour
 
 
     public FlockUnit[] allUnits { get; set; }
+    private Camera playerCam;
+    private GameObject player;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+            playerCam = player.GetComponentInChildren<Camera>();
+
         GenerateUnits();
     }
 
     private void Update()
     {
         CheckNULL();
+        CheckInView();
+    }
+
+    private void CheckInView()
+    {
+        foreach (var unit in allUnits)
+        {
+            if (unit != null)
+            {
+                bool isVisible = unit.PlayerInRange(50f) && IsUnitVisible(unit);
+
+                // Disable or enable the unit's GameObject based on visibility
+                unit.gameObject.SetActive(isVisible);
+            }
+        }
+    }
+
+    private bool IsUnitVisible(FlockUnit unit)
+    {
+        SkinnedMeshRenderer skinnedMeshRenderer = unit.GetComponentInChildren<SkinnedMeshRenderer>();
+
+        if (skinnedMeshRenderer != null)
+        {
+            // Check if any part of the SkinnedMeshRenderer is visibleby any camera
+            Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(playerCam);
+            Bounds bounds = skinnedMeshRenderer.bounds;
+            return GeometryUtility.TestPlanesAABB(frustumPlanes, bounds);
+        }
+
+        // If the SkinnedMeshRenderer is not found, assume it's not visible
+        return false;
     }
 
     private void CheckNULL()
@@ -105,6 +143,5 @@ public class Flocking : MonoBehaviour
             allUnits[i].AssignFlock(this);
             allUnits[i].InitializeSpeed(UnityEngine.Random.Range(minSpeed, maxSpeed));
         }
-        
     }
 }
