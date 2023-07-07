@@ -35,6 +35,12 @@ public class FishMeter : MonoBehaviour
         UpdateSlider();
     }
 
+    public void ResetFishDeaths()
+    {
+        currentCount = 0;
+        UpdateSlider();
+    }
+
 
     private void UpdateSlider()
     {
