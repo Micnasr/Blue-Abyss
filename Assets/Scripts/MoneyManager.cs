@@ -10,8 +10,8 @@ public class MoneyManager : MonoBehaviour
 
     private void Start()
     {
-        // READ FROM FILE AFTER
-        currentMoney = 0;
+        // Load the money data from player preferences
+        currentMoney = PlayerPrefs.GetInt("Money", 0);
         UpdateUI();
     }
 
@@ -20,12 +20,19 @@ public class MoneyManager : MonoBehaviour
         currentMoney += amount;
         UpdateUI();
 
+        // Save the updated money data to player preferences
+        PlayerPrefs.SetInt("Money", currentMoney);
+        PlayerPrefs.Save();
     }
 
     public void RemoveMoney(int amount)
     {
         currentMoney -= amount;
         UpdateUI();
+
+        // Save the updated money data to player preferences
+        PlayerPrefs.SetInt("Money", currentMoney);
+        PlayerPrefs.Save();
     }
 
     private void UpdateUI()
