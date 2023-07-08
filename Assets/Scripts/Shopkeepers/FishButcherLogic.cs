@@ -16,10 +16,14 @@ public class FishButcherLogic : MonoBehaviour
 
     public int moneyMultiplier = 50;
 
+    private Animator npcAnimator;
+
     private void Start()
     {
         fishMeter = FindObjectOfType<FishMeter>();
         moneyManager = FindObjectOfType<MoneyManager>();
+
+        npcAnimator = npc.gameObject.GetComponent<Animator>();
     }
 
     private void Update()
@@ -31,8 +35,13 @@ public class FishButcherLogic : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("SELLING");
-                moneyManager.AddMoney(fishMeter.currentCount * moneyMultiplier);
+                int money = fishMeter.currentCount * moneyMultiplier;
+
+                if (money > 0)
+                {
+                    moneyManager.AddMoney(money);
+                    npcAnimator.SetTrigger("WaveTrigger");
+                }
 
                 // Reset Bag
                 fishMeter.ResetFishDeaths();
