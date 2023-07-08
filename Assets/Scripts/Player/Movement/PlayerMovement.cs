@@ -160,14 +160,27 @@ public class PlayerMovement : MonoBehaviour
     private void SwimUp()
     {
         // Move the player upwards
-        Vector3 swimUpForce = transform.up * swimSpeed/1.5f;
+        Vector3 swimUpForce;
+
+        // If the player's head is above the water, we want to jump further up
+        if (oxygenController.isHeadAboveWater)
+        {
+            swimUpForce = transform.up * swimSpeed / 1.5f;
+        }
+        else
+        {
+            swimUpForce = transform.up * swimSpeed / 4f;
+        }
+
+
         rb.AddForce(swimUpForce, ForceMode.Acceleration);
+
     }
 
     private void SwimDown()
     {
         // Move the player downwards
-        Vector3 swimDownForce = -transform.up * swimSpeed/4;
+        Vector3 swimDownForce = -transform.up * swimSpeed/7f;
         rb.AddForce(swimDownForce, ForceMode.Acceleration);
     }
 
