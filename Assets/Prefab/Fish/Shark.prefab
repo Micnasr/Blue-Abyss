@@ -105,12 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6794787255382895810}
   - component: {fileID: 243082965644777340}
-  - component: {fileID: 284100328317663795}
-  - component: {fileID: 6349378482764952970}
-  - component: {fileID: 8670384353033644602}
-  - component: {fileID: 1168092082131900646}
-  - component: {fileID: 4034671827186932057}
-  - component: {fileID: 5433122169523981937}
+  - component: {fileID: 1437679436761863124}
   m_Layer: 0
   m_Name: Shark
   m_TagString: Untagged
@@ -195,8 +190,8 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.10809207, y: 1.6735348, z: -0.52490497}
     m_Extent: {x: 4.354866, y: 3.1541295, z: 7.9610567}
   m_DirtyAABB: 0
---- !u!136 &284100328317663795
-CapsuleCollider:
+--- !u!64 &1437679436761863124
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -210,121 +205,13 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5678235
-  m_Height: 6.920601
-  m_Direction: 1
-  m_Center: {x: -0.016841888, y: -0.5844703, z: 0.06077278}
---- !u!136 &6349378482764952970
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5264951965984115104}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.3579884
-  m_Height: 5.271789
-  m_Direction: 1
-  m_Center: {x: 0.020715714, y: -4.645886, z: 0.15450288}
---- !u!65 &8670384353033644602
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5264951965984115104}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.5724926, y: 1.6402919, z: 1.5811206}
-  m_Center: {x: -0.022805214, y: 3.199524, z: -0.119098194}
---- !u!65 &1168092082131900646
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5264951965984115104}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.2907753, y: 1.896744, z: 1.0737234}
-  m_Center: {x: -0.029424667, y: 5.013562, z: -0.15640211}
---- !u!65 &4034671827186932057
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5264951965984115104}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.62257767, y: 1.4478894, z: 1.5428677}
-  m_Center: {x: -0.114255905, y: 6.706594, z: 0.09012521}
---- !u!65 &5433122169523981937
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5264951965984115104}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.38142776, y: 1.22509, z: 1.7952521}
-  m_Center: {x: 0.01159668, y: 0.06204242, z: 2.4135058}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1704988206623216765, guid: 3ccfd3051538db543853df80f2691ade, type: 3}
 --- !u!1 &5368870065205551298
 GameObject:
   m_ObjectHideFlags: 0
