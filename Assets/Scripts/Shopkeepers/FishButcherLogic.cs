@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class FishButcherLogic : MonoBehaviour
 {
-    public Transform player;
+    private Transform player;
     public Transform npc;
     public float interactionDistance = 5f;
     public float rotationSpeed = 5f;
@@ -24,6 +24,8 @@ public class FishButcherLogic : MonoBehaviour
         moneyManager = FindObjectOfType<MoneyManager>();
 
         npcAnimator = npc.gameObject.GetComponent<Animator>();
+
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Update()

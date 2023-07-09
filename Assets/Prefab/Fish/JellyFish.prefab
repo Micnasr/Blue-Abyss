@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8744093088685349220}
-  m_LocalRotation: {x: -0.000000037748947, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.2220984, y: -0.54, z: -59.05804}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &3573214797967044840
 SkinnedMeshRenderer:
@@ -101,8 +101,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b4463d6f419144d9531642992ff857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDuration: 2
+  animationDuration: 3
   blendShapeName: Key 2
+  bobbingAmount: 0.005
+  bobbingSpeed: 1
+  rotationSpeed: 50
+  attackDistance: 15
+  jellyStingPrefab: {fileID: 5775629024882333013, guid: 8d2d4f03e4076dc4c919716749a4a0bb,
+    type: 3}
+  stingRadiusMin: 0.1
+  stingRadiusMax: 30
+  stingDuration: 5
+  spawnDelay: 10
 --- !u!64 &7955411762171018209
 MeshCollider:
   m_ObjectHideFlags: 0
