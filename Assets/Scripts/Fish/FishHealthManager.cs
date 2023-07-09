@@ -26,6 +26,9 @@ public class FishHealthManager : MonoBehaviour
     [SerializeField] private float noiseStrength = 0.25f;
     [SerializeField] private float duration = 1.0f;
 
+    public GameObject damageEffect;
+    private bool playedEffect = false;
+
     private float runAwaySpeed;
 
     // Flag to track if the fish has died
@@ -59,6 +62,11 @@ public class FishHealthManager : MonoBehaviour
         if (currentHealth <= 0f)
         {
             HandleDeath();
+        } 
+        else if (maxHealth > 6 && (currentHealth <= maxHealth * 0.3f) && !playedEffect)
+        {
+            PlayDamageEffect();
+            playedEffect = true;
         }
     }
 
@@ -180,5 +188,23 @@ public class FishHealthManager : MonoBehaviour
     {
         uniqueDeathMaterial.SetFloat("_CutoffHeight", height);
         uniqueDeathMaterial.SetFloat("_NoiseStrength", noiseStrength);
+    }
+
+    private void PlayDamageEffect()
+    {
+        if (damageEffect != null)
+        {
+            // Instantiate the damage effect as a child of the fish
+            damageEffect = Instantiate(damageEffect, transform);
+            damageEffect.transform.localPosition = Vector3.zero;
+            damageEffect.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+
+            // Play the particle system
+            ParticleSystem particleSystem = damageEffect.GetComponent<ParticleSystem>();
+            if (particleSystem != null)
+            {
+                particleSystem.Play();
+            }
+        }
     }
 }

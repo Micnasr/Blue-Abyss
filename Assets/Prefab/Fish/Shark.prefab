@@ -542,6 +542,8 @@ MonoBehaviour:
   shaderBottomThreshold: 1.7
   noiseStrength: 0.25
   duration: 1
+  damageEffect: {fileID: 3027278326694109150, guid: dd2a9939b435be543b2c8eedd7291fc8,
+    type: 3}
 --- !u!95 &1229730717537197492
 Animator:
   serializedVersion: 5
