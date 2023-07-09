@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Water : MonoBehaviour
 {
+    public ParticleSystem bubbleEffect;
+
+    private ParticleSystem activeEffect;
+    public GameObject player;
+
     private void OnTriggerEnter(Collider other)
     {
         Transform parent = other.transform.parent;
@@ -12,7 +17,9 @@ public class Water : MonoBehaviour
         {
             PlayerMovement movement = other.GetComponentInParent<PlayerMovement>();
             movement.isSwimming = true;
-        } 
+
+            SpawnBubbleEffect(other.transform.position);
+        }
         else if (other.CompareTag("PlayerHead"))
         {
             OxygenController oxygenScript = other.GetComponentInParent<OxygenController>();
@@ -32,13 +39,31 @@ public class Water : MonoBehaviour
             PlayerMovement movement = other.GetComponentInParent<PlayerMovement>();
             movement.isSwimming = false;
         }
-        // If head leaves the water only then we can breath
+        // If head leaves the water only then we can breathe
         else if (other.CompareTag("PlayerHead"))
         {
             OxygenController oxygenScript = other.GetComponentInParent<OxygenController>();
             oxygenScript.isHeadAboveWater = true;
 
             RenderSettings.fog = false;
+        }
+    }
+
+    private void Update()
+    {
+        // Teleport Particles to Player while player is running (to make more visible)
+        if (activeEffect != null && player != null)
+        {
+            activeEffect.transform.position = player.transform.position;
+        }
+    }
+
+    private void SpawnBubbleEffect(Vector3 position)
+    {
+        if (bubbleEffect != null)
+        {
+            activeEffect = Instantiate(bubbleEffect, position, Quaternion.identity);
+            activeEffect.Play();
         }
     }
 }

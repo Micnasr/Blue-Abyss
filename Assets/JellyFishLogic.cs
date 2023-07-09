@@ -10,7 +10,6 @@ public class JellyfishAnimation : MonoBehaviour
     private SkinnedMeshRenderer skinnedMeshRenderer;
     private int blendShapeIndex;
     private float timer;
-    private bool increasing;
 
     private void Start()
     {
@@ -20,7 +19,6 @@ public class JellyfishAnimation : MonoBehaviour
         blendShapeIndex = FindBlendShapeIndex(blendShapeName);
 
         timer = 0f;
-        increasing = true;
     }
 
     private void Update()

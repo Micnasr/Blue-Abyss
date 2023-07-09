@@ -7,7 +7,12 @@ public class Gun : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] GunData gunData;
+
+    // Normal Effect when hitting non fish
     public GameObject hitOnEffect;
+
+    // Effect for Fish
+    public GameObject bloodEffect;
 
     public Transform muzzle;
 
@@ -53,7 +58,7 @@ public class Gun : MonoBehaviour
                     continue;
 
                 // Create Hit on Effect
-                Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
+                
 
                 // Add the hit object to the list
                 hitObjects.Add(hitObject);
@@ -67,10 +72,16 @@ public class Gun : MonoBehaviour
                     fishHealthManager = hitObject.GetComponentInParent<FishHealthManager>();
                 }
 
+                // If hit target has a Fish Health Manager (Its a damagable specie)
                 if (fishHealthManager != null)
                 {
                     // Call TakeDamage function
                     fishHealthManager.TakeDamage(gunData.damage);
+                    Instantiate(bloodEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
+                } 
+                else
+                {
+                    Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
                 }
             }
 
