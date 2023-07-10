@@ -63,26 +63,8 @@ public class Gun : MonoBehaviour
                 // Add the hit object to the list
                 hitObjects.Add(hitObject);
 
-                // Grab FishHealthManager script
-                FishHealthManager fishHealthManager = hitObject.GetComponent<FishHealthManager>();
-
-                // If script does not exist, try to get from parent
-                if (fishHealthManager == null)
-                {
-                    fishHealthManager = hitObject.GetComponentInParent<FishHealthManager>();
-                }
-
-                // If hit target has a Fish Health Manager (Its a damagable specie)
-                if (fishHealthManager != null)
-                {
-                    // Call TakeDamage function
-                    fishHealthManager.TakeDamage(gunData.damage);
-                    Instantiate(bloodEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
-                } 
-                else
-                {
-                    Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
-                }
+                // Handle Damage to Fish & HitEffect
+                DamageAndHit(hitObject, hitInfo, i);
             }
 
             timeSinceLastShot = 0;
@@ -92,6 +74,29 @@ public class Gun : MonoBehaviour
         }
     }
 
+    private void DamageAndHit(GameObject hitObject, RaycastHit[] hitInfo, int i)
+    {
+        // Grab FishHealthManager script
+        FishHealthManager fishHealthManager = hitObject.GetComponent<FishHealthManager>();
+
+        // If script does not exist, try to get from parent
+        if (fishHealthManager == null)
+        {
+            fishHealthManager = hitObject.GetComponentInParent<FishHealthManager>();
+        }
+
+        // If hit target has a Fish Health Manager (Its a damagable specie)
+        if (fishHealthManager != null)
+        {
+            // Call TakeDamage function
+            fishHealthManager.TakeDamage(gunData.damage);
+            Instantiate(bloodEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
+        }
+        else
+        {
+            Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
+        }
+    }
 
     private void Update()
     {
