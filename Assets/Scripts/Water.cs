@@ -18,7 +18,7 @@ public class Water : MonoBehaviour
             PlayerMovement movement = other.GetComponentInParent<PlayerMovement>();
             movement.isSwimming = true;
 
-            SpawnBubbleEffect(other.transform.position);
+            SpawnBubbleEffect(other.transform.position, parent);
         }
         else if (other.CompareTag("PlayerHead"))
         {
@@ -49,20 +49,11 @@ public class Water : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        // Teleport Particles to Player while player is running (to make more visible)
-        if (activeEffect != null && player != null)
-        {
-            activeEffect.transform.position = player.transform.position;
-        }
-    }
-
-    private void SpawnBubbleEffect(Vector3 position)
+    private void SpawnBubbleEffect(Vector3 position, Transform parent)
     {
         if (bubbleEffect != null)
         {
-            activeEffect = Instantiate(bubbleEffect, position, Quaternion.identity);
+            activeEffect = Instantiate(bubbleEffect, position, Quaternion.identity, parent);
             activeEffect.Play();
         }
     }
