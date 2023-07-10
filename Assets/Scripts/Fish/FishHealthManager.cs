@@ -156,6 +156,8 @@ public class FishHealthManager : MonoBehaviour
         // Give Rewards When Dead
         fishMeter.AddFishDeath(deathPoints);
 
+        Destroy(damageEffect);
+
         // Start Dissolving Animation
         StartCoroutine(DissolveHeightTransition(uniqueDeathMaterial));
     }

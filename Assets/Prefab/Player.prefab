@@ -192,7 +192,7 @@ Transform:
   - {fileID: 7687243092260039680}
   - {fileID: 7063968324172870769}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5135001688982826863
 Rigidbody:
@@ -914,6 +914,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: bb4983ddd2603f3438d978b96d14e482, type: 2}
   hitOnEffect: {fileID: 8226690080474338650, guid: 585e7307f3e998b4681f382cd08e5c30,
+    type: 3}
+  bloodEffect: {fileID: 4037230488441724624, guid: b5a89fc5647b0ac4d9b6f4e85df77b45,
     type: 3}
   muzzle: {fileID: 1128077903629659498}
   playerCam: {fileID: 2423798104463690300}
