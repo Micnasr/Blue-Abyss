@@ -26,7 +26,7 @@ public class OxygenController : MonoBehaviour
         // Player starts on land
         isHeadAboveWater = true;
 
-        healthManager = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthManager>();
+        healthManager = GetComponent<HealthManager>();
     }
 
     private void Update()

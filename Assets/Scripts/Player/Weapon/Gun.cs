@@ -22,6 +22,8 @@ public class Gun : MonoBehaviour
 
     float timeSinceLastShot;
 
+    public Color shieldEffectColor;
+
     private void Start()
     {
         //Subscribing to Event
@@ -49,6 +51,12 @@ public class Gun : MonoBehaviour
             {
                 GameObject hitObject = hitInfo[i].transform.gameObject;
 
+                if (hitObject.CompareTag("shield"))
+                {
+                    PlayColorEffect(hitInfo, i, shieldEffectColor);
+                    break;
+                }
+
                 // Check if the hit object has a parent
                 if (hitInfo[i].transform.parent != null)
                     hitObject = hitInfo[i].transform.parent.gameObject;
@@ -56,9 +64,6 @@ public class Gun : MonoBehaviour
                 // Check if the same object has been hit before at the same hit point
                 if (hitObjects.Contains(hitObject))
                     continue;
-
-                // Create Hit on Effect
-                
 
                 // Add the hit object to the list
                 hitObjects.Add(hitObject);
@@ -72,6 +77,15 @@ public class Gun : MonoBehaviour
             // Play Animation
             spoolAnimator.Play("BasicHarpoonShoot", 0, 0);
         }
+    }
+
+    private void PlayColorEffect(RaycastHit[] hitInfo, int i, Color color)
+    {
+        GameObject newEffect = Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
+        ParticleSystem particleSystem = newEffect.GetComponent<ParticleSystem>();
+        ParticleSystem.ColorOverLifetimeModule colorOverLifetimeModule = particleSystem.colorOverLifetime;
+        colorOverLifetimeModule.color = new ParticleSystem.MinMaxGradient(color);
+        particleSystem.Play();
     }
 
     private void DamageAndHit(GameObject hitObject, RaycastHit[] hitInfo, int i)

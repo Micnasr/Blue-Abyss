@@ -915,11 +915,12 @@ MonoBehaviour:
   gunData: {fileID: 11400000, guid: bb4983ddd2603f3438d978b96d14e482, type: 2}
   hitOnEffect: {fileID: 8226690080474338650, guid: 585e7307f3e998b4681f382cd08e5c30,
     type: 3}
-  bloodEffect: {fileID: 4037230488441724624, guid: b5a89fc5647b0ac4d9b6f4e85df77b45,
+  bloodEffect: {fileID: 8226690080474338650, guid: 15c05918f9b897c4eabf97e70f97ffa2,
     type: 3}
   muzzle: {fileID: 1128077903629659498}
   playerCam: {fileID: 2423798104463690300}
   spoolAnimator: {fileID: 5466449204410511317}
+  shieldEffectColor: {r: 0.36311856, g: 0.8062839, b: 0.9056604, a: 1}
 --- !u!1 &9194792825607678403
 GameObject:
   m_ObjectHideFlags: 0

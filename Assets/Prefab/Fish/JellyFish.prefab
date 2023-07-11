@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &3573214797967044840
 SkinnedMeshRenderer:
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationDuration: 3
   blendShapeName: Key 2
+  animatorDistance: 60
   bobbingAmount: 0.005
   bobbingSpeed: 1
   rotationSpeed: 50
@@ -110,8 +111,8 @@ MonoBehaviour:
   jellyStingPrefab: {fileID: 5775629024882333013, guid: 8d2d4f03e4076dc4c919716749a4a0bb,
     type: 3}
   stingRadiusMin: 0.1
-  stingRadiusMax: 30
-  stingDuration: 5
+  stingRadiusMax: 20
+  stingDuration: 4
   spawnDelay: 10
 --- !u!64 &7955411762171018209
 MeshCollider:
