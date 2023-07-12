@@ -43,9 +43,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject jumpParticlePrefab;
     public GameObject walkParticlePrefab;
 
-    private GameObject jumpParticle;
-    private GameObject walkParticle;
-
+    private float walkParticleSpawnRate = 0.1f;
+    private float walkParticleTimer = 0f;
 
     void Start()
     {
@@ -106,9 +105,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private float walkParticleSpawnRate = 0.1f;
-    private float walkParticleTimer = 0f;
-
     private void MoveGround()
     {
         ApplyCustomGravity();
@@ -119,16 +115,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
-            if (Mathf.Abs(horizonInput) > 0f || Mathf.Abs(verticalInput) > 0f)
-            {
-                walkParticleTimer += Time.deltaTime;
-
-                if (walkParticleTimer >= walkParticleSpawnRate)
-                {
-                    SpawnWalkParticle();
-                    walkParticleTimer = 0f;
-                }
-            }
+            SpawnWalkParticle();
         }
         else if (!grounded)
         {
@@ -138,12 +125,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void SpawnWalkParticle()
     {
-        if (walkParticlePrefab != null)
+        // Check if Player is Moving
+        if (Mathf.Abs(horizonInput) > 0f || Mathf.Abs(verticalInput) > 0f)
         {
-            Vector3 spawnPosition = GetFeetPosition();
-            GameObject walkParticleInstance = Instantiate(walkParticlePrefab, spawnPosition, Quaternion.identity);
-            walkParticleInstance.transform.parent = transform;
-            Destroy(walkParticleInstance, 3f); // Destroy the walk particle after 3 seconds
+            walkParticleTimer += Time.deltaTime;
+
+            if (walkParticleTimer >= walkParticleSpawnRate)
+            {
+                if (walkParticlePrefab != null)
+                {
+                    Vector3 spawnPosition = GetFeetPosition();
+                    GameObject walkParticleInstance = Instantiate(walkParticlePrefab, spawnPosition, Quaternion.identity);
+                    walkParticleInstance.transform.parent = transform;
+                }
+
+                walkParticleTimer = 0f;
+            }
         }
     }
 
