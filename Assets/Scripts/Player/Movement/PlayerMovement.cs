@@ -39,7 +39,14 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     OxygenController oxygenController;
 
-    
+    [Header("ParticleEffects")]
+    public GameObject jumpParticlePrefab;
+    public GameObject walkParticlePrefab;
+
+    private GameObject jumpParticle;
+    private GameObject walkParticle;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -99,19 +106,58 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private float walkParticleSpawnRate = 0.1f;
+    private float walkParticleTimer = 0f;
+
     private void MoveGround()
     {
         ApplyCustomGravity();
 
         moveDirection = orientation.forward * verticalInput + orientation.right * horizonInput;
-        
-        // On ground
+
         if (grounded)
+        {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
-        // If in the air
+            if (Mathf.Abs(horizonInput) > 0f || Mathf.Abs(verticalInput) > 0f)
+            {
+                walkParticleTimer += Time.deltaTime;
+
+                if (walkParticleTimer >= walkParticleSpawnRate)
+                {
+                    SpawnWalkParticle();
+                    walkParticleTimer = 0f;
+                }
+            }
+        }
         else if (!grounded)
+        {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+    }
+
+    private void SpawnWalkParticle()
+    {
+        if (walkParticlePrefab != null)
+        {
+            Vector3 spawnPosition = GetFeetPosition();
+            GameObject walkParticleInstance = Instantiate(walkParticlePrefab, spawnPosition, Quaternion.identity);
+            walkParticleInstance.transform.parent = transform;
+            Destroy(walkParticleInstance, 3f); // Destroy the walk particle after 3 seconds
+        }
+    }
+
+    private Vector3 GetFeetPosition()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, playerHeight, whatIsGround))
+        {
+            return hit.point;
+        }
+        else
+        {
+            return transform.position;
+        }
     }
 
     private void SpeedControl()
