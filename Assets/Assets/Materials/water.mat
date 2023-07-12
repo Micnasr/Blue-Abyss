@@ -13,7 +13,6 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ENVIRONMENTREFLECTIONS_OFF
   - _FOAM
   - _NORMALMAP
   - _SHARP_INERSECTION
@@ -147,7 +146,7 @@ Material:
     - _DstBlendAlpha: 10
     - _EdgeFade: 7.37
     - _EnvironmentReflections: 1
-    - _EnvironmentReflectionsOn: 0
+    - _EnvironmentReflectionsOn: 1
     - _FlatShadingOn: 0
     - _FoamOn: 1
     - _FoamSize: 0.01
@@ -198,7 +197,7 @@ Material:
     - _SlopeThreshold: 0.25
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _SparkleIntensity: 4.53
+    - _SparkleIntensity: 1
     - _SparkleSize: 0.7
     - _SpecularHighlights: 1
     - _SpecularReflectionsOn: 1
@@ -223,7 +222,7 @@ Material:
     - _WaveDistance: 0.763
     - _WaveHeight: 0.43
     - _WaveNormalStr: 0.291
-    - _WaveSpeed: 1
+    - _WaveSpeed: 1.12
     - _WaveSteepness: 0
     - _WaveTint: 0.029
     - _WavesOn: 1
