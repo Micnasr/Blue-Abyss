@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &3573214797967044840
 SkinnedMeshRenderer:
@@ -114,6 +114,8 @@ MonoBehaviour:
   stingRadiusMax: 20
   stingDuration: 4
   spawnDelay: 10
+  inShieldEffectPrefab: {fileID: 6258197967815928059, guid: 44d79a12e31bc9b499b742e5be00db45,
+    type: 3}
 --- !u!64 &7955411762171018209
 MeshCollider:
   m_ObjectHideFlags: 0

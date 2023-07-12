@@ -119,3 +119,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shieldDamage: 30
+  inShieldEffectPrefab: {fileID: 6258197967815928059, guid: 44d79a12e31bc9b499b742e5be00db45,
+    type: 3}

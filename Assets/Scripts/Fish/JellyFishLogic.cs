@@ -29,6 +29,7 @@ public class JellyfishAnimation : MonoBehaviour
 
     private bool stingActive = false;
     private GameObject currentSting;
+    private JellyShieldScript jellyShieldScript;
     private Transform playerTransform;
 
     private void Start()
@@ -91,6 +92,7 @@ public class JellyfishAnimation : MonoBehaviour
 
         // Spawn jelly sting prefab
         currentSting = Instantiate(jellyStingPrefab, transform.position, Quaternion.identity);
+        jellyShieldScript = currentSting.GetComponent<JellyShieldScript>();
         Transform scaleTransform = currentSting.transform;
         Vector3 initialScale = scaleTransform.localScale;
         Vector3 targetScale = Vector3.one * stingRadiusMax;
@@ -106,7 +108,7 @@ public class JellyfishAnimation : MonoBehaviour
 
         yield return new WaitForSeconds(stingDuration);
 
-        Destroy(currentSting);
+        jellyShieldScript.DestroyShield();
         currentSting = null;
 
         // Wait for the spawn delay before allowing the sphere to spawn back
