@@ -126,7 +126,7 @@ Material:
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
     - _CausticsBrightness: 4.83
-    - _CausticsDistortion: 0.15
+    - _CausticsDistortion: 0
     - _CausticsOn: 0
     - _CausticsSpeed: 0.1
     - _CausticsTiling: 0.5
@@ -187,7 +187,7 @@ Material:
     - _ReflectionLighting: 0
     - _ReflectionStrength: 0.248
     - _RefractionOn: 0
-    - _RefractionStrength: 0.267
+    - _RefractionStrength: 0
     - _RiverModeOn: 0
     - _ShadingMode: 0
     - _ShadowStrength: 1
@@ -208,6 +208,9 @@ Material:
     - _SunReflectionSize: 0.943
     - _SunReflectionStrength: 3
     - _Surface: 0
+    - _TessMax: 15
+    - _TessMin: 0
+    - _TessValue: 16
     - _TranslucencyCurvatureMask: 0
     - _TranslucencyExp: 4
     - _TranslucencyOn: 0
@@ -224,7 +227,7 @@ Material:
     - _WaveNormalStr: 0.291
     - _WaveSpeed: 1.12
     - _WaveSteepness: 0
-    - _WaveTint: 0.029
+    - _WaveTint: 0.003
     - _WavesOn: 1
     - _WorkflowMode: 1
     - _WorldSpaceUV: 1
@@ -237,7 +240,7 @@ Material:
     - _DistanceNormalsFadeDist: {r: 300, g: 0.25, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 0.09803922}
-    - _HorizonColor: {r: 0.2352941, g: 0.9051294, b: 1, a: 1}
+    - _HorizonColor: {r: 0, g: 0.65187633, b: 0.8862745, a: 1}
     - _IntersectionColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShallowColor: {r: 0, g: 0.8446603, b: 1, a: 0.39607844}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}

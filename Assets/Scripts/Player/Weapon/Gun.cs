@@ -18,7 +18,7 @@ public class Gun : MonoBehaviour
 
     public Camera playerCam;
 
-    public Animator spoolAnimator;
+    public Animator gunController;
 
     float timeSinceLastShot;
 
@@ -40,6 +40,9 @@ public class Gun : MonoBehaviour
 
             // Raycast Goes Through Everything
             hitInfo = Physics.RaycastAll(playerCam.transform.position, playerCam.transform.forward, gunData.maxDistance);
+
+            // Play Gun Shot Animation
+            gunController.SetTrigger("GunShot");
 
             // List to store already hit objects
             List<GameObject> hitObjects = new List<GameObject>();
@@ -73,9 +76,6 @@ public class Gun : MonoBehaviour
             }
 
             timeSinceLastShot = 0;
-
-            // Play Animation
-            spoolAnimator.Play("BasicHarpoonShoot", 0, 0);
         }
     }
 
