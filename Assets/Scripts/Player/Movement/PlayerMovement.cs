@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask whatIsGround;
 
     [HideInInspector] public bool grounded;
+    private bool wasGrounded = false;
 
     public Transform orientation;
 
@@ -76,7 +77,16 @@ public class PlayerMovement : MonoBehaviour
         // Check if we are on the ground
         if (!isSwimming)
         {
+            // Check if we are on the ground :) - MN
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+            
+            // Check if we landed on the ground
+            if (wasGrounded == false && grounded == true)
+            {
+                SpawnJumpParticle();
+            }
+
+            wasGrounded = grounded;
             SpeedControl();
 
             // Handle Drag
@@ -120,6 +130,16 @@ public class PlayerMovement : MonoBehaviour
         else if (!grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+    }
+
+    private void SpawnJumpParticle()
+    {
+        if (walkParticlePrefab != null)
+        {
+            Vector3 spawnPosition = GetFeetPosition();
+            GameObject jumpParticleInstance = Instantiate(jumpParticlePrefab, spawnPosition, Quaternion.identity);
+            jumpParticleInstance.transform.parent = transform;
         }
     }
 
