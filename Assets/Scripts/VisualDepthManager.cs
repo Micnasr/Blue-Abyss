@@ -9,8 +9,15 @@ public class VisualDepthManager : MonoBehaviour
 {
     private const byte k_MaxByteForOverexposedColor = 191;
 
-    public float minValue = 50f;
-    public float maxValue = 170f;
+    // G value of the Color (Makes it more balue)
+    public float minGValue = 50f;
+    public float maxGValue = 170f;
+
+    // Fog Values
+    public float minFog = 20f;
+    public float maxFog = 70f;
+
+    // Boundary of the map
     public float minDepth = -400f;
     public float maxDepth = -3f;
 
@@ -19,12 +26,13 @@ public class VisualDepthManager : MonoBehaviour
     public Volume postProcessingVolume;
     private ColorAdjustments colorAdjustments;
 
-    private float currentValue;
+    private float currentBValue;
+    private float currentFogEnd;
 
     private void Start()
     {
         // Initialize the current value to the initial value
-        currentValue = maxValue;
+        currentBValue = maxGValue;
 
         // Get the ColorAdjustments component from the Post Processing Volume
         postProcessingVolume.profile.TryGet(out colorAdjustments);
@@ -40,6 +48,23 @@ public class VisualDepthManager : MonoBehaviour
 
     private void Update()
     {
+        UpdateDepthColor();
+        UpdateFog();
+    }
+
+    private void UpdateFog()
+    {
+        // Get the player's Y coordinate
+        float playerY = transform.position.y;
+
+        // Calculate the normalized depth
+        float normalizedDepth = Mathf.InverseLerp(minDepth, maxDepth, playerY);
+
+        RenderSettings.fogEndDistance = Mathf.Lerp(minFog, maxFog, normalizedDepth);
+    }
+
+    private void UpdateDepthColor()
+    {
         // Get the player's Y coordinate
         float playerY = transform.position.y;
 
@@ -47,12 +72,12 @@ public class VisualDepthManager : MonoBehaviour
         float normalizedDepth = Mathf.InverseLerp(minDepth, maxDepth, playerY);
 
         // Calculate the new value based on the normalized depth
-        currentValue = Mathf.Lerp(minValue, maxValue, normalizedDepth);
+        currentBValue = Mathf.Lerp(minGValue, maxGValue, normalizedDepth);
 
         // Set the G and B values of the Color Filter to the normalized depth
         if (colorAdjustments != null)
         {
-            Color baseLinearColor = new Color32(35, (byte)Mathf.RoundToInt(currentValue), 191, 255);
+            Color baseLinearColor = new Color32(35, (byte)Mathf.RoundToInt(currentBValue), 191, 255);
             colorAdjustments.colorFilter.value = ComposeHdrColor(baseLinearColor, intensity);
         }
     }
