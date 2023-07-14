@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 6995076460426175063}
   - component: {fileID: 2845071954360440733}
   - component: {fileID: 8381478848916375725}
+  - component: {fileID: 2891920961101231259}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -300,6 +301,26 @@ MonoBehaviour:
   healingAmount: 4
   timeToStartHealing: 5
   updateDuration: 0.5
+--- !u!114 &2891920961101231259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942630516093076900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44bea2111ace65c43ae4754c87e1c1f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minGValue: 50
+  maxGValue: 170
+  minFog: 20
+  maxFog: 70
+  minDepth: -400
+  maxDepth: -3
+  intensity: 0.8
+  postProcessingVolume: {fileID: 0}
 --- !u!1 &1072415295382214231
 GameObject:
   m_ObjectHideFlags: 0

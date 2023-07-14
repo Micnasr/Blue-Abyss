@@ -16,6 +16,11 @@ public class HealthManager : MonoBehaviour
 
     private float timeSinceLastDamage;
 
+    private void Awake()
+    {
+        maxHealth = PlayerPrefs.GetFloat("MaxHealth", 100);
+    }
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -91,5 +96,11 @@ public class HealthManager : MonoBehaviour
     public void HandleDeath()
     {
         Debug.Log("Player DEAD!");
+    }
+
+    public void NewMaxHealth(float newMaxHealth)
+    {
+        maxHealth = newMaxHealth;
+        healthMeter.maxValue = maxHealth;
     }
 }
