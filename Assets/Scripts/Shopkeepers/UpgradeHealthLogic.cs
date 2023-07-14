@@ -22,6 +22,8 @@ public class UpgradeHealthLogic : MonoBehaviour
     private GameObject player;
     private HealthManager healthManager;
 
+    public Color CompletedArrow;
+
     // Current Upgrade Stage (0-4)
     public int nextStage;
 
@@ -38,8 +40,6 @@ public class UpgradeHealthLogic : MonoBehaviour
 
         nextStage = FigureOutCurrentStage();
         UpdateUI();
-
-
     }
 
     private int FigureOutCurrentStage()
@@ -85,9 +85,7 @@ public class UpgradeHealthLogic : MonoBehaviour
         // Render The Arrows Depending on BUY STAGE
         for (int i = 0; i < nextStage; i++)
         {
-            Color currentColor = arrows[i].color;
-            currentColor.a = arrowTransparency;
-            arrows[i].color = currentColor;
+            arrows[i].color = CompletedArrow;
         }
     }
 
@@ -104,5 +102,10 @@ public class UpgradeHealthLogic : MonoBehaviour
             nextStage++;
             UpdateUI();
         }
+    }
+
+    public void BuyUpgrade()
+    {
+        AdvanceStage();
     }
 }

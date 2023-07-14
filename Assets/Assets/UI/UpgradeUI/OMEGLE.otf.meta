@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 0da68f6680c9d80498fc85be2a08a84d
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - OMEGLE
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 289521a472c34d7489696bfe6fe15a4b, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
