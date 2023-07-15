@@ -8,10 +8,14 @@ public class MoneyManager : MonoBehaviour
     public int currentMoney;
     public TextMeshProUGUI moneyText;
 
-    private void Start()
+    private void Awake()
     {
         // Load the money data from player preferences
         currentMoney = PlayerPrefs.GetInt("Money", 0);
+    }
+
+    private void Start()
+    {
         UpdateUI();
     }
 

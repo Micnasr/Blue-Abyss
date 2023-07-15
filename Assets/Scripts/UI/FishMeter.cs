@@ -11,7 +11,12 @@ public class FishMeter : MonoBehaviour
     public TextMeshProUGUI statusText;
 
     public int currentCount = 0;
-    public int maxCount = 5;
+    public int maxBag = 5;
+
+    private void Awake()
+    {
+        maxBag = PlayerPrefs.GetInt("MaxBag", maxBag);
+    }
 
     private void Start()
     {
@@ -20,8 +25,8 @@ public class FishMeter : MonoBehaviour
         if (fishMeter != null)
         {
             fishMeter.value = currentCount;
-            fishMeter.maxValue = maxCount;
-            statusText.text = "0/" + maxCount;
+            fishMeter.maxValue = maxBag;
+            statusText.text = "0/" + maxBag;
         }
         else
         {
@@ -31,7 +36,7 @@ public class FishMeter : MonoBehaviour
     public void AddFishDeath(int amount)
     {
         currentCount += amount;
-        currentCount = Mathf.Clamp(currentCount, 0, maxCount);
+        currentCount = Mathf.Clamp(currentCount, 0, maxBag);
         UpdateSlider();
     }
 
@@ -46,7 +51,7 @@ public class FishMeter : MonoBehaviour
     {
         if (fishMeter != null)
         {
-            statusText.text = currentCount + "/" + maxCount;
+            statusText.text = currentCount + "/" + maxBag;
 
             // Smoothly Update Slider
             StartCoroutine(UpdateSliderCoroutine());
@@ -73,5 +78,12 @@ public class FishMeter : MonoBehaviour
 
         // Ensure the final value is set accurately
         fishMeter.value = targetValue;
+    }
+
+    public void NewMaxCount(int newMaxCount)
+    {
+        maxBag = newMaxCount;
+        fishMeter.maxValue = maxBag;
+        statusText.text = currentCount + "/" + maxBag;
     }
 }
