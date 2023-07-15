@@ -16,5 +16,3 @@ MonoBehaviour:
   damage: 1
   maxDistance: 100
   fireRate: 60
-  reloadTime: 1
-  reloading: 0

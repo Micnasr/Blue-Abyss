@@ -15,5 +15,4 @@ public class GunData : ScriptableObject
 
     [Header("Reloading")]
     public float fireRate;
-
 }
