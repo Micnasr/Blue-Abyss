@@ -18,7 +18,7 @@ public class HealthManager : MonoBehaviour
 
     private void Awake()
     {
-        maxHealth = PlayerPrefs.GetFloat("MaxHealth", 100);
+        maxHealth = PlayerPrefs.GetFloat("MaxHealth", maxHealth);
     }
 
     private void Start()

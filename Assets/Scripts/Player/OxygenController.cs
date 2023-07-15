@@ -18,6 +18,11 @@ public class OxygenController : MonoBehaviour
 
     HealthManager healthManager;
 
+    private void Awake()
+    {
+        maxOxygen = PlayerPrefs.GetFloat("MaxOxygen", maxOxygen);
+    }
+
     private void Start()
     {
         currentOxygen = maxOxygen;
@@ -77,5 +82,11 @@ public class OxygenController : MonoBehaviour
         {
             Debug.LogError("Player Not Found - Health Manager");
         }
+    }
+
+    public void NewMaxOxygen(float newMaxOxygen)
+    {
+        maxOxygen = newMaxOxygen;
+        oxygenMeter.maxValue = maxOxygen;
     }
 }

@@ -51,7 +51,7 @@ public class UpgradeShopLogic : MonoBehaviour
                     CloseUpgradeUI();
                 }
             }
-        }   
+        }
     }
 
     public void CloseUpgradeUI()

@@ -7,30 +7,38 @@ using UnityEngine.UI;
 
 public class UpgradeHealthLogic : MonoBehaviour
 {
+    [Header("Upgrade Data")]
     public float[] healthStages;
-    public float[] prices;
+    public int[] prices;
 
+    [Header("Reference Data")]
     public Image[] arrows;
 
     private int maxStage;
 
-    public float arrowTransparency;
-
     public TextMeshProUGUI differenceText;
     public TextMeshProUGUI priceText;
 
+    public GameObject purchaseButton;
+    public GameObject moneyIcon;
+
     private GameObject player;
     private HealthManager healthManager;
+    private MoneyManager moneyManager;
 
+    [Header("Colors")]
+    public Color affordColor;
+    public Color brokeColor;
     public Color CompletedArrow;
 
     // Current Upgrade Stage (0-4)
-    public int nextStage;
+    private int nextStage;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         healthManager = player.GetComponent<HealthManager>();
+        moneyManager = FindObjectOfType<MoneyManager>();
 
         maxStage = healthStages.Length;
 
@@ -40,6 +48,23 @@ public class UpgradeHealthLogic : MonoBehaviour
 
         nextStage = FigureOutCurrentStage();
         UpdateUI();
+    }
+
+    private void Update()
+    {
+        UpdatePriceColor();
+    }
+
+    private void UpdatePriceColor()
+    {
+        if (nextStage < maxStage)
+        {
+            // Update the Color to be Red if we cannot afford
+            if (moneyManager.currentMoney >= prices[nextStage])
+                priceText.color = affordColor;
+            else
+                priceText.color = brokeColor;
+        }
     }
 
     private int FigureOutCurrentStage()
@@ -57,14 +82,6 @@ public class UpgradeHealthLogic : MonoBehaviour
         return 0;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            AdvanceStage();
-        }
-    }
-
     public void UpdateUI()
     {
         // Update the User Interface Accordingly
@@ -79,7 +96,10 @@ public class UpgradeHealthLogic : MonoBehaviour
         // Completed Screen
         else
         {
-            priceText.text = "COMPLETED";
+            differenceText.text = healthStages[maxStage - 1].ToString();
+            priceText.text = "MAX";
+            purchaseButton.SetActive(false);
+            moneyIcon.SetActive(false);
         }
 
         // Render The Arrows Depending on BUY STAGE
@@ -106,6 +126,16 @@ public class UpgradeHealthLogic : MonoBehaviour
 
     public void BuyUpgrade()
     {
-        AdvanceStage();
+        // Check if player can afford
+        if (moneyManager.currentMoney >= prices[nextStage])
+        {
+            moneyManager.RemoveMoney(prices[nextStage]);
+            AdvanceStage();
+        }
+        else
+        {
+            Debug.Log("No Money :(");
+        }
+
     }
 }
