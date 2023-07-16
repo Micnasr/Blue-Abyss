@@ -10,7 +10,7 @@ Material:
   m_Name: Coral 11
   m_Shader: {fileID: 4800000, guid: ad394ab92593c1f4ea90e834a025d9bf, type: 3}
   m_ShaderKeywords: _EMISSION
-  m_LightmapFlags: 0
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -56,6 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _BumpScale: 1
     - _ColorClipValue: 0.619
     - _Cutoff: 0.5
