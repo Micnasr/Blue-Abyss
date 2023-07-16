@@ -157,7 +157,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HorizonDistance: 7.6
+    - _HorizonDistance: 32
     - _IntersectionClipping: 0.428
     - _IntersectionFalloff: 0.01
     - _IntersectionLength: 2.66
@@ -240,7 +240,7 @@ Material:
     - _DistanceNormalsFadeDist: {r: 300, g: 0.25, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 0.09803922}
-    - _HorizonColor: {r: 0, g: 0.65187633, b: 0.8862745, a: 1}
+    - _HorizonColor: {r: 0.03137237, g: 0.2557418, b: 0.4433962, a: 1}
     - _IntersectionColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShallowColor: {r: 0, g: 0.8446603, b: 1, a: 0.39607844}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
