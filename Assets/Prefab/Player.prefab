@@ -243,7 +243,7 @@ MonoBehaviour:
   swimSpeed: 60
   isSwimming: 0
   jumpKey: 32
-  diveKey: 99
+  diveKey: 306
   playerHeight: 1.8
   whatIsGround:
     serializedVersion: 2
