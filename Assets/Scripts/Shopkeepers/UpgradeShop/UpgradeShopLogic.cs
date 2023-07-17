@@ -15,7 +15,7 @@ public class UpgradeShopLogic : MonoBehaviour
     public float interactionDistance = 5f;
     public float rotationSpeed = 5f;
 
-    private bool UIOpen = false;
+    private bool UIOpen = true;
 
     public GameObject UIPanel;
 
@@ -40,8 +40,6 @@ public class UpgradeShopLogic : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E) && playerMovement.grounded)
             {
-                UIOpen = !UIOpen;
-
                 if (UIOpen)
                 {
                     OpenUpgradeUI();
@@ -56,6 +54,8 @@ public class UpgradeShopLogic : MonoBehaviour
 
     public void CloseUpgradeUI()
     {
+        UIOpen = !UIOpen;
+
         UIPanel.SetActive(false);
 
         playerMovement.enabled = true;
@@ -69,6 +69,8 @@ public class UpgradeShopLogic : MonoBehaviour
 
     private void OpenUpgradeUI()
     {
+        UIOpen = !UIOpen;
+
         UIPanel.SetActive(true);
 
         playerMovement.enabled = false;
