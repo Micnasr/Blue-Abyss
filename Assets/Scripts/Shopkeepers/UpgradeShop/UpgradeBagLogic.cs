@@ -20,7 +20,6 @@ public class UpgradeBagLogic : MonoBehaviour
     public TextMeshProUGUI priceText;
 
     public GameObject purchaseButton;
-    public GameObject moneyIcon;
 
     private GameObject player;
 
@@ -99,7 +98,6 @@ public class UpgradeBagLogic : MonoBehaviour
             differenceText.text = bagStages[maxStage-1].ToString();
             priceText.text = "MAX";
             purchaseButton.SetActive(false);
-            moneyIcon.SetActive(false);
         }
 
         // Render The Arrows Depending on BUY STAGE

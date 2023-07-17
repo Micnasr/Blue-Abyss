@@ -20,7 +20,6 @@ public class UpgradeOxygenLogic : MonoBehaviour
     public TextMeshProUGUI priceText;
 
     public GameObject purchaseButton;
-    public GameObject moneyIcon;
 
     private GameObject player;
     private OxygenController oxygenController;
@@ -99,7 +98,6 @@ public class UpgradeOxygenLogic : MonoBehaviour
             differenceText.text = oxygenStages[maxStage-1].ToString();
             priceText.text = "MAX";
             purchaseButton.SetActive(false);
-            moneyIcon.SetActive(false);
         }
 
         // Render The Arrows Depending on BUY STAGE

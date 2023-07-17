@@ -20,7 +20,6 @@ public class UpgradeDamageLogic : MonoBehaviour
     public TextMeshProUGUI priceText;
 
     public GameObject purchaseButton;
-    public GameObject moneyIcon;
 
     private GameObject player;
     public GunData gunData;
@@ -98,7 +97,6 @@ public class UpgradeDamageLogic : MonoBehaviour
             differenceText.text = damageStages[maxStage-1].ToString();
             priceText.text = "MAX";
             purchaseButton.SetActive(false);
-            moneyIcon.SetActive(false);
         }
 
         // Render The Arrows Depending on BUY STAGE

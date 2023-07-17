@@ -20,7 +20,6 @@ public class UpgradeHealthLogic : MonoBehaviour
     public TextMeshProUGUI priceText;
 
     public GameObject purchaseButton;
-    public GameObject moneyIcon;
 
     private GameObject player;
     private HealthManager healthManager;
@@ -99,7 +98,6 @@ public class UpgradeHealthLogic : MonoBehaviour
             differenceText.text = healthStages[maxStage - 1].ToString();
             priceText.text = "MAX";
             purchaseButton.SetActive(false);
-            moneyIcon.SetActive(false);
         }
 
         // Render The Arrows Depending on BUY STAGE
