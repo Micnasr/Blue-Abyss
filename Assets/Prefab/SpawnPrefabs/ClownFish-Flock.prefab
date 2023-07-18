@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3544146010267463258}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.99, y: -11, z: -3.636063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -54,9 +54,9 @@ MonoBehaviour:
   _avoidanceDistance: 2
   _alignmentDistance: 2
   _obstacleDistance: 7
-  _boundsDistance: 15
+  _boundsDistance: 10
   _cohesionWeight: 2
   _avoidanceWeight: 1
   _alignmentWeight: 0
-  _boundsWeight: 10
+  _boundsWeight: 2
   _obstacleWeight: 10

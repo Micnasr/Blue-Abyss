@@ -380,6 +380,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eefb5ec2d39d31246aca167a713970d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishPrefab: {fileID: 5102813987796697568, guid: cbb3f7349128d1447b70ce573b6af2d5,
-    type: 3}
+  fishPrefabs:
+  - {fileID: 5102813987796697568, guid: cbb3f7349128d1447b70ce573b6af2d5, type: 3}
   Waypoints: []
+  respawnDelay: 10
+  spawnDistanceThreshold: 20
