@@ -427,6 +427,7 @@ MonoBehaviour:
   deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
   shaderTopThreshold: 1.2
   shaderBottomThreshold: 1.7
+  doesBleed: 1
   noiseStrength: 0.25
   duration: 1
   damageEffect: {fileID: 3027278326694109150, guid: dd2a9939b435be543b2c8eedd7291fc8,

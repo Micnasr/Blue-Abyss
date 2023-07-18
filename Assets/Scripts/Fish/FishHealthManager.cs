@@ -16,6 +16,8 @@ public class FishHealthManager : MonoBehaviour
     public float shaderTopThreshold;
     public float shaderBottomThreshold;
 
+    public bool doesBleed = false;
+
     // Only for flocks
     private FlockUnit flockUnit;
     // Only for water animals
@@ -63,7 +65,7 @@ public class FishHealthManager : MonoBehaviour
         {
             HandleDeath();
         } 
-        else if (maxHealth > 6 && (currentHealth <= maxHealth * 0.3f) && !playedEffect)
+        else if (doesBleed && (currentHealth <= maxHealth * 0.3f) && !playedEffect)
         {
             PlayDamageEffect();
             playedEffect = true;
@@ -156,7 +158,8 @@ public class FishHealthManager : MonoBehaviour
         // Give Rewards When Dead
         fishMeter.AddFishDeath(deathPoints);
 
-        Destroy(damageEffect);
+        if (doesBleed)
+            Destroy(damageEffect);
 
         // Start Dissolving Animation
         StartCoroutine(DissolveHeightTransition(uniqueDeathMaterial));

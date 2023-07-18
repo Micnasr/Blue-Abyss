@@ -19,7 +19,6 @@ public class LandEnemyPatrol : MonoBehaviour
     private void Start()
     {
         SetRandomWaypoint();
-        transform.position = currentWaypoint.position;
     }
 
     private void Update()
