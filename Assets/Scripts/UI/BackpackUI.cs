@@ -21,6 +21,8 @@ public class BackpackUI : MonoBehaviour
 
     private List<GameObject> instantiatedObjects = new List<GameObject>();
 
+    public GameObject itemHolder;
+
     private void Awake()
     {
         itemsUnlockedStr = PlayerPrefs.GetString("Backpack", "");
@@ -29,6 +31,7 @@ public class BackpackUI : MonoBehaviour
     void Start()
     {
         backgroundPanel.SetActive(false);
+        itemHolder.SetActive(false);
 
         ConvertStrArray();
         GenerateUI();
@@ -69,25 +72,25 @@ public class BackpackUI : MonoBehaviour
         switch (itemsUnlocked.Count)
         {
             case 0:
-                posX = -27.87619f;
-                width = 39.9209f;
+                posX = -10.1f;
+                width = -0.46844f;
                 break;
             case 1:
-                posX = -11.36689f;
-                width = 72.981f;
+                posX = 0.5948f;
+                width = 20.9216f;
                 break;
             case 2:
-                posX = 4.6226f;
-                width = 104.96f;
+                posX = 16.78f;
+                width = 53.292f;
                 break;
             case 3:
-                posX = 21.2f;
-                width = 138.11f;
+                posX = 32.66911f;
+                width = 85.0702f;
                 break;
             // Add more cases for other counts as needed
             default:
-                posX = 37.5f;
-                width = 170.82f;
+                posX = 49.23399f;
+                width = 118.2f;
                 break;
         }
 
@@ -106,7 +109,7 @@ public class BackpackUI : MonoBehaviour
         for (int i = 0; i < itemsUnlocked.Count; i++)
         {
             GameObject instantiatedPrefab = Instantiate(prefabs[itemsUnlocked[i]], positions[i].position, positions[i].rotation);
-            instantiatedPrefab.transform.SetParent(backgroundPanel.transform);
+            instantiatedPrefab.transform.SetParent(itemHolder.transform);
             instantiatedObjects.Add(instantiatedPrefab);
         }
 
@@ -130,11 +133,13 @@ public class BackpackUI : MonoBehaviour
     private void CloseUpgradeUI()
     {
         backgroundPanel.SetActive(false);
+        itemHolder.SetActive(false);
     }
 
     private void OpenUpgradeUI()
     {
         backgroundPanel.SetActive(true);
+        itemHolder.SetActive(true);
     }
 
     public void BoughtItem(string item)
