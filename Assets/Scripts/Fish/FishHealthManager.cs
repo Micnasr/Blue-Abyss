@@ -34,7 +34,7 @@ public class FishHealthManager : MonoBehaviour
     private float runAwaySpeed;
 
     // Flag to track if the fish has died
-    private bool isDead = false;
+    [HideInInspector] public bool isDead = false;
 
     private FishMeter fishMeter;
 

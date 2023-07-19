@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 public class Flocking : MonoBehaviour
@@ -66,6 +67,11 @@ public class Flocking : MonoBehaviour
     [SerializeField] private float _obstacleWeight;
     public float obstacleWeight { get { return _obstacleWeight; } }
 
+    [Header("Respawn")]
+    public float respawnTimer;
+    public float respawnRange;
+    private bool respawning = false;
+
 
 
 
@@ -86,14 +92,34 @@ public class Flocking : MonoBehaviour
     {
         CheckNULL();
         CheckInView();
+
+        // Respawn Flock Logic
+        if (allUnits.Length == 0 && !respawning)
+        {
+            respawning = true;
+            Debug.Log("Respawning");
+            StartCoroutine(RespawnFish());
+        }
     }
 
-    private void CheckInView()
+    private IEnumerator RespawnFish()
+    {
+        yield return new WaitForSeconds(respawnTimer);
+
+        if (!PlayerInRange(respawnRange))
+            GenerateUnits();
+            respawning = false;
+    }
+
+        private void CheckInView()
     {
         foreach (var unit in allUnits)
         {
-            if (unit != null)
+            FishHealthManager fishHealthManager = unit.GetComponent<FishHealthManager>();
+            if (unit != null && !fishHealthManager.isDead)
             {
+               
+
                 bool isVisible = unit.PlayerInRange(50f) && IsUnitVisible(unit);
 
                 // Disable or enable the unit's GameObject based on visibility
@@ -143,5 +169,16 @@ public class Flocking : MonoBehaviour
             allUnits[i].AssignFlock(this);
             allUnits[i].InitializeSpeed(UnityEngine.Random.Range(minSpeed, maxSpeed));
         }
+    }
+
+    private bool PlayerInRange(float range)
+    {
+        if (player == null)
+        {
+            return false;
+        }
+
+        float distance = Vector3.Distance(transform.position, player.transform.position);
+        return distance <= range;
     }
 }
