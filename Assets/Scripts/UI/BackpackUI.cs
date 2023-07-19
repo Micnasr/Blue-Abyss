@@ -28,6 +28,8 @@ public class BackpackUI : MonoBehaviour
 
     void Start()
     {
+        backgroundPanel.SetActive(false);
+
         ConvertStrArray();
         GenerateUI();
     }

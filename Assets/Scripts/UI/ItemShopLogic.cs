@@ -11,11 +11,16 @@ public class ItemShopLogic : MonoBehaviour
     public int[] priceOfItems;
 
     public TextMeshProUGUI[] textPriceOfItems;
+    public GameObject[] purchaseButtons;
 
     private Transform player;
     private MoneyManager moneyManager;
 
     public BackpackUI backpackUI;
+
+    [Header("Colors")]
+    public Color affordColor;
+    public Color brokeColor;
 
     void Start()
     {
@@ -23,6 +28,39 @@ public class ItemShopLogic : MonoBehaviour
         moneyManager = FindObjectOfType<MoneyManager>();
 
         PopulatePrices();
+
+        UpdateUI();
+    }
+
+    private void Update()
+    {
+        UpdatePriceColor(); 
+    }
+
+    private void UpdateUI()
+    {
+        string[] names = { "Anchor", "Lifevest", "Light", "Jacket" };
+        for (int i = 0; i < names.Length; i++)
+        {
+            if (backpackUI.itemsUnlockedStr.Contains(names[i]))
+            {
+                textPriceOfItems[i].text = "OWNED";
+                purchaseButtons[i].SetActive(false);
+            }
+        }
+    }
+
+    private void UpdatePriceColor()
+    {
+        // Update the Color to be Red if we cannot afford
+        for (int i = 0; i < textPriceOfItems.Length; i++)
+        {
+            if (moneyManager.currentMoney < priceOfItems[i] && textPriceOfItems[i].text != "OWNED")
+                textPriceOfItems[i].color = brokeColor;
+            else
+                textPriceOfItems[i].color = affordColor;
+        }
+        
     }
 
     private void PopulatePrices()
@@ -47,7 +85,7 @@ public class ItemShopLogic : MonoBehaviour
 
             //Give Item to Player
             backpackUI.BoughtItem(name);
-
+            UpdateUI();
         }
         else
         {
@@ -71,7 +109,7 @@ public class ItemShopLogic : MonoBehaviour
 
             //Give Item to Player
             backpackUI.BoughtItem(name);
-
+            UpdateUI();
         }
         else
         {
@@ -95,7 +133,7 @@ public class ItemShopLogic : MonoBehaviour
 
             //Give Item to Player
             backpackUI.BoughtItem(name);
-
+            UpdateUI();
         }
         else
         {
@@ -119,7 +157,7 @@ public class ItemShopLogic : MonoBehaviour
 
             //Give Item to Player
             backpackUI.BoughtItem(name);
-
+            UpdateUI();
         }
         else
         {
