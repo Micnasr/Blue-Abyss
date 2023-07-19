@@ -102,5 +102,8 @@ public class HealthManager : MonoBehaviour
     {
         maxHealth = newMaxHealth;
         healthMeter.maxValue = maxHealth;
+
+        PlayerPrefs.SetFloat("MaxHealth", newMaxHealth);
+        PlayerPrefs.Save();
     }
 }

@@ -19,6 +19,13 @@ public class BackpackUI : MonoBehaviour
 
     private bool openUI = false;
 
+    private List<GameObject> instantiatedObjects = new List<GameObject>();
+
+    private void Awake()
+    {
+        itemsUnlockedStr = PlayerPrefs.GetString("Backpack", "");
+    }
+
     void Start()
     {
         ConvertStrArray();
@@ -27,6 +34,7 @@ public class BackpackUI : MonoBehaviour
 
     private void ConvertStrArray()
     {
+        itemsUnlocked.Clear();
         string[] strArray = itemsUnlockedStr.Split('-');
 
         for (int i = 0; i < strArray.Length; i++)
@@ -58,6 +66,10 @@ public class BackpackUI : MonoBehaviour
 
         switch (itemsUnlocked.Count)
         {
+            case 0:
+                posX = -27.87619f;
+                width = 39.9209f;
+                break;
             case 1:
                 posX = -11.36689f;
                 width = 72.981f;
@@ -77,6 +89,14 @@ public class BackpackUI : MonoBehaviour
                 break;
         }
 
+        // Destroy previously instantiated objects
+        foreach (GameObject obj in instantiatedObjects)
+        {
+            Destroy(obj);
+        }
+
+        instantiatedObjects.Clear();
+
         RectTransform rectTransform = backgroundPanel.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = new Vector2(posX, rectTransform.anchoredPosition.y);
         rectTransform.sizeDelta = new Vector2(width, rectTransform.sizeDelta.y);
@@ -85,6 +105,7 @@ public class BackpackUI : MonoBehaviour
         {
             GameObject instantiatedPrefab = Instantiate(prefabs[itemsUnlocked[i]], positions[i].position, positions[i].rotation);
             instantiatedPrefab.transform.SetParent(backgroundPanel.transform);
+            instantiatedObjects.Add(instantiatedPrefab);
         }
 
     }
@@ -112,5 +133,19 @@ public class BackpackUI : MonoBehaviour
     private void OpenUpgradeUI()
     {
         backgroundPanel.SetActive(true);
+    }
+
+    public void BoughtItem(string item)
+    {
+        if (itemsUnlocked.Count == 0)
+            itemsUnlockedStr = item;
+        else
+            itemsUnlockedStr += ("-" + item);
+
+        PlayerPrefs.SetString("Backpack", itemsUnlockedStr);
+        PlayerPrefs.Save();
+
+        ConvertStrArray();
+        GenerateUI();
     }
 }

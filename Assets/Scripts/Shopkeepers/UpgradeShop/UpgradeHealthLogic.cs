@@ -114,8 +114,6 @@ public class UpgradeHealthLogic : MonoBehaviour
         {     
             // Update Max Health
             healthManager.NewMaxHealth(healthStages[nextStage]);
-            PlayerPrefs.SetFloat("MaxHealth", healthStages[nextStage]);
-            PlayerPrefs.Save();
             
             nextStage++;
             UpdateUI();
