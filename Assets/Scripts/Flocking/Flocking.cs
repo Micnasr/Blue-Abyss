@@ -72,9 +72,6 @@ public class Flocking : MonoBehaviour
     public float respawnRange;
     private bool respawning = false;
 
-
-
-
     public FlockUnit[] allUnits { get; set; }
     private Camera playerCam;
     private GameObject player;
@@ -97,7 +94,6 @@ public class Flocking : MonoBehaviour
         if (allUnits.Length == 0 && !respawning)
         {
             respawning = true;
-            Debug.Log("Respawning");
             StartCoroutine(RespawnFish());
         }
     }
@@ -118,8 +114,6 @@ public class Flocking : MonoBehaviour
             FishHealthManager fishHealthManager = unit.GetComponent<FishHealthManager>();
             if (unit != null && !fishHealthManager.isDead)
             {
-               
-
                 bool isVisible = unit.PlayerInRange(50f) && IsUnitVisible(unit);
 
                 // Disable or enable the unit's GameObject based on visibility
@@ -170,6 +164,15 @@ public class Flocking : MonoBehaviour
             allUnits[i].InitializeSpeed(UnityEngine.Random.Range(minSpeed, maxSpeed));
         }
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.DrawWireCube(Vector3.zero, spawnBounds);
+    }
+#endif
 
     private bool PlayerInRange(float range)
     {

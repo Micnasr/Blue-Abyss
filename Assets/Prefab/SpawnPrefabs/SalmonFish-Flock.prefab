@@ -60,3 +60,5 @@ MonoBehaviour:
   _alignmentWeight: 0
   _boundsWeight: 10
   _obstacleWeight: 10
+  respawnTimer: 5
+  respawnRange: 20
