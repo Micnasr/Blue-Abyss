@@ -49,6 +49,13 @@ public class UpgradeShopLogic : MonoBehaviour
                     CloseUpgradeUI();
                 }
             }
+        } // Incase the player moves out of the range after interacting
+        else if (Input.GetKeyDown(KeyCode.E) && playerMovement.grounded)
+        {
+            if (!UIOpen)
+            {
+                CloseUpgradeUI();
+            }
         }
     }
 
