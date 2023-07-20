@@ -29,12 +29,6 @@ public class LifevestLogic : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        GameObject anchorUI = GameObject.FindGameObjectWithTag("Anchor");
-
-        if (anchorUI != null)
-        {
-            anchorLogic = anchorUI.GetComponent<AnchorLogic>();
-        }
 
         playerMovement = player.GetComponent<PlayerMovement>();
         rb = player.GetComponent<Rigidbody>();
@@ -52,6 +46,13 @@ public class LifevestLogic : MonoBehaviour
             toggledON = !toggledON;
 
             // If Vest is On we want Anchor to Be OFF
+            GameObject anchorUI = GameObject.FindGameObjectWithTag("Anchor");
+
+            if (anchorUI != null)
+            {
+                anchorLogic = anchorUI.GetComponent<AnchorLogic>();
+            }
+
             if (toggledON && anchorLogic != null)
             {
                 anchorLogic.toggledON = false;

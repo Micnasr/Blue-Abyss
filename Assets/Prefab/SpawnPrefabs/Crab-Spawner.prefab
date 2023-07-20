@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishPrefabs:
   - {fileID: 7919411607318185391, guid: 6780cfaf32e04114ea7ded96ae944bee, type: 3}
+  - {fileID: 1002859518456047588, guid: 6ecc94d63a1667546aa2cee70b9bc74c, type: 3}
   Waypoints: []
   respawnDelay: 10
   spawnDistanceThreshold: 8
