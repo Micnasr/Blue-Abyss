@@ -378,9 +378,10 @@ GameObject:
   - component: {fileID: 8368220127026349220}
   - component: {fileID: 5457611937121195659}
   - component: {fileID: 96534523193731087}
+  - component: {fileID: 3784175834454749750}
   m_Layer: 5
   m_Name: LifevestUI
-  m_TagString: Untagged
+  m_TagString: Lifevest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -446,3 +447,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3784175834454749750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8026854014791926078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7d2814d8fe24d4896da934ccfc9336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggledON: 0
+  LifevestFloatStrength: 7
+  toggleKey: 116
+  onColor: {r: 0.007843138, g: 0.6901961, b: 0.003921569, a: 1}
+  offColor: {r: 0.6117647, g: 0.10980392, b: 0, a: 1}

@@ -7,11 +7,12 @@ using UnityEngine.UI;
 public class AnchorLogic : MonoBehaviour
 {
     private GameObject player;
-    private OxygenController oxygenController;
     private PlayerMovement playerMovement;
     private Rigidbody rb;
 
-    private bool toggledON = false;
+    private LifevestLogic lifevestLogic;
+
+    [HideInInspector] public bool toggledON = false;
 
     [Header("Item Data")]
     public float AnchorDropStrength;
@@ -28,6 +29,13 @@ public class AnchorLogic : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        GameObject lifevestUI = GameObject.FindGameObjectWithTag("Lifevest");
+
+        if (lifevestUI != null)
+        {
+            lifevestLogic = lifevestUI.GetComponent<LifevestLogic>();
+        }
+
         playerMovement = player.GetComponent<PlayerMovement>();
         rb = player.GetComponent<Rigidbody>();
 
@@ -42,6 +50,12 @@ public class AnchorLogic : MonoBehaviour
         if (Input.GetKeyDown(toggleKey))
         {
             toggledON = !toggledON;
+
+            // If Anchor is On we want Vest to Be OFF
+            if (toggledON && lifevestLogic != null)
+            {
+                lifevestLogic.toggledON = false;
+            }
         }
 
         // Toggles Color Status on Image

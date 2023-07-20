@@ -7,6 +7,8 @@ TagManager:
   - PlayerHead
   - WaterCollider
   - waypoint
+  - Anchor
+  - Lifevest
   - shield
   layers:
   - Default

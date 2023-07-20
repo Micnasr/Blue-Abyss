@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 3605379375410426516}
   m_Layer: 5
   m_Name: AnchorUI
-  m_TagString: Untagged
+  m_TagString: Anchor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -307,7 +307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08c3f38df63ae214c96ad4ea76d9c363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AnchorDropStrength: 10
+  toggledON: 0
+  AnchorDropStrength: 7
   toggleKey: 122
   onColor: {r: 0.009157414, g: 0.6886792, b: 0.0032484946, a: 1}
   offColor: {r: 0.6117647, g: 0.10980392, b: 0, a: 1}
