@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 8100445368519702719}
   - component: {fileID: 5522086805573131570}
   - component: {fileID: 6743981343341228574}
+  - component: {fileID: 3605379375410426516}
   m_Layer: 5
   m_Name: AnchorUI
   m_TagString: Untagged
@@ -294,6 +295,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3605379375410426516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5655215640735530267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08c3f38df63ae214c96ad4ea76d9c363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnchorDropStrength: 10
+  toggleKey: 122
+  onColor: {r: 0.009157414, g: 0.6886792, b: 0.0032484946, a: 1}
+  offColor: {r: 0.6117647, g: 0.10980392, b: 0, a: 1}
 --- !u!1 &7907903055611187431
 GameObject:
   m_ObjectHideFlags: 0
