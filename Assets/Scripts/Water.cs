@@ -7,7 +7,6 @@ public class Water : MonoBehaviour
     public ParticleSystem bubbleEffect;
 
     private ParticleSystem activeEffect;
-    public GameObject player;
 
     private void OnTriggerEnter(Collider other)
     {

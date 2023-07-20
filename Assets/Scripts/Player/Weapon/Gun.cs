@@ -8,12 +8,6 @@ public class Gun : MonoBehaviour
     [Header("References")]
     [SerializeField] GunData gunData;
 
-    // Normal Effect when hitting non fish
-    public GameObject hitOnEffect;
-
-    // Effect for Fish
-    public GameObject bloodEffect;
-
     public Transform muzzle;
 
     public Camera playerCam;
@@ -23,6 +17,11 @@ public class Gun : MonoBehaviour
     float timeSinceLastShot;
 
     public Color shieldEffectColor;
+
+    [Header("Effect Prefabs")]
+    public GameObject hitOnEffect;
+    public GameObject bloodEffect;
+    public GameObject waterSplash;
 
     private void Start()
     {
@@ -106,8 +105,14 @@ public class Gun : MonoBehaviour
             fishHealthManager.TakeDamage(gunData.damage);
             Instantiate(bloodEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
         }
+        else if (hitInfo[i].transform.CompareTag("WaterCollider"))
+        {
+            // We Hit Water Surface
+           Instantiate(waterSplash, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
+        }
         else
         {
+            // We hit a non alive thing
             Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
         }
     }
