@@ -634,7 +634,7 @@ Transform:
   - {fileID: 6657064762886849617}
   - {fileID: 5101231413525758054}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3791621636006195984
 MonoBehaviour:
@@ -683,13 +683,14 @@ MonoBehaviour:
   maxHealth: 5
   deathPoints: 4
   deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
-  shaderTopThreshold: 0.2
-  shaderBottomThreshold: 0.7
+  shaderTopThreshold: 0.7
+  shaderBottomThreshold: 1
   doesBleed: 1
   noiseStrength: 0.25
   duration: 1
   damageEffect: {fileID: 3027278326694109150, guid: dd2a9939b435be543b2c8eedd7291fc8,
     type: 3}
+  isDead: 0
 --- !u!95 &156810198007706204
 Animator:
   serializedVersion: 5

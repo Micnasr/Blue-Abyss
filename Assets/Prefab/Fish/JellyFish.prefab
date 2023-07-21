@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3573214797967044840}
   - component: {fileID: 2552687587302214998}
   - component: {fileID: 7955411762171018209}
+  - component: {fileID: 5321389288473622359}
   m_Layer: 0
   m_Name: JellyFish
   m_TagString: Untagged
@@ -114,8 +115,6 @@ MonoBehaviour:
   stingRadiusMax: 20
   stingDuration: 4
   spawnDelay: 10
-  inShieldEffectPrefab: {fileID: 6258197967815928059, guid: 44d79a12e31bc9b499b742e5be00db45,
-    type: 3}
 --- !u!64 &7955411762171018209
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -138,3 +137,25 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3292193842502687620, guid: 22633d27d0d18e74dbde7e9a936f090b, type: 3}
+--- !u!114 &5321389288473622359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8744093088685349220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0747cc7cdfda4604f9ea807bc48b4234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  deathPoints: 4
+  deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
+  shaderTopThreshold: 0.2
+  shaderBottomThreshold: 2
+  doesBleed: 0
+  noiseStrength: 0.25
+  duration: 1
+  damageEffect: {fileID: 0}
+  isDead: 0

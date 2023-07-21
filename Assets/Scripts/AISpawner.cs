@@ -45,11 +45,11 @@ public class AISpawner : MonoBehaviour
         if (currentFish == null) return;
 
         Vector3 playerPosition = player.transform.position;
-        Vector3 currentFishPosition = transform.position;
+        Vector3 currentFishPosition = currentFish.transform.position;
 
         // Calculate the distance between the two positions
         float distance = Vector3.Distance(playerPosition, currentFishPosition);
-        
+
         if (distance > despawnRange)
         {
             currentFish.SetActive(false);
