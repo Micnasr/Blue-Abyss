@@ -64,7 +64,9 @@ public class Gun : MonoBehaviour
                 // If we hit an obstacle, we do not care about what we hit behind
                 if ((obstacleLayers.value & (1 << hitObject.layer)) != 0)
                 {
-                    Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
+                    //Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
+                    DetermineColorOfHit(hitInfo, i);
+
                     break;
                 }
 
@@ -86,6 +88,39 @@ public class Gun : MonoBehaviour
             timeSinceLastShot = 0;
         }
     }
+
+    // HitEffect will be of color of material hit :) ~MN
+    private void DetermineColorOfHit(RaycastHit[] hitInfo, int i)
+    {
+        MeshRenderer meshRenderer = hitInfo[i].transform.GetComponent<MeshRenderer>();
+
+        if (meshRenderer != null)
+        {
+            Texture2D texture = meshRenderer.material.mainTexture as Texture2D;
+            if (texture != null)
+            {
+                Vector2 pixelUV = hitInfo[i].textureCoord;
+                pixelUV.x *= texture.width;
+                pixelUV.y *= texture.height;
+                Color color = texture.GetPixel((int)pixelUV.x, (int)pixelUV.y);
+                PlayColorEffect(hitInfo, i, color);
+            }
+            else
+            {
+                Material mat = meshRenderer.material;
+
+                if (mat.HasProperty("_Color"))
+                {
+                    Color color = mat.color;
+                    PlayColorEffect(hitInfo, i, color);
+                } else
+                {
+                    Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
+                }
+            }
+        }
+    }
+
 
     private void PlayColorEffect(RaycastHit[] hitInfo, int i, Color color)
     {
