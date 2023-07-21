@@ -16,6 +16,8 @@ public class AISpawner : MonoBehaviour
     private Camera playerCam;
     private GameObject player;
 
+    public float despawnRange = 200f;
+
 
     private void Start()
     {
@@ -29,11 +31,33 @@ public class AISpawner : MonoBehaviour
 
     private void Update()
     {
+        PerformanceRender();
+
         // Check if the current fish is dead and not already respawning
         if (currentFish == null && !isRespawning)
         {
             StartCoroutine(RespawnFish());
-        }
+        }  
+    }
+
+    private void PerformanceRender()
+    {
+        if (currentFish == null) return;
+
+        Vector3 playerPosition = player.transform.position;
+        Vector3 currentFishPosition = transform.position;
+
+        // Calculate the distance between the two positions
+        float distance = Vector3.Distance(playerPosition, currentFishPosition);
+        
+        if (distance > despawnRange)
+        {
+            currentFish.SetActive(false);
+        }   
+        else
+        {
+            currentFish.SetActive(true);
+        } 
     }
 
     void GetWaypoints()

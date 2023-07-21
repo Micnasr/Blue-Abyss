@@ -385,3 +385,4 @@ MonoBehaviour:
   Waypoints: []
   respawnDelay: 10
   spawnDistanceThreshold: 20
+  despawnRange: 150

@@ -54,6 +54,7 @@ MonoBehaviour:
   Waypoints: []
   respawnDelay: 10
   spawnDistanceThreshold: 20
+  despawnRange: 150
 --- !u!1 &1039712640140839721
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,9 +16,17 @@ public class LandEnemyPatrol : MonoBehaviour
 
     public LayerMask obstacleLayer;
 
+    private Transform player;
+
+    [Header("Performance")]
+    public float animatorDistance = 20f;
+    private Animator animator;
+
     private void Start()
     {
         SetRandomWaypoint();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -29,6 +37,8 @@ public class LandEnemyPatrol : MonoBehaviour
         }
 
         MoveTowardsWaypoint();
+
+        PerformanceAnimations();
     }
 
     private void SetRandomWaypoint()
@@ -70,5 +80,27 @@ public class LandEnemyPatrol : MonoBehaviour
 
         // Draw debug rays
         Debug.DrawRay(raycastOrigin, -transform.up * raycastDistance, Color.yellow);
+    }
+
+    private bool PlayerInRange(float range)
+    {
+        if (player == null)
+        {
+            return false;
+        }
+
+        float distance = Vector3.Distance(transform.position, player.position);
+        return distance <= range;
+    }
+
+    private void PerformanceAnimations()
+    {
+        if (animator != null)
+        {
+            if (!PlayerInRange(animatorDistance))
+                animator.enabled = false;
+            else
+                animator.enabled = true;
+        }
     }
 }
