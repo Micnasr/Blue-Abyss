@@ -64,8 +64,9 @@ public class Gun : MonoBehaviour
                 // If we hit an obstacle, we do not care about what we hit behind
                 if ((obstacleLayers.value & (1 << hitObject.layer)) != 0)
                 {
-                    //Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
-                    DetermineColorOfHit(hitInfo, i);
+                    Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
+                      
+                    /* DetermineColorOfHit(hitInfo, i); YOU NEED TO SET TEXTURES AS READ/WRITE TO USE THIS */
 
                     break;
                 }
