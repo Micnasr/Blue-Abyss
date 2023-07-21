@@ -18,6 +18,8 @@ public class Gun : MonoBehaviour
 
     public Color shieldEffectColor;
 
+    public LayerMask obstacleLayers;
+
     [Header("Effect Prefabs")]
     public GameObject hitOnEffect;
     public GameObject bloodEffect;
@@ -56,6 +58,13 @@ public class Gun : MonoBehaviour
                 if (hitObject.CompareTag("shield"))
                 {
                     PlayColorEffect(hitInfo, i, shieldEffectColor);
+                    break;
+                }
+
+                // If we hit an obstacle, we do not care about what we hit behind
+                if ((obstacleLayers.value & (1 << hitObject.layer)) != 0)
+                {
+                    Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
                     break;
                 }
 
@@ -109,11 +118,6 @@ public class Gun : MonoBehaviour
         {
             // We Hit Water Surface
            Instantiate(waterSplash, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
-        }
-        else
-        {
-            // We hit a non alive thing
-            Instantiate(hitOnEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
         }
     }
 
