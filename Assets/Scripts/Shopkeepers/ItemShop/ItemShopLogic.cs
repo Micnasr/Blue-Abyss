@@ -13,7 +13,6 @@ public class ItemShopLogic : MonoBehaviour
     public TextMeshProUGUI[] textPriceOfItems;
     public GameObject[] purchaseButtons;
 
-    private Transform player;
     private MoneyManager moneyManager;
 
     public BackpackUI backpackUI;
@@ -24,7 +23,6 @@ public class ItemShopLogic : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         moneyManager = FindObjectOfType<MoneyManager>();
 
         PopulatePrices();

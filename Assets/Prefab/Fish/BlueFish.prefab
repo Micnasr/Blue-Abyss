@@ -316,13 +316,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0747cc7cdfda4604f9ea807bc48b4234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 30
   deathPoints: 1
   deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
   shaderTopThreshold: 0.2
   shaderBottomThreshold: 0.7
+  doesBleed: 0
   noiseStrength: 0.25
   duration: 1
+  damageEffect: {fileID: 0}
+  isDead: 0
 --- !u!95 &8909729310197371854
 Animator:
   serializedVersion: 5
