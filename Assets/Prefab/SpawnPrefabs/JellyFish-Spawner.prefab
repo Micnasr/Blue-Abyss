@@ -46,3 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishPrefab: {fileID: 8744093088685349220, guid: ca8024be8ae23da4c8beefd929b9e5a8,
     type: 3}
+  respawnDelay: 10
+  spawnDistanceThreshold: 20
+  despawnRange: 200
