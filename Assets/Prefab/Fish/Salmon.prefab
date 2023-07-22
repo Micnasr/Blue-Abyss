@@ -403,7 +403,7 @@ MonoBehaviour:
   smoothDamp: 1
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
   directionsToCheckWhenAvoidingObstacles:
   - {x: 1, y: 0, z: 0}
   - {x: -1, y: 0, z: 0}

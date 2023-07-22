@@ -274,7 +274,9 @@ public class EnemyPatrol : MonoBehaviour
             return;
  
         int randomIndex = Random.Range(0, fishSounds.Length);
-        FindObjectOfType<AudioManager>().Play(fishSounds[randomIndex]);
+
+        float randomPitch = Random.Range(0.95f, 1.05f);
+        FindObjectOfType<AudioManager>().Play(fishSounds[randomIndex], randomPitch, gameObject);
     }
 
 }
