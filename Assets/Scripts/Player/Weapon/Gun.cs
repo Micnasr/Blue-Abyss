@@ -34,10 +34,6 @@ public class Gun : MonoBehaviour
     public GameObject damageUIPrefab;
     public Transform damageUISpawn;
 
-    public Color fullDamageColor;
-    public Color mediumDamageColor;
-    public Color smallDamageColor;
-
     private void Start()
     {
         //Subscribing to Event
@@ -114,7 +110,12 @@ public class Gun : MonoBehaviour
         if (textMeshPro != null)
         {
             textMeshPro.text = "-" + damageValue.ToString();
-            textMeshPro.color = fullDamageColor;
+
+            float interpolationFactor = Mathf.Clamp01(damageValue / gunData.damage);
+            byte gValue = (byte)Mathf.Lerp(0f, 255f, interpolationFactor);
+
+            // Color32 - Color would not work in this case - this took too long to realize :cry:
+            textMeshPro.color = new Color32(255, (byte)(255 - gValue), 0, 255);
         }
 
         StartCoroutine(DestroyAfterAnimation(1f, damageUIInstance));
