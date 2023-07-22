@@ -34,6 +34,9 @@ public class EnemyPatrol : MonoBehaviour
 
     private Transform player;
 
+    [Header("Sounds")]
+    public string[] fishSounds;
+
     private void Start()
     {
         SetRandomWaypoint();
@@ -55,6 +58,7 @@ public class EnemyPatrol : MonoBehaviour
             {
                 if (ReachedWaypoint())
                 {
+                    PlayFishSound();
                     SetRandomWaypoint();
                 }
 
@@ -65,6 +69,7 @@ public class EnemyPatrol : MonoBehaviour
         {
             if (ReachedWaypoint())
             {
+                PlayFishSound();
                 SetRandomWaypoint();
             }
 
@@ -261,6 +266,15 @@ public class EnemyPatrol : MonoBehaviour
             else
                 animator.enabled = true;
         }
+    }
+
+    private void PlayFishSound()
+    {
+        if (fishSounds.Length == 0)
+            return;
+ 
+        int randomIndex = Random.Range(0, fishSounds.Length);
+        FindObjectOfType<AudioManager>().Play(fishSounds[randomIndex]);
     }
 
 }

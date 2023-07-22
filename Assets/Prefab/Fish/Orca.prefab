@@ -101,6 +101,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   animatorDistance: 130
+  fishSounds:
+  - OrcaScream1
 --- !u!114 &1972772128812184089
 MonoBehaviour:
   m_ObjectHideFlags: 0
