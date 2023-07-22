@@ -20,6 +20,11 @@ public class Gun : MonoBehaviour
 
     public LayerMask obstacleLayers;
 
+    [Header("Damage Distance Calculations")]
+    public float maxDistanceForScaling = 30f;
+    public float minDistanceForScaling = 8f;
+    public float minDamagePercentage = 0.1f;
+
     [Header("Effect Prefabs")]
     public GameObject hitOnEffect;
     public GameObject bloodEffect;
@@ -144,10 +149,34 @@ public class Gun : MonoBehaviour
         // If hit target has a Fish Health Manager (Its a damagable specie)
         if (fishHealthManager != null)
         {
-            // Call TakeDamage function
-            fishHealthManager.TakeDamage(gunData.damage);
+            // Calculate the Damage Based on Distance
+            float distance = Vector3.Distance(transform.position, hitInfo[i].point);
+
+            float damagePercentage;
+            if (distance < minDistanceForScaling)
+            {
+                damagePercentage = 1f;
+            }
+            else if (distance >= minDistanceForScaling && distance <= maxDistanceForScaling)
+            {
+                // Scale the damage based on the distance
+                damagePercentage = Mathf.Lerp(1f, minDamagePercentage, (distance - minDistanceForScaling) / (maxDistanceForScaling - minDistanceForScaling));
+            }
+            else
+            {
+                // Minimum damage beyond maxDistanceForScaling
+                damagePercentage = minDamagePercentage;
+            }
+
+            // Calculate the actual damage
+            float actualDamage = gunData.damage * damagePercentage;
+            actualDamage = Mathf.Round(actualDamage * 10f) / 10f;
+
+            // Apply Damage
+            fishHealthManager.TakeDamage(actualDamage);
+
             Instantiate(bloodEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
-            ShowDamageUI(gunData.damage);
+            ShowDamageUI(actualDamage);
         }
         else if (hitInfo[i].transform.CompareTag("WaterCollider"))
         {
