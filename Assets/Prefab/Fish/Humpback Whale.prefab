@@ -577,6 +577,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   animatorDistance: 300
+  fishSounds:
+  - HumpbackScream1
 --- !u!114 &2048649442847279125
 MonoBehaviour:
   m_ObjectHideFlags: 0

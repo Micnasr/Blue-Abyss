@@ -95,7 +95,7 @@ public class HealthManager : MonoBehaviour
 
     public void HandleDeath()
     {
-        Debug.Log("Player DEAD!");
+        // Handle how player dies, either respawn scene or respawn player only
     }
 
     public void NewMaxHealth(float newMaxHealth)

@@ -272,6 +272,10 @@ public class EnemyPatrol : MonoBehaviour
     {
         if (fishSounds.Length == 0)
             return;
+
+        // % Chance to Play the Audio (To Avoid Spam)
+        if (Random.Range(0, 5) != 1)
+            return;
  
         int randomIndex = Random.Range(0, fishSounds.Length);
 

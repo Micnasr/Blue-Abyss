@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    // NEVER TOUCH TO AVOID LOSING DATA
     public Sound[] sounds;
 
     public static AudioManager instance;
@@ -34,7 +35,6 @@ public class AudioManager : MonoBehaviour
 
         AudioSource source = null;
 
-        // AudioManager is the default source if nothing is provided
         if (sourceGameObject != null)
         {
             source = FindAudioSourceWithClip(sourceGameObject, soundData.clip);
@@ -46,8 +46,16 @@ public class AudioManager : MonoBehaviour
                 source.pitch = soundData.pitch;
                 source.loop = soundData.loop;
                 source.spatialBlend = soundData.spatialBlend;
+                source.maxDistance = soundData.maxDistance;
+
+                // Either we choose logarithmic or Linear 
+                if (soundData.logarithmicRolloff)
+                    source.rolloffMode = AudioRolloffMode.Logarithmic;
+                else
+                    source.rolloffMode = AudioRolloffMode.Linear;
             }
         }
+        // AudioManager is the default source if nothing is provided
         else
         {
             source = FindAudioSourceWithClip(gameObject, soundData.clip);
@@ -58,9 +66,9 @@ public class AudioManager : MonoBehaviour
                 source.volume = soundData.volume;
                 source.pitch = soundData.pitch;
                 source.loop = soundData.loop;
-                source.spatialBlend = soundData.spatialBlend;
             }
         }
+
 
         source.pitch = pitch;
 
