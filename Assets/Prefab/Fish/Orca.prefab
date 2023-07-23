@@ -95,7 +95,7 @@ MonoBehaviour:
   aggressiveDistance: 30
   biteTimer: 2
   stopDistance: 5
-  surfaceLevel: -4
+  surfaceLevel: -4.8
   chaseMovementSpeed: 10
   landLayer:
     serializedVersion: 2

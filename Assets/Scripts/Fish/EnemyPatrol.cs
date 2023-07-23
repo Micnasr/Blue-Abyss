@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
@@ -6,6 +7,7 @@ public class EnemyPatrol : MonoBehaviour
 {
     public List<Transform> waypoints;
     private Transform currentWaypoint;
+    private bool isCheckingWaypoint = false;
 
     [Header("Movement")]
     public float turningSpeed;
@@ -57,7 +59,7 @@ public class EnemyPatrol : MonoBehaviour
             else
             {
                 if (ReachedWaypoint())
-                {
+                { 
                     PlayFishSound();
                     SetRandomWaypoint();
                 }
@@ -83,6 +85,13 @@ public class EnemyPatrol : MonoBehaviour
     {
         int randomIndex = Random.Range(0, waypoints.Count);
         currentWaypoint = waypoints[randomIndex];
+
+        if (isCheckingWaypoint)
+        {
+            StopCoroutine(CheckWaypointReached());
+        }
+
+        StartCoroutine(CheckWaypointReached());
     }
 
     private bool ReachedWaypoint()
@@ -283,4 +292,20 @@ public class EnemyPatrol : MonoBehaviour
         FindObjectOfType<AudioManager>().Play(fishSounds[randomIndex], randomPitch, gameObject);
     }
 
+    private IEnumerator CheckWaypointReached()
+    {
+        isCheckingWaypoint = true;
+        GameObject currentCheck = currentWaypoint.gameObject;
+        yield return new WaitForSeconds(50f);
+
+        if (currentWaypoint.gameObject == currentCheck)
+        {
+            Debug.Log("Took Too Long, Changing Waypoint for: " + this.name);
+            SetRandomWaypoint();
+        }
+        else
+        {
+            isCheckingWaypoint = false;
+        }
+    }
 }

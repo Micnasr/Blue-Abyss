@@ -404,12 +404,13 @@ MonoBehaviour:
   aggressiveDistance: 20
   biteTimer: 2
   stopDistance: 4.5
-  surfaceLevel: -4
+  surfaceLevel: -4.8
   chaseMovementSpeed: 8
   landLayer:
     serializedVersion: 2
     m_Bits: 256
   animatorDistance: 90
+  fishSounds: []
 --- !u!114 &-1736763308955186176
 MonoBehaviour:
   m_ObjectHideFlags: 0
