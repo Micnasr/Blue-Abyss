@@ -15,6 +15,7 @@ Material:
   m_ValidKeywords:
   - _FOAM
   - _NORMALMAP
+  - _REFRACTION
   - _SHARP_INERSECTION
   - _UNLIT
   - _WAVES
@@ -186,7 +187,7 @@ Material:
     - _ReflectionFresnel: 5
     - _ReflectionLighting: 0
     - _ReflectionStrength: 0.248
-    - _RefractionOn: 0
+    - _RefractionOn: 1
     - _RefractionStrength: 0
     - _RiverModeOn: 0
     - _ShadingMode: 0

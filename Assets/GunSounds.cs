@@ -6,7 +6,8 @@ public class GunSounds : MonoBehaviour
 {
     public void GunShotSound()
     {
-        FindObjectOfType<AudioManager>().Play("shotgunShoot");
+        float randomPitch = Random.Range(0.9f, 1.2f);
+        FindObjectOfType<AudioManager>().Play("shotgunShoot", randomPitch);
     }
 
     public void GunCockingSound()
