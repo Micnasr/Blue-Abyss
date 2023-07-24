@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class VehicleController : MonoBehaviour
@@ -21,6 +22,8 @@ public class VehicleController : MonoBehaviour
     private PlayerShoot playerShoot;
     private PlayerCam playerCam;
     private WeaponSway weaponSway;
+
+    public ParticleSystem boatParticleSystem;
 
     private void Start()
     {
@@ -64,9 +67,11 @@ public class VehicleController : MonoBehaviour
                 return;
             }
         }
+
+        FX_WaterParticles();
     }
 
-    private void HandleLookingAtVehicle()
+private void HandleLookingAtVehicle()
     {
         // Check if the player is looking at the vehicle and presses the interact key (E)
         if (Input.GetKeyDown(interactKey) && CanEnterVehicle())
@@ -140,4 +145,36 @@ public class VehicleController : MonoBehaviour
 
         isDriving = false;
     }
+
+    private void FX_WaterParticles()
+    {
+        float maxVelocity = 6.7f;
+        float minRateOverTime = 0f;
+        float maxRateOverTime = 400f;
+
+        // Calculate the rate over time based on the boat's velocity
+        float velocityPercent = Mathf.Clamp01(boatRigidbody.velocity.magnitude / maxVelocity);
+        float rateOverTime = Mathf.Lerp(minRateOverTime, maxRateOverTime, velocityPercent);
+
+        // Set the rate over time in the emission property of the particle system
+        var emission = boatParticleSystem.emission;
+        emission.rateOverTime = rateOverTime;
+
+        // Start/stop the boat particle effect based on the boat's velocity
+        if (boatRigidbody.velocity.magnitude > 0.2f) // Adjust the threshold as needed
+        {
+            if (!boatParticleSystem.isPlaying)
+            {
+                boatParticleSystem.Play();
+            }
+        }
+        else
+        {
+            if (boatParticleSystem.isPlaying)
+            {
+                boatParticleSystem.Stop();
+            }
+        }
+    }
+
 }
