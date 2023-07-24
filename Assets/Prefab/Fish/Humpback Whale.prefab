@@ -560,7 +560,7 @@ MonoBehaviour:
   waypoints: []
   turningSpeed: 0.4
   movementSpeed: 5
-  threshold: 8
+  threshold: 15
   angleCheck: 20
   raycastDistance: 30
   avoidanceDistance: 10

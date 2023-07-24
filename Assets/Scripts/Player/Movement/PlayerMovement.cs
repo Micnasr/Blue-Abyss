@@ -47,6 +47,13 @@ public class PlayerMovement : MonoBehaviour
     private float walkParticleSpawnRate = 0.1f;
     private float walkParticleTimer = 0f;
 
+    [Header("Sound Effects")]
+    public string[] walking_sounds_sand;
+    public string woodTag;
+    public string[] walking_sounds_wood;
+    public float walkSoundSpawnRate = 0.1f;
+    private float walkSoundTimer = 0f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -126,6 +133,12 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
             SpawnWalkParticle();
+
+            // Sound Depending on Surface
+            if (GetSurfaceType() == woodTag)
+                SpawnWalkSoundEffects(walking_sounds_wood);
+            else
+                SpawnWalkSoundEffects(walking_sounds_sand);
         }
         else if (!grounded)
         {
@@ -164,6 +177,28 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void SpawnWalkSoundEffects(string[] soundList)
+    {
+        // Check if Player is Moving
+        if (Mathf.Abs(horizonInput) > 0f || Mathf.Abs(verticalInput) > 0f)
+        {
+            walkSoundTimer += Time.deltaTime;
+
+            if (walkSoundTimer >= walkSoundSpawnRate)
+            {
+                if (soundList.Length == 0)
+                    return;
+               
+                int randomIndex = Random.Range(0, soundList.Length);
+
+                //float randomPitch = Random.Range(0.95f, 1.05f);
+                FindObjectOfType<AudioManager>().Play(soundList[randomIndex]);
+
+                walkSoundTimer = 0f;
+            }
+        }
+    }
+
     private Vector3 GetFeetPosition()
     {
         RaycastHit hit;
@@ -174,6 +209,19 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             return transform.position;
+        }
+    }
+
+    private string GetSurfaceType()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, playerHeight, whatIsGround))
+        {
+            return hit.collider.gameObject.tag;
+        }
+        else
+        {
+            return "";
         }
     }
 

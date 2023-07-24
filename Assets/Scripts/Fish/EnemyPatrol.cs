@@ -291,7 +291,8 @@ public class EnemyPatrol : MonoBehaviour
         float randomPitch = Random.Range(0.95f, 1.05f);
         FindObjectOfType<AudioManager>().Play(fishSounds[randomIndex], randomPitch, gameObject);
     }
-
+    
+    // Function Helps with Fish Not Getting Stuck on Waypoints
     private IEnumerator CheckWaypointReached()
     {
         isCheckingWaypoint = true;
@@ -300,7 +301,6 @@ public class EnemyPatrol : MonoBehaviour
 
         if (currentWaypoint.gameObject == currentCheck)
         {
-            Debug.Log("Took Too Long, Changing Waypoint for: " + this.name);
             SetRandomWaypoint();
         }
         else

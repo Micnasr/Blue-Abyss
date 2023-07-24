@@ -193,7 +193,7 @@ Transform:
   - {fileID: 7687243092260039680}
   - {fileID: 7063968324172870769}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5135001688982826863
 Rigidbody:
@@ -234,13 +234,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a820abeddca764798496ad5e7170b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 150
+  moveSpeed: 120
   gravity: 30
   groundDrag: 5
   jumpForce: 200
   jumpCooldown: 0.6
   airMultiplier: 0.3
-  swimSpeed: 60
+  swimSpeed: 45
   isSwimming: 0
   jumpKey: 32
   diveKey: 306
@@ -254,6 +254,12 @@ MonoBehaviour:
     type: 3}
   walkParticlePrefab: {fileID: 8398097546346151297, guid: 9066c37162280024c923e6b10ef22d58,
     type: 3}
+  walking_sounds_sand:
+  - walk_sand1
+  - walk_sand2
+  - walk_sand3
+  - walk_sand4
+  walkSoundSpawnRate: 0.3
 --- !u!114 &6995076460426175063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,7 +358,7 @@ Transform:
   - {fileID: 6651058789964719310}
   m_Father: {fileID: 3865924300104921997}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.0000018066496, y: 0.000021778484, z: 7.466228e-13}
 --- !u!1 &1106493657306378444
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,7 +546,7 @@ Transform:
   - {fileID: 3847085734616616145}
   m_Father: {fileID: 3865924300104921997}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 89.9999, z: 90}
 --- !u!1 &2855930086129952155
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,6 +588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3508385373404542145}
   - component: {fileID: 8704481598023831646}
+  - component: {fileID: 4385535368078903196}
   m_Layer: 6
   m_Name: Shotgun
   m_TagString: Untagged
@@ -627,6 +634,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4385535368078903196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3332464098132032152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122d00ce3555a544bb44782b80451bb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4372125949532520324
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,7 +677,7 @@ Transform:
   - {fileID: 3865924300104921997}
   m_Father: {fileID: 3508385373404542145}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.000015258788, y: 180, z: -180}
 --- !u!1 &6587342030663898461
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,7 +709,7 @@ Transform:
   - {fileID: 3716321874612134550}
   m_Father: {fileID: 3865924300104921997}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.000006908671, y: 179.9999, z: 1.2558725e-11}
 --- !u!1 &6690070888239028603
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,7 +983,7 @@ Transform:
   - {fileID: 1496671109086113773}
   m_Father: {fileID: 5430182719350092320}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98021, y: -179.9999, z: 0}
 --- !u!1 &8095336400640760059
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,9 +1209,3 @@ MonoBehaviour:
   damageUIPrefab: {fileID: 5210549443229694597, guid: 7443e3e8f4886514c81c152ea7f30b9d,
     type: 3}
   damageUISpawn: {fileID: 0}
-  damageColor:
-    serializedVersion: 2
-    rgba: 0
-  jedo:
-    serializedVersion: 2
-    rgba: 0

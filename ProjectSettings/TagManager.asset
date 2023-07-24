@@ -10,6 +10,8 @@ TagManager:
   - Anchor
   - Lifevest
   - shield
+  - FxTemporaire
+  - wood-surface
   layers:
   - Default
   - TransparentFX

@@ -84,7 +84,7 @@ MonoBehaviour:
   waypoints: []
   turningSpeed: 1
   movementSpeed: 8
-  threshold: 8
+  threshold: 12
   angleCheck: 20
   raycastDistance: 15
   avoidanceDistance: 10
