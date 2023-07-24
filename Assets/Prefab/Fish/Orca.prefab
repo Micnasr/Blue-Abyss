@@ -126,6 +126,7 @@ MonoBehaviour:
   damageEffect: {fileID: 3027278326694109150, guid: dd2a9939b435be543b2c8eedd7291fc8,
     type: 3}
   isDead: 0
+  criticalSound: OrcaCritical
 --- !u!95 &5837924285796106720
 Animator:
   serializedVersion: 5

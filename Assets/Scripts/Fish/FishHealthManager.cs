@@ -38,6 +38,9 @@ public class FishHealthManager : MonoBehaviour
 
     private FishMeter fishMeter;
 
+    [Header("Sound Effects")]
+    public string criticalSound;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -68,6 +71,10 @@ public class FishHealthManager : MonoBehaviour
         else if (doesBleed && (currentHealth <= maxHealth * 0.3f) && !playedEffect)
         {
             PlayDamageEffect();
+
+            if (criticalSound != "")
+                FindObjectOfType<AudioManager>().Play(criticalSound, 1f, gameObject);
+            
             playedEffect = true;
         }
     }

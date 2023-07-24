@@ -182,7 +182,8 @@ public class Gun : MonoBehaviour
         else if (hitInfo[i].transform.CompareTag("WaterCollider"))
         {
             // We Hit Water Surface
-           Instantiate(waterSplash, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
+            FindObjectOfType<AudioManager>().Play("BulletSplash");
+            Instantiate(waterSplash, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
         }
     }
 

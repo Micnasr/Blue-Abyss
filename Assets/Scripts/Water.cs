@@ -5,8 +5,10 @@ using UnityEngine;
 public class Water : MonoBehaviour
 {
     public ParticleSystem bubbleEffect;
-
     private ParticleSystem activeEffect;
+
+    public string splashInWater;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,6 +19,9 @@ public class Water : MonoBehaviour
             PlayerMovement movement = other.GetComponentInParent<PlayerMovement>();
             movement.isSwimming = true;
 
+            if (splashInWater != "")
+                FindObjectOfType<AudioManager>().Play(splashInWater);
+            
             SpawnBubbleEffect(other.transform.position, parent);
         }
         else if (other.CompareTag("PlayerHead"))
