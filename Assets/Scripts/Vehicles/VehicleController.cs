@@ -30,24 +30,32 @@ public class VehicleController : MonoBehaviour
     private PlayerShoot playerShoot;
     private PlayerCam playerCam;
     private WeaponSway weaponSway;
+    private OxygenController oxygenController;
 
     private bool isTeleporting = false;
 
-    [Header("Player References")]
-    public GameObject weaponHolster;
-    public CapsuleCollider playerMainCollider;
+    private GameObject weaponHolster;
+    private CapsuleCollider playerMainCollider;
 
     public ParticleSystem boatParticleSystem;
+
+    [Header("AddOn")]
+    public bool hasHeadlights;
+    public GameObject leftHeadlight;
+    public GameObject rightHeadlight;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerRigidbody = player.GetComponent<Rigidbody>();
+        oxygenController = player.GetComponent<OxygenController>();
 
         playerMovement = player.gameObject.GetComponent<PlayerMovement>();
         playerShoot = player.gameObject.GetComponent<PlayerShoot>();
         playerCam = player.gameObject.GetComponentInChildren<PlayerCam>();
         weaponSway = player.gameObject.GetComponentInChildren<WeaponSway>();
+        weaponHolster = weaponSway.gameObject;
+        playerMainCollider = player.gameObject.GetComponentInChildren<CapsuleCollider>();
 
         boatRigidbody = GetComponent<Rigidbody>();
         if (boatRigidbody == null)
@@ -84,12 +92,12 @@ public class VehicleController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 ExitVehicle();
-                Debug.Log("Exiting Vehicle");
                 return;
             }
         }
 
         FX_WaterParticles();
+        ToggleHeadlights();
     }
 
     private void HandleLookingAtVehicle()
@@ -137,6 +145,9 @@ public class VehicleController : MonoBehaviour
         player.SetParent(driverSeat);
 
         isDriving = true;
+        
+        if (isSubmarine)
+            oxygenController.inSubmarine = true;
     }
 
     private void HandleDriving()
@@ -182,15 +193,12 @@ public class VehicleController : MonoBehaviour
         {
             newVelocity.y = 0f;
             boatRigidbody.velocity = newVelocity;
-            Debug.Log("STOP");
         }
         else if (atLowestDepth && boatRigidbody.velocity.y < 0f)
         {
             newVelocity.y = 0f;
             boatRigidbody.velocity = newVelocity;
-            Debug.Log("STOP");
         }
-
     }
 
 
@@ -223,6 +231,9 @@ public class VehicleController : MonoBehaviour
         weaponHolster.SetActive(true);
 
         isDriving = false;
+
+        if (isSubmarine)
+            oxygenController.inSubmarine = false;
     }
 
     private void FX_WaterParticles()    
@@ -253,6 +264,23 @@ public class VehicleController : MonoBehaviour
             {
                 boatParticleSystem.Stop();
             }
+        }
+    }
+
+    private void ToggleHeadlights()
+    {
+        if (!hasHeadlights)
+            return;
+
+        if (atHighestDepth || oxygenController.isHeadAboveWater)
+        {
+            leftHeadlight.SetActive(false);
+            rightHeadlight.SetActive(false);
+        }
+        else
+        {
+            leftHeadlight.SetActive(true);
+            rightHeadlight.SetActive(true);
         }
     }
 

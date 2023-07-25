@@ -105,7 +105,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2605764124162912762}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -326,6 +326,7 @@ MonoBehaviour:
   duration: 1
   damageEffect: {fileID: 0}
   isDead: 0
+  criticalSound: 
 --- !u!95 &8909729310197371854
 Animator:
   serializedVersion: 5

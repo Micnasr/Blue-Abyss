@@ -398,16 +398,17 @@ MonoBehaviour:
   driverSeat: {fileID: 7581347253758022421}
   exitLocation: {fileID: 4165491230454103527}
   interactKey: 101
-  moveSpeed: 14000
+  moveSpeed: 20000
   rotationSpeed: 6000
   isSubmarine: 1
   diveKey: 306
   riseKey: 32
-  RiseDiveSpeed: 6000
-  LowestDepth: 6000
-  weaponHolster: {fileID: 0}
-  playerMainCollider: {fileID: 0}
+  RiseDiveSpeed: 10000
+  LowestDepth: -30
   boatParticleSystem: {fileID: 8338715439909389396}
+  hasHeadlights: 1
+  leftHeadlight: {fileID: 5419219923028102913}
+  rightHeadlight: {fileID: 4912822787865150604}
 --- !u!1 &1939274870204994935
 GameObject:
   m_ObjectHideFlags: 0
@@ -981,7 +982,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2321070781508889397
 Transform:
   m_ObjectHideFlags: 0
@@ -1148,7 +1149,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1034765849259618325
 Transform:
   m_ObjectHideFlags: 0

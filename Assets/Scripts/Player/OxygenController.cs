@@ -12,6 +12,8 @@ public class OxygenController : MonoBehaviour
 
     private float currentOxygen;
 
+    public bool inSubmarine = false;
+
     public bool isHeadAboveWater;
 
     public Slider oxygenMeter;
@@ -40,7 +42,7 @@ public class OxygenController : MonoBehaviour
         oxygenMeter.value = currentOxygen;
 
         // Head under the water
-        if (isHeadAboveWater == false)
+        if (isHeadAboveWater == false && !inSubmarine)
         {
             // Deplete oxygen over time
             currentOxygen -= oxygenDepletionRate * Time.deltaTime;
