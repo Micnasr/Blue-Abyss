@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,10 +11,17 @@ public class VehicleController : MonoBehaviour
     public KeyCode interactKey = KeyCode.E;
 
     [Header("Vehicle Stats")]
-    public float moveSpeed = 5f;
-    public float rotationSpeed = 100f;
-
+    public float moveSpeed;
+    public float rotationSpeed;
     private bool isDriving = false;
+    
+    public bool isSubmarine = false;
+    public KeyCode diveKey = KeyCode.LeftControl;
+    public KeyCode riseKey = KeyCode.Space;
+
+    public float RiseDiveSpeed;
+    public float LowestDepth;
+    private float HighestDepth;
 
     private Transform player;
     private Rigidbody playerRigidbody;
@@ -22,6 +30,12 @@ public class VehicleController : MonoBehaviour
     private PlayerShoot playerShoot;
     private PlayerCam playerCam;
     private WeaponSway weaponSway;
+
+    private bool isTeleporting = false;
+
+    [Header("Player References")]
+    public GameObject weaponHolster;
+    public CapsuleCollider playerMainCollider;
 
     public ParticleSystem boatParticleSystem;
 
@@ -41,6 +55,9 @@ public class VehicleController : MonoBehaviour
             boatRigidbody = gameObject.AddComponent<Rigidbody>();
             boatRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         }
+
+        if (isSubmarine)
+            HighestDepth = this.transform.position.y;
     }
 
     private void FixedUpdate()
@@ -48,6 +65,10 @@ public class VehicleController : MonoBehaviour
         if (isDriving)
         {
             HandleDriving();
+
+            // If It is a submarine :) ~ Michael
+            if (isSubmarine)
+                HandleSubmarine();
         }
     }
 
@@ -71,7 +92,7 @@ public class VehicleController : MonoBehaviour
         FX_WaterParticles();
     }
 
-private void HandleLookingAtVehicle()
+    private void HandleLookingAtVehicle()
     {
         // Check if the player is looking at the vehicle and presses the interact key (E)
         if (Input.GetKeyDown(interactKey) && CanEnterVehicle())
@@ -107,6 +128,8 @@ private void HandleLookingAtVehicle()
 
         playerRigidbody.velocity = Vector3.zero;
         playerRigidbody.isKinematic = true;
+        weaponHolster.SetActive(false);
+        playerMainCollider.enabled = false;
 
         // Move the player to the driver seat position and rotate them to face the boat's forward direction
         player.position = driverSeat.position;
@@ -129,24 +152,80 @@ private void HandleLookingAtVehicle()
         boatRigidbody.AddForce(forwardForce, ForceMode.Force);
     }
 
+    private bool atHighestDepth = false;
+    private bool atLowestDepth = false;
+
+    private void HandleSubmarine()
+    {
+        // Handle diving
+        if (Input.GetKey(diveKey) && transform.position.y >= LowestDepth)
+        {
+            Vector3 forwardForce = -transform.up * RiseDiveSpeed;
+            boatRigidbody.AddForce(forwardForce, ForceMode.Force);
+        }
+
+        // Handle rising
+        if (Input.GetKey(riseKey) && transform.position.y <= HighestDepth)
+        {
+            Vector3 forwardForce = transform.up * RiseDiveSpeed;
+            boatRigidbody.AddForce(forwardForce, ForceMode.Force);
+        }
+
+        // Check if the submarine is at its highest or lowest depth
+        atHighestDepth = transform.position.y >= HighestDepth;
+        atLowestDepth = transform.position.y <= LowestDepth;
+
+        Vector3 newVelocity = boatRigidbody.velocity;
+
+        // Prevent further movement if the submarine is at a boundary (either up or down)
+        if (atHighestDepth && boatRigidbody.velocity.y > 0f)
+        {
+            newVelocity.y = 0f;
+            boatRigidbody.velocity = newVelocity;
+            Debug.Log("STOP");
+        }
+        else if (atLowestDepth && boatRigidbody.velocity.y < 0f)
+        {
+            newVelocity.y = 0f;
+            boatRigidbody.velocity = newVelocity;
+            Debug.Log("STOP");
+        }
+
+    }
+
 
     private void ExitVehicle()
     {
-        // Enable player scripts
-        playerMovement.enabled = true;
-        playerShoot.enabled = true;
-        weaponSway.enabled = true;
-        playerRigidbody.isKinematic = false;
+        if (isTeleporting)
+            return;
 
-        // Teleport the player to the exit location and reset their rotation
+        isTeleporting = true;
+        StartCoroutine(DelayedExitVehicle());
+        isTeleporting = false;
+    }
+
+    private IEnumerator DelayedExitVehicle()
+    {
+        // Wait for physics calculations to finish
+        yield return new WaitForFixedUpdate();
+
+        // Move the player to the exit location and reset their rotation
         player.position = exitLocation.position;
         player.rotation = exitLocation.rotation;
         player.SetParent(null);
 
+        // Re-enable scripts and components
+        playerMovement.enabled = true;
+        playerShoot.enabled = true;
+        weaponSway.enabled = true;
+        playerRigidbody.isKinematic = false;
+        playerMainCollider.enabled = true;
+        weaponHolster.SetActive(true);
+
         isDriving = false;
     }
 
-    private void FX_WaterParticles()
+    private void FX_WaterParticles()    
     {
         float maxVelocity = 6.7f;
         float minRateOverTime = 0f;
