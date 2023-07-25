@@ -13,6 +13,7 @@ public class FishButcherLogic : MonoBehaviour
 
     private FishMeter fishMeter;
     private MoneyManager moneyManager;
+    private PlayerMovement playerMovement;
 
     public int moneyMultiplier = 50;
 
@@ -26,6 +27,7 @@ public class FishButcherLogic : MonoBehaviour
         npcAnimator = npc.gameObject.GetComponent<Animator>();
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerMovement = player.gameObject.GetComponent<PlayerMovement>();
     }
 
     private void Update()
@@ -35,7 +37,7 @@ public class FishButcherLogic : MonoBehaviour
         {
             RotateNPC();
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && playerMovement.grounded)
             {
                 int money = fishMeter.currentCount * moneyMultiplier;
 
