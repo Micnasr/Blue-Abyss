@@ -5217,7 +5217,7 @@ Transform:
   - {fileID: 5303173736778732045}
   - {fileID: 6985632877417221426}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &67642254249818011
 Rigidbody:
@@ -5259,7 +5259,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   driverSeat: {fileID: 1058881591860028676}
-  exitLocation: {fileID: 5505453164842593462}
+  exitLocations:
+  - {fileID: 5505453164842593462}
   interactKey: 101
   moveSpeed: 7000
   rotationSpeed: 6000
@@ -5269,6 +5270,9 @@ MonoBehaviour:
   RiseDiveSpeed: 0
   LowestDepth: 0
   boatParticleSystem: {fileID: 7632602386248401308}
+  hasHeadlights: 0
+  leftHeadlight: {fileID: 0}
+  rightHeadlight: {fileID: 0}
 --- !u!1 &6789383843698906947
 GameObject:
   m_ObjectHideFlags: 0

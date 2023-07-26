@@ -35,6 +35,7 @@ public class EnemyPatrol : MonoBehaviour
     private Animator animator;
 
     private Transform player;
+    private OxygenController oxygenController;
 
     [Header("Sounds")]
     public string[] fishSounds;
@@ -43,6 +44,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         SetRandomWaypoint();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        oxygenController = player.GetComponent<OxygenController>();
         animator = GetComponent<Animator>();
     }
 
@@ -51,7 +53,7 @@ public class EnemyPatrol : MonoBehaviour
         if (isAggressive)
         {
             // Check if Player is In the Range and not on land
-            if (PlayerInRange(aggressiveDistance) && !IsPlayerOnLand())
+            if (PlayerInRange(aggressiveDistance) && !IsPlayerOnLand() && !oxygenController.inSubmarine)
             {
                 // Chase Player Down
                 MoveTowardsPlayer();

@@ -6,7 +6,7 @@ using UnityEngine;
 public class VehicleController : MonoBehaviour
 {
     public Transform driverSeat;
-    public Transform exitLocation;
+    public Transform[] exitLocations;
 
     public KeyCode interactKey = KeyCode.E;
 
@@ -88,6 +88,9 @@ public class VehicleController : MonoBehaviour
         }
         else
         {
+            // Rigidbody On Player Is Causing Problems so use This To TP
+            player.transform.position = driverSeat.transform.position;
+
             // Check if the player presses the interact key (E) to exit the vehicle
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -135,7 +138,7 @@ public class VehicleController : MonoBehaviour
         weaponSway.enabled = false;
 
         playerRigidbody.velocity = Vector3.zero;
-        playerRigidbody.isKinematic = true;
+
         weaponHolster.SetActive(false);
         playerMainCollider.enabled = false;
 
@@ -217,24 +220,57 @@ public class VehicleController : MonoBehaviour
         // Wait for physics calculations to finish
         yield return new WaitForFixedUpdate();
 
-        // Move the player to the exit location and reset their rotation
-        player.position = exitLocation.position;
-        player.rotation = exitLocation.rotation;
+        isDriving = false;
+
+        if (isSubmarine)
+        {
+            Transform validExitLocation = null;
+
+            // Loop through each exit location and check for collisions
+            foreach (Transform exit in exitLocations)
+            {
+                Collider[] colliders = Physics.OverlapSphere(exit.position, 1f, LayerMask.GetMask("whatIsGround", "Obstacle"));
+
+                if (colliders.Length == 0)
+                {
+                    // No collisions found, this is a valid exit location
+                    validExitLocation = exit;
+                    break;
+                }
+            }
+
+            if (validExitLocation != null)
+            {
+                // Move the player to the valid exit location and reset their rotation
+                player.position = validExitLocation.position;
+                player.rotation = validExitLocation.rotation;
+            }
+            else
+            {
+                yield break;
+            }
+        }
+        else
+        {
+            player.position = exitLocations[0].position;
+            player.rotation = exitLocations[0].rotation;
+        }
+
         player.SetParent(null);
 
         // Re-enable scripts and components
         playerMovement.enabled = true;
         playerShoot.enabled = true;
         weaponSway.enabled = true;
-        playerRigidbody.isKinematic = false;
+        
         playerMainCollider.enabled = true;
         weaponHolster.SetActive(true);
 
-        isDriving = false;
 
         if (isSubmarine)
             oxygenController.inSubmarine = false;
     }
+
 
     private void FX_WaterParticles()    
     {

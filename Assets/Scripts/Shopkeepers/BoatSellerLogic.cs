@@ -16,6 +16,11 @@ public class BoatSellerLogic : MonoBehaviour
 
     public TextMeshProUGUI[] textPriceOfItems;
     public GameObject[] purchaseButtons;
+    public GameObject[] spawnButtons;
+
+    public GameObject[] boatPrefabs;
+    public Transform[] boatSpawnLocation;
+    private GameObject currentBoat;
 
     private MoneyManager moneyManager;
 
@@ -47,11 +52,13 @@ public class BoatSellerLogic : MonoBehaviour
             if (ownedBoatsStr.Contains(names[i]))
             {
                 textPriceOfItems[i].text = "OWNED";
+                spawnButtons[i].SetActive(true);
                 purchaseButtons[i].SetActive(false);
             }
             else
             {
                 textPriceOfItems[i].text = "$" + priceOfItems[i].ToString();
+                spawnButtons[i].SetActive(false);
             }
         }
     }
@@ -88,6 +95,15 @@ public class BoatSellerLogic : MonoBehaviour
         {
             Debug.Log("No Money :(");
         }
+    }
+
+    public void SpawnBoat(int boatIndex)
+    {
+        if (currentBoat != null)
+            Destroy(currentBoat);
+
+        Debug.Log("SpawningBoat");
+        currentBoat = Instantiate(boatPrefabs[boatIndex], boatSpawnLocation[boatIndex].position, boatSpawnLocation[boatIndex].rotation);
     }
 }
 
