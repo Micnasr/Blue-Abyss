@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -39,6 +40,9 @@ public class VehicleController : MonoBehaviour
 
     public ParticleSystem boatParticleSystem;
 
+    private bool atHighestDepth = false;
+    private bool atLowestDepth = false;
+
     [Header("AddOn")]
     public bool hasHeadlights;
     public GameObject leftHeadlight;
@@ -78,7 +82,11 @@ public class VehicleController : MonoBehaviour
             if (isSubmarine)
                 HandleSubmarine();
         }
+
+        BoundaryPrevention();
     }
+
+    
 
     private void Update()
     {
@@ -92,7 +100,7 @@ public class VehicleController : MonoBehaviour
             player.transform.position = driverSeat.transform.position;
 
             // Check if the player presses the interact key (E) to exit the vehicle
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(interactKey))
             {
                 ExitVehicle();
                 return;
@@ -166,9 +174,6 @@ public class VehicleController : MonoBehaviour
         boatRigidbody.AddForce(forwardForce, ForceMode.Force);
     }
 
-    private bool atHighestDepth = false;
-    private bool atLowestDepth = false;
-
     private void HandleSubmarine()
     {
         // Handle diving
@@ -183,24 +188,6 @@ public class VehicleController : MonoBehaviour
         {
             Vector3 forwardForce = transform.up * RiseDiveSpeed;
             boatRigidbody.AddForce(forwardForce, ForceMode.Force);
-        }
-
-        // Check if the submarine is at its highest or lowest depth
-        atHighestDepth = transform.position.y >= HighestDepth;
-        atLowestDepth = transform.position.y <= LowestDepth;
-
-        Vector3 newVelocity = boatRigidbody.velocity;
-
-        // Prevent further movement if the submarine is at a boundary (either up or down)
-        if (atHighestDepth && boatRigidbody.velocity.y > 0f)
-        {
-            newVelocity.y = 0f;
-            boatRigidbody.velocity = newVelocity;
-        }
-        else if (atLowestDepth && boatRigidbody.velocity.y < 0f)
-        {
-            newVelocity.y = 0f;
-            boatRigidbody.velocity = newVelocity;
         }
     }
 
@@ -247,6 +234,7 @@ public class VehicleController : MonoBehaviour
             }
             else
             {
+                Debug.LogError("No Spaces to Exit");
                 yield break;
             }
         }
@@ -262,6 +250,9 @@ public class VehicleController : MonoBehaviour
         playerMovement.enabled = true;
         playerShoot.enabled = true;
         weaponSway.enabled = true;
+
+        if (!isSubmarine)
+            playerMovement.isSwimming = false;
         
         playerMainCollider.enabled = true;
         weaponHolster.SetActive(true);
@@ -320,4 +311,24 @@ public class VehicleController : MonoBehaviour
         }
     }
 
+    private void BoundaryPrevention()
+    {
+        // Check if the submarine is at its highest or lowest depth
+        atHighestDepth = transform.position.y >= HighestDepth;
+        atLowestDepth = transform.position.y <= LowestDepth;
+
+        Vector3 newVelocity = boatRigidbody.velocity;
+
+        // Prevent further movement if the submarine is at a boundary (either up or down)
+        if (atHighestDepth && boatRigidbody.velocity.y > 0f)
+        {
+            newVelocity.y = 0f;
+            boatRigidbody.velocity = newVelocity;
+        }
+        else if (atLowestDepth && boatRigidbody.velocity.y < 0f)
+        {
+            newVelocity.y = 0f;
+            boatRigidbody.velocity = newVelocity;
+        }
+    }
 }
