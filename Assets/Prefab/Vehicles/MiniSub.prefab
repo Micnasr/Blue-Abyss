@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1909607977230382513}
   - component: {fileID: 3274829386543207065}
   - component: {fileID: 5683323413914910223}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dashboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 4775832954970236784}
   - component: {fileID: 425384292374598969}
   - component: {fileID: 7200936908606347165}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7581347253758022421}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DriverSeat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4165491230454103527}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ExitSeat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 4859443411360923001}
   - component: {fileID: 8307772069403449883}
   - component: {fileID: 1386355750139996857}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Control
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 5450560605202265974}
   - component: {fileID: 460094347980878126}
   - component: {fileID: 4302909572943556851}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MiniSub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ Transform:
   - {fileID: 2085608187554373253}
   - {fileID: 8304949737648201559}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &460094347980878126
 Rigidbody:
@@ -403,12 +403,14 @@ MonoBehaviour:
   interactKey: 101
   moveSpeed: 20000
   rotationSpeed: 6000
+  engineSoundEffect: MiniSubEngineNoise
+  boatParticleSystem: {fileID: 8338715439909389396}
   isSubmarine: 1
   diveKey: 306
   riseKey: 32
+  sonarEffect: MiniSubSonar
   RiseDiveSpeed: 10000
   LowestDepth: -30
-  boatParticleSystem: {fileID: 8338715439909389396}
   hasHeadlights: 1
   leftHeadlight: {fileID: 5419219923028102913}
   rightHeadlight: {fileID: 4912822787865150604}
@@ -423,7 +425,7 @@ GameObject:
   - component: {fileID: 6043047411038212831}
   - component: {fileID: 70298852312461226}
   - component: {fileID: 3668226778160776313}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,7 +506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2085608187554373253}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HideWaterInShipPlanes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,7 +544,7 @@ GameObject:
   - component: {fileID: 7543281688505755665}
   - component: {fileID: 7583344425490896875}
   - component: {fileID: 7107283136642271146}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,7 +662,7 @@ GameObject:
   - component: {fileID: 1457060925279142600}
   - component: {fileID: 5424783813271492357}
   - component: {fileID: 5724133771562269061}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -778,7 +780,7 @@ GameObject:
   - component: {fileID: 3727858618569327725}
   - component: {fileID: 8108844004489796168}
   - component: {fileID: 673688365282001365}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -861,7 +863,7 @@ GameObject:
   - component: {fileID: 5993038488937862419}
   - component: {fileID: 8719594613556168572}
   - component: {fileID: 5220925595614738864}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -979,7 +981,7 @@ GameObject:
   - component: {fileID: 2321070781508889397}
   - component: {fileID: 5371767746329535660}
   - component: {fileID: 6054048557815794757}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Light Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1063,7 +1065,7 @@ GameObject:
   - component: {fileID: 6958281860971151984}
   - component: {fileID: 4467003476223265902}
   - component: {fileID: 8398339664810442958}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1146,7 +1148,7 @@ GameObject:
   - component: {fileID: 1034765849259618325}
   - component: {fileID: 3723246979898313568}
   - component: {fileID: 8883332259344768625}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Light Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1230,7 +1232,7 @@ GameObject:
   - component: {fileID: 7055652014115020000}
   - component: {fileID: 8338715439909389396}
   - component: {fileID: 8072609522348357232}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FX_BackOfBoat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5956,7 +5958,7 @@ GameObject:
   - component: {fileID: 5245606552773373468}
   - component: {fileID: 5947506650513394416}
   - component: {fileID: 2906039829475585683}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Chairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6040,7 +6042,7 @@ GameObject:
   - component: {fileID: 4864533630649265026}
   - component: {fileID: 597862022152160315}
   - component: {fileID: 4475624214570034872}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6129,7 +6131,7 @@ GameObject:
   - component: {fileID: 6123629753256870545}
   - component: {fileID: 4278718666971075296}
   - component: {fileID: 1960399433952196614}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mini Sub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6347,7 +6349,7 @@ GameObject:
   - component: {fileID: 7222420464041785401}
   - component: {fileID: 1665247165329905135}
   - component: {fileID: 6880043188826703390}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Small Windows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6428,7 +6430,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6129474204244849946}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ExitSeat (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

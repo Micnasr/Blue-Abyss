@@ -5264,12 +5264,14 @@ MonoBehaviour:
   interactKey: 101
   moveSpeed: 7000
   rotationSpeed: 6000
+  boatParticleSystem: {fileID: 7632602386248401308}
   isSubmarine: 0
   diveKey: 306
   riseKey: 32
+  engineSoundEffect: DinghyEngineNoise
+  sonarEffect: 
   RiseDiveSpeed: 0
   LowestDepth: 0
-  boatParticleSystem: {fileID: 7632602386248401308}
   hasHeadlights: 0
   leftHeadlight: {fileID: 0}
   rightHeadlight: {fileID: 0}

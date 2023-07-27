@@ -16,9 +16,17 @@ public class VehicleController : MonoBehaviour
     public float rotationSpeed;
     private bool isDriving = false;
     
+    public string engineSoundEffect;
+    public ParticleSystem boatParticleSystem;
+
+    [Header("Submarine Stats")]
     public bool isSubmarine = false;
+
     public KeyCode diveKey = KeyCode.LeftControl;
     public KeyCode riseKey = KeyCode.Space;
+
+    public string sonarEffect;
+    private bool sonarCoroutineStarted = false;
 
     public float RiseDiveSpeed;
     public float LowestDepth;
@@ -37,8 +45,6 @@ public class VehicleController : MonoBehaviour
 
     private GameObject weaponHolster;
     private CapsuleCollider playerMainCollider;
-
-    public ParticleSystem boatParticleSystem;
 
     private bool atHighestDepth = false;
     private bool atLowestDepth = false;
@@ -69,7 +75,11 @@ public class VehicleController : MonoBehaviour
         }
 
         if (isSubmarine)
+        {
             HighestDepth = this.transform.position.y;
+        }
+
+        FindObjectOfType<AudioManager>().Play(engineSoundEffect, 1f, gameObject);
     }
 
     private void FixedUpdate()
@@ -80,13 +90,20 @@ public class VehicleController : MonoBehaviour
 
             // If It is a submarine :) ~ Michael
             if (isSubmarine)
+            {
                 HandleSubmarine();
+                
+                // Handle Sonar Sound Effects
+                if (!sonarCoroutineStarted)
+                {
+                    StartCoroutine(SonarSoundEffect());
+                    sonarCoroutineStarted = true;
+                }
+            }
         }
 
         BoundaryPrevention();
     }
-
-    
 
     private void Update()
     {
@@ -99,7 +116,7 @@ public class VehicleController : MonoBehaviour
             // Rigidbody On Player Is Causing Problems so use This To TP
             player.transform.position = driverSeat.transform.position;
 
-            // Check if the player presses the interact key (E) to exit the vehicle
+            // Check if the player presses the interact key to exit the vehicle
             if (Input.GetKeyDown(interactKey))
             {
                 ExitVehicle();
@@ -109,6 +126,8 @@ public class VehicleController : MonoBehaviour
 
         FX_WaterParticles();
         ToggleHeadlights();
+
+        EngineSounds();
     }
 
     private void HandleLookingAtVehicle()
@@ -174,6 +193,20 @@ public class VehicleController : MonoBehaviour
         boatRigidbody.AddForce(forwardForce, ForceMode.Force);
     }
 
+    private void EngineSounds()
+    {    
+        // Dynamically Change Volume Depending on Vehicle Speed
+        float maxVelocity = 6.7f;
+        float minVolume = 0f;
+        float maxVolume = 0.8f;
+
+        float velocityPercent = Mathf.Clamp01(boatRigidbody.velocity.magnitude / maxVelocity);
+        float volumeOverTime = Mathf.Lerp(minVolume, maxVolume, velocityPercent);
+
+        GetComponent<AudioSource>().volume = volumeOverTime;
+    }
+
+
     private void HandleSubmarine()
     {
         // Handle diving
@@ -207,8 +240,6 @@ public class VehicleController : MonoBehaviour
         // Wait for physics calculations to finish
         yield return new WaitForFixedUpdate();
 
-        isDriving = false;
-
         if (isSubmarine)
         {
             Transform validExitLocation = null;
@@ -218,9 +249,20 @@ public class VehicleController : MonoBehaviour
             {
                 Collider[] colliders = Physics.OverlapSphere(exit.position, 1f, LayerMask.GetMask("whatIsGround", "Obstacle"));
 
-                if (colliders.Length == 0)
+                bool isValidExit = true;
+
+                foreach (Collider collider in colliders)
                 {
-                    // No collisions found, this is a valid exit location
+                    if (collider.gameObject.transform.parent.gameObject != gameObject)
+                    {
+                        isValidExit = false;
+                        break;
+                    }
+                }
+
+                if (isValidExit)
+                {
+                    // No collisions found with other objects, this is a valid exit location
                     validExitLocation = exit;
                     break;
                 }
@@ -234,7 +276,7 @@ public class VehicleController : MonoBehaviour
             }
             else
             {
-                Debug.LogError("No Spaces to Exit");
+                Debug.LogWarning("No Spaces to Exit");
                 yield break;
             }
         }
@@ -244,6 +286,7 @@ public class VehicleController : MonoBehaviour
             player.rotation = exitLocations[0].rotation;
         }
 
+        isDriving = false;
         player.SetParent(null);
 
         // Re-enable scripts and components
@@ -331,4 +374,12 @@ public class VehicleController : MonoBehaviour
             boatRigidbody.velocity = newVelocity;
         }
     }
+
+    private IEnumerator SonarSoundEffect()
+    {
+        yield return new WaitForSeconds(10f);
+        sonarCoroutineStarted = false;
+        FindObjectOfType<AudioManager>().Play(sonarEffect, 1f, gameObject);
+    }
+
 }

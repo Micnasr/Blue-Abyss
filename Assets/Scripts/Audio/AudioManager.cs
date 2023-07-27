@@ -53,6 +53,8 @@ public class AudioManager : MonoBehaviour
                     source.rolloffMode = AudioRolloffMode.Logarithmic;
                 else
                     source.rolloffMode = AudioRolloffMode.Linear;
+
+                soundData.source = source;
             }
         }
         // AudioManager is the default source if nothing is provided
@@ -66,6 +68,8 @@ public class AudioManager : MonoBehaviour
                 source.volume = soundData.volume;
                 source.pitch = soundData.pitch;
                 source.loop = soundData.loop;
+
+                soundData.source = source;
             }
         }
 
@@ -88,5 +92,16 @@ public class AudioManager : MonoBehaviour
         return null;
     }
 
+    // Can only use this function for sounds with unique gameobjects!
+    public void StopPlaying(string sound)
+    {
+        Sound s = Array.Find(sounds, item => item.name == sound);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found!");
+            return;
+        }
 
+        s.source.Stop();
+    }
 }
