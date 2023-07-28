@@ -9,20 +9,25 @@ public class BoatSellerLogic : MonoBehaviour
 {
     // This code is a lot cleaner than the one in ItemShopLogic, I came a long way ~MN
     [Header("Price Of Items: Dinghy -> MiniSub")]
-    string[] names = { "Dinghy", "MiniSub" };
+    string[] names = { "Dinghy", "MiniSub", "Titan" };
     public int[] priceOfItems;
 
     private string ownedBoatsStr;
-
-    public TextMeshProUGUI[] textPriceOfItems;
-    public GameObject[] purchaseButtons;
-    public GameObject[] spawnButtons;
 
     public GameObject[] boatPrefabs;
     public Transform[] boatSpawnLocation;
     private GameObject currentBoat;
 
     private MoneyManager moneyManager;
+
+    [Header("Page Data")]  
+    public GameObject[] fullNames;
+    public GameObject[] fullPics;
+    public GameObject[] description;
+    public TextMeshProUGUI[] textPriceOfItems;
+    public GameObject[] purchaseButtons;
+    public GameObject[] spawnButtons;
+    private int openPage = 0;
 
     [Header("Colors")]
     public Color affordColor;
@@ -49,18 +54,44 @@ public class BoatSellerLogic : MonoBehaviour
     { 
         for (int i = 0; i < names.Length; i++)
         {
-            if (ownedBoatsStr.Contains(names[i]))
+            bool state = false;
+            if (i == openPage)
             {
-                textPriceOfItems[i].text = "OWNED";
-                spawnButtons[i].SetActive(true);
-                purchaseButtons[i].SetActive(false);
+                state = true;
+            }
+
+            fullNames[i].SetActive(state);
+            fullPics[i].SetActive(state);
+            description[i].SetActive(state);
+            textPriceOfItems[i].gameObject.SetActive(state);
+            purchaseButtons[i].SetActive(state);
+
+            if (!state)
+            {
+                purchaseButtons[i].SetActive(state);
+                spawnButtons[i].SetActive(state);
             }
             else
             {
-                textPriceOfItems[i].text = "$" + priceOfItems[i].ToString();
-                spawnButtons[i].SetActive(false);
+                if (ownedBoatsStr.Contains(names[i]))
+                {
+                    textPriceOfItems[i].text = "OWNED";
+                    spawnButtons[i].SetActive(true);
+                    purchaseButtons[i].SetActive(false);
+                }
+                else
+                {
+                    textPriceOfItems[i].text = "$" + priceOfItems[i].ToString();
+                    spawnButtons[i].SetActive(false);
+                }
             }
         }
+    }
+
+    public void UpdatePage(int page)
+    {
+        openPage = page;
+        UpdateUI();
     }
 
     private void UpdatePriceColor()
@@ -99,6 +130,10 @@ public class BoatSellerLogic : MonoBehaviour
 
     public void SpawnBoat(int boatIndex)
     {
+        // CHANGE LOGIC FOR FUTURE
+        if (boatIndex == 2)
+            return;
+
         if (currentBoat != null)
             Destroy(currentBoat);
 
