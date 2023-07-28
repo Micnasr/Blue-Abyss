@@ -7,7 +7,7 @@ public class FishHealthManager : MonoBehaviour
 {
     [Header("Fish Health Properties")]
     public float maxHealth;
-    private float currentHealth;
+    [HideInInspector] public float currentHealth;
 
     [Header("Dead Properties")]
     public int deathPoints;

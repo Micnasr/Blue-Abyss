@@ -34,6 +34,10 @@ public class Gun : MonoBehaviour
     public GameObject damageUIPrefab;
     public Transform damageUISpawn;
 
+    [Header("FishPointsUI Data")]
+    public Transform fishPointsUISpawn;
+    public Color32 orangeFishColor;
+
     private void Start()
     {
         //Subscribing to Event
@@ -41,6 +45,8 @@ public class Gun : MonoBehaviour
     }
 
     private bool CanShoot() => timeSinceLastShot > 1f / (gunData.fireRate / 60f);
+
+    int fishPoints = 0;
 
     public void Shoot()
     {
@@ -60,6 +66,7 @@ public class Gun : MonoBehaviour
             // Sort the hitInfo array based on hit distance (this helps with rendering effects with superimposed meshes)
             System.Array.Sort(hitInfo, (a, b) => a.distance.CompareTo(b.distance));
 
+            // Process All Hits
             for (int i = 0; i < hitInfo.Length; i++)
             {
                 GameObject hitObject = hitInfo[i].transform.gameObject;
@@ -95,6 +102,11 @@ public class Gun : MonoBehaviour
                 HandleDamage(hitObject, hitInfo, i);
             }
 
+            // Spawn Fish Points UI
+            if (fishPoints != 0)
+                SpawnFishUI(fishPoints);
+
+            fishPoints = 0;
             timeSinceLastShot = 0;
         }
     }
@@ -176,6 +188,9 @@ public class Gun : MonoBehaviour
             // Apply Damage
             fishHealthManager.TakeDamage(actualDamage);
 
+            if (fishHealthManager.currentHealth <= 0)
+                fishPoints += fishHealthManager.deathPoints;
+
             Instantiate(bloodEffect, hitInfo[i].point, Quaternion.LookRotation(hitInfo[i].normal));
             ShowDamageUI(actualDamage);
         }
@@ -223,5 +238,23 @@ public class Gun : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void SpawnFishUI(int points)
+    {
+        GameObject pointsInstance = Instantiate(damageUIPrefab, fishPointsUISpawn.position, fishPointsUISpawn.rotation);
+        pointsInstance.transform.SetParent(fishPointsUISpawn);
+
+        TMPro.TextMeshProUGUI textMeshPro = pointsInstance.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+        if (textMeshPro != null)
+        {
+            textMeshPro.text = "+" + points.ToString();
+            textMeshPro.color = orangeFishColor;
+            textMeshPro.fontSize = 40;
+        }
+
+
+        StartCoroutine(DestroyAfterAnimation(1f, pointsInstance));
+
     }
 }
