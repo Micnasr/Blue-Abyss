@@ -7,13 +7,19 @@ using UnityEngine;
 public class FishButcherLogic : MonoBehaviour
 {
     private Transform player;
+    private PlayerCam playerCam;
     public Transform npc;
     public float interactionDistance = 5f;
     public float rotationSpeed = 5f;
 
+    public KeyCode interactKey = KeyCode.E;
+
     private FishMeter fishMeter;
     private MoneyManager moneyManager;
     private PlayerMovement playerMovement;
+
+    public string interactMessage;
+    private bool interactedOn = false;
 
     public int moneyMultiplier = 50;
 
@@ -28,16 +34,17 @@ public class FishButcherLogic : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerMovement = player.gameObject.GetComponent<PlayerMovement>();
+        playerCam = player.gameObject.GetComponentInChildren<PlayerCam>();
     }
 
     private void Update()
     {
         // Check if the player is near the NPC
-        if (Vector3.Distance(player.position, npc.position) <= interactionDistance)
+        if (Vector3.Distance(playerCam.transform.position, npc.position) <= interactionDistance)
         {
             RotateNPC();
 
-            if (Input.GetKeyDown(KeyCode.E) && playerMovement.grounded)
+            if (Input.GetKeyDown(interactKey) && playerMovement.grounded && LookingAtNPC())
             {
                 int money = fishMeter.currentCount * moneyMultiplier;
 
@@ -51,6 +58,19 @@ public class FishButcherLogic : MonoBehaviour
                 fishMeter.ResetFishDeaths();
             }
         }
+
+        // Handle Interact UI Render
+        if (!interactedOn && (Vector3.Distance(playerCam.transform.position, npc.position) <= interactionDistance) && LookingAtNPC() && playerMovement.grounded)
+        {
+            FindAnyObjectByType<InteractUI>().InteractWith(interactMessage);
+            interactedOn = true;
+
+        }
+        else if (interactedOn && (!playerMovement.grounded || Vector3.Distance(playerCam.transform.position, npc.position) >= interactionDistance || !LookingAtNPC()))
+        {
+            FindAnyObjectByType<InteractUI>().InteractStop();
+            interactedOn = false;
+        }
     }
 
     private void RotateNPC()
@@ -62,6 +82,24 @@ public class FishButcherLogic : MonoBehaviour
         // Smoothly rotate the NPC towards the player
         Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
         npc.rotation = Quaternion.Lerp(npc.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    private bool LookingAtNPC()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, 20f))
+        {
+            if (hit.collider != null && hit.collider.gameObject != null && hit.collider.gameObject.transform.parent != null)
+            {
+                if (hit.collider.gameObject.transform.parent.gameObject == gameObject)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
 

@@ -141,4 +141,3 @@ public class BoatSellerLogic : MonoBehaviour
         currentBoat = Instantiate(boatPrefabs[boatIndex], boatSpawnLocation[boatIndex].position, boatSpawnLocation[boatIndex].rotation);
     }
 }
-

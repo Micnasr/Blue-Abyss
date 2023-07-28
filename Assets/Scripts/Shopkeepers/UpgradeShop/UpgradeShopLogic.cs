@@ -15,6 +15,11 @@ public class UpgradeShopLogic : MonoBehaviour
     public float interactionDistance = 5f;
     public float rotationSpeed = 5f;
 
+    public KeyCode interactKey = KeyCode.E;
+    
+    public string interactMessage;
+    private bool interactedOn = false;
+
     private bool UIOpen = true;
 
     public GameObject UIPanel;
@@ -34,11 +39,11 @@ public class UpgradeShopLogic : MonoBehaviour
     private void Update()
     {
         // Check if the player is near the NPC
-        if (Vector3.Distance(player.position, npc.position) <= interactionDistance)
+        if (Vector3.Distance(playerCam.transform.position, npc.position) <= interactionDistance)
         {
             RotateNPC();
 
-            if (Input.GetKeyDown(KeyCode.E) && playerMovement.grounded)
+            if (Input.GetKeyDown(interactKey) && playerMovement.grounded && LookingAtNPC())
             {
                 if (UIOpen)
                 {
@@ -49,14 +54,52 @@ public class UpgradeShopLogic : MonoBehaviour
                     CloseUpgradeUI();
                 }
             }
-        } // Incase the player moves out of the range after interacting
-        else if (Input.GetKeyDown(KeyCode.E) && playerMovement.grounded)
+            else
+            {
+                if (Input.GetKeyDown(interactKey) && !UIOpen)
+                {
+                    CloseUpgradeUI();
+                }
+            }
+        }
+        else
         {
-            if (!UIOpen)
+            if (Input.GetKeyDown(interactKey) && !UIOpen)
             {
                 CloseUpgradeUI();
             }
         }
+
+        // Handle Interact UI Render
+        if (!interactedOn && (Vector3.Distance(playerCam.transform.position, npc.position) <= interactionDistance) && LookingAtNPC() && UIOpen && playerMovement.grounded)
+        {
+            FindAnyObjectByType<InteractUI>().InteractWith(interactMessage);
+            interactedOn = true;
+
+        }
+        else if (interactedOn && (!playerMovement.grounded || !UIOpen || Vector3.Distance(playerCam.transform.position, npc.position) >= interactionDistance || !LookingAtNPC()))
+        {
+            FindAnyObjectByType<InteractUI>().InteractStop();
+            interactedOn = false;
+        }
+    }
+
+    private bool LookingAtNPC()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, 5f))
+        {
+            if (hit.collider != null && hit.collider.gameObject != null && hit.collider.gameObject.transform.parent != null)
+            {
+                if (hit.collider.gameObject.transform.parent.gameObject == gameObject)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public void CloseUpgradeUI()
