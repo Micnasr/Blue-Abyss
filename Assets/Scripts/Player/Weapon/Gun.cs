@@ -250,7 +250,7 @@ public class Gun : MonoBehaviour
         {
             textMeshPro.text = "+" + points.ToString();
             textMeshPro.color = orangeFishColor;
-            textMeshPro.fontSize = 40;
+            //textMeshPro.fontSize = 40;
         }
 
 
