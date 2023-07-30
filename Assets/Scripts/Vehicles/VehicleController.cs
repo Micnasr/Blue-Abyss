@@ -112,7 +112,6 @@ public class VehicleController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(boatRigidbody.velocity);
         if (!isDriving)
         {
             HandleLookingAtVehicle();
