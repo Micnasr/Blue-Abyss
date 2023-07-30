@@ -403,6 +403,9 @@ MonoBehaviour:
   interactKey: 101
   moveSpeed: 20000
   rotationSpeed: 6000
+  minVolume: 0
+  maxVolume: 1
+  maxSpeed: 10
   engineSoundEffect: MiniSubEngineNoise
   boatParticleSystem: {fileID: 8338715439909389396}
   isSubmarine: 1

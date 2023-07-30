@@ -15,6 +15,11 @@ public class VehicleController : MonoBehaviour
     public float moveSpeed;
     public float rotationSpeed;
     private bool isDriving = false;
+
+    [Header("Engine Sound Parameter")]
+    public float minVolume;
+    public float maxVolume;
+    public float maxSpeed;
     
     public string engineSoundEffect;
     public ParticleSystem boatParticleSystem;
@@ -107,6 +112,7 @@ public class VehicleController : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(boatRigidbody.velocity);
         if (!isDriving)
         {
             HandleLookingAtVehicle();
@@ -127,7 +133,7 @@ public class VehicleController : MonoBehaviour
         FX_WaterParticles();
         ToggleHeadlights();
 
-        EngineSounds();
+        EngineSounds(minVolume, maxVolume, maxSpeed);
     }
 
     private void HandleLookingAtVehicle()
@@ -193,12 +199,12 @@ public class VehicleController : MonoBehaviour
         boatRigidbody.AddForce(forwardForce, ForceMode.Force);
     }
 
-    private void EngineSounds()
+    private void EngineSounds(float min, float max, float maxSpeed)
     {    
         // Dynamically Change Volume Depending on Vehicle Speed
-        float maxVelocity = 6.7f;
-        float minVolume = 0f;
-        float maxVolume = 0.8f;
+        float maxVelocity = maxSpeed;
+        float minVolume = min;
+        float maxVolume = max;
 
         float velocityPercent = Mathf.Clamp01(boatRigidbody.velocity.magnitude / maxVelocity);
         float volumeOverTime = Mathf.Lerp(minVolume, maxVolume, velocityPercent);
