@@ -32,6 +32,7 @@ public class FishHealthManager : MonoBehaviour
     public GameObject damageEffect;
     private bool playedEffect = false;
 
+    public float runAwayMultiplier = 2f;
     private float runAwaySpeed;
 
     // Flag to track if the fish has died
@@ -57,8 +58,14 @@ public class FishHealthManager : MonoBehaviour
         landEnemyPatrol = GetComponent<LandEnemyPatrol>();
 
         // Calculate Run Away Speed
-        if (enemyPatrol != null)
-            runAwaySpeed = enemyPatrol.movementSpeed * 2f;
+        if (enemyPatrol != null || landEnemyPatrol != null)
+            if (enemyPatrol != null)
+                runAwaySpeed = enemyPatrol.movementSpeed * runAwayMultiplier;
+            else if (landEnemyPatrol != null)
+            {
+                runAwaySpeed = landEnemyPatrol.movementSpeed * runAwayMultiplier;
+                Debug.Log(gameObject.name);
+            }
 
         fishMeter = FindObjectOfType<FishMeter>();
     }
@@ -85,13 +92,18 @@ public class FishHealthManager : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-        if (enemyPatrol != null)
+        if (enemyPatrol != null || landEnemyPatrol)
             StartCoroutine(RunAway());
     }
 
     private IEnumerator RunAway()
     {
-        float originalSpeed = enemyPatrol.movementSpeed;
+        float originalSpeed = 0f;
+        if (enemyPatrol != null)
+            originalSpeed = enemyPatrol.movementSpeed;
+        else if (landEnemyPatrol != null)
+            originalSpeed = landEnemyPatrol.movementSpeed;
+
         float elapsedTime = 0f;
         float accelerationDuration = 0.7f;
         float decelerationDuration = 1f;
@@ -100,14 +112,21 @@ public class FishHealthManager : MonoBehaviour
         {
             // Calculate the t value for interpolation (acceleration)
             float t = elapsedTime / accelerationDuration;
-            enemyPatrol.movementSpeed = Mathf.Lerp(originalSpeed, runAwaySpeed, t);
+
+            if (enemyPatrol != null)
+                enemyPatrol.movementSpeed = Mathf.Lerp(originalSpeed, runAwaySpeed, t);
+            else if (landEnemyPatrol != null)
+                landEnemyPatrol.movementSpeed = Mathf.Lerp(originalSpeed, runAwaySpeed, t);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         // Ensure the fish reaches the runaway speed
-        enemyPatrol.movementSpeed = runAwaySpeed;
+        if (enemyPatrol != null)
+            enemyPatrol.movementSpeed = runAwaySpeed;
+        else if (landEnemyPatrol != null)
+            landEnemyPatrol.movementSpeed = runAwaySpeed;
 
         yield return new WaitForSeconds(5f);
 
@@ -117,14 +136,21 @@ public class FishHealthManager : MonoBehaviour
         {
             // Calculate the t value for interpolation (deceleration)
             float t = elapsedTime / decelerationDuration;
-            enemyPatrol.movementSpeed = Mathf.Lerp(runAwaySpeed, originalSpeed, t);
+            
+            if (enemyPatrol != null)
+                enemyPatrol.movementSpeed = Mathf.Lerp(runAwaySpeed, originalSpeed, t);
+            else if (landEnemyPatrol != null)
+                landEnemyPatrol.movementSpeed = Mathf.Lerp(runAwaySpeed, originalSpeed, t);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         // Ensure the fish reaches the original speed
-        enemyPatrol.movementSpeed = originalSpeed;
+        if (enemyPatrol != null)
+            enemyPatrol.movementSpeed = originalSpeed;
+        else if (landEnemyPatrol != null)
+            landEnemyPatrol.movementSpeed = originalSpeed;
     }
 
     public void HandleDeath()
@@ -221,5 +247,4 @@ public class FishHealthManager : MonoBehaviour
             }
         }
     }
-
 }

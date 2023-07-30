@@ -946,7 +946,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 768
-  animatorDistance: 40
+  animatorDistance: 80
 --- !u!114 &7872602326277218873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,14 +963,15 @@ MonoBehaviour:
   currentHealth: 0
   deathPoints: 7
   deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
-  shaderTopThreshold: 1.2
-  shaderBottomThreshold: 1
+  shaderTopThreshold: 1.5
+  shaderBottomThreshold: 1.3
   doesBleed: 1
-  bloodHeightOffset: 0.7
+  bloodHeightOffset: 0.5
   noiseStrength: 0.25
   duration: 1
   damageEffect: {fileID: 3027278326694109150, guid: dd2a9939b435be543b2c8eedd7291fc8,
     type: 3}
+  runAwayMultiplier: 3
   isDead: 0
   criticalSound: 
 --- !u!65 &6144653896034081305
