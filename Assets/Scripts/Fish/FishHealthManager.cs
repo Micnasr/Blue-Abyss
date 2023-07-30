@@ -17,6 +17,7 @@ public class FishHealthManager : MonoBehaviour
     public float shaderBottomThreshold;
 
     public bool doesBleed = false;
+    public float bloodHeightOffset = 0;
 
     // Only for flocks
     private FlockUnit flockUnit;
@@ -206,10 +207,11 @@ public class FishHealthManager : MonoBehaviour
     {
         if (damageEffect != null)
         {
-            // Instantiate the damage effect as a child of the fish
-            damageEffect = Instantiate(damageEffect, transform);
-            damageEffect.transform.localPosition = Vector3.zero;
-            damageEffect.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+            // Calculate the spawn position with height offset
+            Vector3 spawnPosition = transform.position + (Vector3.up * bloodHeightOffset);
+
+            // Instantiate the damage effect at the spawn position as a child of the fish
+            damageEffect = Instantiate(damageEffect, spawnPosition, Quaternion.Euler(0f, 90f, 0f), transform);
 
             // Play the particle system
             ParticleSystem particleSystem = damageEffect.GetComponent<ParticleSystem>();
@@ -219,4 +221,5 @@ public class FishHealthManager : MonoBehaviour
             }
         }
     }
+
 }
