@@ -579,6 +579,7 @@ MonoBehaviour:
   animatorDistance: 300
   fishSounds:
   - HumpbackScream1
+  - WhaleSonar
 --- !u!114 &2048649442847279125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,6 +593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1000
+  currentHealth: 0
   deathPoints: 150
   deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
   shaderTopThreshold: 2
@@ -602,6 +604,7 @@ MonoBehaviour:
   damageEffect: {fileID: 3027278326694109150, guid: dd2a9939b435be543b2c8eedd7291fc8,
     type: 3}
   isDead: 0
+  criticalSound: 
 --- !u!95 &2348059882585863083
 Animator:
   serializedVersion: 5
