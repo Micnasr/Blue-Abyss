@@ -134,11 +134,14 @@ public class PlayerMovement : MonoBehaviour
 
             SpawnWalkParticle();
 
-            // Sound Depending on Surface
-            if (GetSurfaceType() == woodTag)
-                SpawnWalkSoundEffects(walking_sounds_wood);
-            else
-                SpawnWalkSoundEffects(walking_sounds_sand);
+            if (rb.velocity.magnitude >= 0.001f)
+            {
+                // Sound Depending on Surface
+                if (GetSurfaceType() == woodTag)
+                    SpawnWalkSoundEffects(walking_sounds_wood);
+                else
+                    SpawnWalkSoundEffects(walking_sounds_sand);
+            }
         }
         else if (!grounded)
         {
