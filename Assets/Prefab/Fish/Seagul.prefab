@@ -516,7 +516,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   animatorDistance: 150
-  fishSounds: []
+  fishSounds:
+  - SeagulSound1
 --- !u!114 &3388114030181392478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,7 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0747cc7cdfda4604f9ea807bc48b4234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 20
   currentHealth: 0
   deathPoints: 1
   deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
@@ -540,7 +541,7 @@ MonoBehaviour:
   noiseStrength: 0.25
   duration: 1
   damageEffect: {fileID: 0}
-  runAwayMultiplier: 3
+  runAwayMultiplier: 2.5
   isDead: 0
   criticalSound: 
 --- !u!95 &4607520497178201463

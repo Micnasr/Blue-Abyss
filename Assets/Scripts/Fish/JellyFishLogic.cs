@@ -108,6 +108,7 @@ public class JellyfishAnimation : MonoBehaviour
 
         yield return new WaitForSeconds(stingDuration);
 
+        FindObjectOfType<AudioManager>().StopPlaying("JellyfishElectricity");
         jellyShieldScript.DestroyShield();
         currentSting = null;
 

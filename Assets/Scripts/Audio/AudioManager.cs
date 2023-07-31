@@ -41,6 +41,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        // Play Starting Music
         Play("DeepWaterMusic");
     }
 
@@ -113,7 +114,7 @@ public class AudioManager : MonoBehaviour
         return null;
     }
 
-    // Can only use this function for sounds with unique gameobjects!
+    // Can only use this function for sounds with unique gameobjects! (2D Sounds ONLY)
     public void StopPlaying(string sound)
     {
         Sound s = Array.Find(sounds, item => item.name == sound);

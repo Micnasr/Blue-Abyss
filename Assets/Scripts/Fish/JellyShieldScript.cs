@@ -29,7 +29,10 @@ public class JellyShieldScript : MonoBehaviour
             playerInsideTrigger = true;
 
             if (!inShieldEffectSpawned)
+            {
                 SpawnInShieldEffect();
+                FindObjectOfType<AudioManager>().Play("JellyfishElectricity");
+            }
         }
     }
 
@@ -41,7 +44,10 @@ public class JellyShieldScript : MonoBehaviour
             playerInsideTrigger = false;
 
             if (inShieldEffectSpawned)
+            {
                 DestroyInShieldEffect();
+                FindObjectOfType<AudioManager>().StopPlaying("JellyfishElectricity");
+            }
         }
     }
 
