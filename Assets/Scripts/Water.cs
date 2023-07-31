@@ -29,6 +29,8 @@ public class Water : MonoBehaviour
             OxygenController oxygenScript = other.GetComponentInParent<OxygenController>();
             oxygenScript.isHeadAboveWater = false;
 
+            FindObjectOfType<AudioManager>().FadeTrack("DeepWaterMusic", "ShallowWaterMusic", 1f);
+
             RenderSettings.fog = true;
         }
     }
@@ -49,6 +51,7 @@ public class Water : MonoBehaviour
             OxygenController oxygenScript = other.GetComponentInParent<OxygenController>();
             oxygenScript.isHeadAboveWater = true;
 
+            FindObjectOfType<AudioManager>().FadeTrack("ShallowWaterMusic", "DeepWaterMusic", 1f);
             RenderSettings.fog = false;
         }
     }

@@ -1,6 +1,8 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using System.Collections;
+using static Unity.VisualScripting.Member;
 
 public class AudioManager : MonoBehaviour
 {
@@ -21,6 +23,25 @@ public class AudioManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+
+        // Give each 2D sound a component under AudioManager 
+        foreach(Sound s in sounds)
+        {
+            if (s.spatialBlend == 0)
+            {
+                s.source = gameObject.AddComponent<AudioSource>();
+                s.source.clip = s.clip;
+                s.source.volume = s.volume;
+                s.source.pitch = s.pitch;
+                s.source.loop = s.loop;
+                s.source.spatialBlend = s.spatialBlend;
+            }
+        }
+    }
+
+    private void Start()
+    {
+        Play("DeepWaterMusic");
     }
 
     public void Play(string name, float pitch = 1f, GameObject sourceGameObject = null)
@@ -103,5 +124,53 @@ public class AudioManager : MonoBehaviour
         }
 
         s.source.Stop();
+    }
+
+    public void FadeTrack(string currentName, string nextName, float fadeDuration)
+    {
+        Sound currentSoundData = Array.Find(sounds, sound => sound.name == currentName);
+        Sound nextSoundData = Array.Find(sounds, sound => sound.name == nextName);
+
+        AudioSource currentSource = FindAudioSourceWithClip(gameObject, currentSoundData.clip);
+        AudioSource nextSource = FindAudioSourceWithClip(gameObject, nextSoundData.clip);
+
+        StartCoroutine(FadeOutTrack(currentSource, fadeDuration));
+        StartCoroutine(FadeInTrack(nextSource, fadeDuration));
+    }
+
+    private IEnumerator FadeOutTrack(AudioSource audioSource, float fadeDuration)
+    {
+        float startVolume = audioSource.volume;
+        float startTime = Time.time;
+
+        while (Time.time < startTime + fadeDuration)
+        {
+            float elapsed = Time.time - startTime;
+            float normalizedTime = elapsed / fadeDuration;
+            audioSource.volume = Mathf.Lerp(startVolume, 0f, normalizedTime);
+            yield return null;
+        }
+
+        audioSource.Stop();
+    }
+
+    private IEnumerator FadeInTrack(AudioSource audioSource, float fadeDuration)
+    {
+        audioSource.volume = 0f;
+        audioSource.Play();
+
+        float startVolume = 0f;
+        float targetVolume = 1f;
+        float startTime = Time.time;
+
+        while (Time.time < startTime + fadeDuration)
+        {
+            float elapsed = Time.time - startTime;
+            float normalizedTime = elapsed / fadeDuration;
+            audioSource.volume = Mathf.Lerp(startVolume, targetVolume, normalizedTime);
+            yield return null;
+        }
+
+        audioSource.volume = targetVolume;
     }
 }

@@ -34,6 +34,7 @@ public class FishHealthManager : MonoBehaviour
 
     public float runAwayMultiplier = 2f;
     private float runAwaySpeed;
+    private bool runningAway = false;
 
     // Flag to track if the fish has died
     [HideInInspector] public bool isDead = false;
@@ -62,11 +63,8 @@ public class FishHealthManager : MonoBehaviour
             if (enemyPatrol != null)
                 runAwaySpeed = enemyPatrol.movementSpeed * runAwayMultiplier;
             else if (landEnemyPatrol != null)
-            {
                 runAwaySpeed = landEnemyPatrol.movementSpeed * runAwayMultiplier;
-                Debug.Log(gameObject.name);
-            }
-
+            
         fishMeter = FindObjectOfType<FishMeter>();
     }
 
@@ -93,7 +91,13 @@ public class FishHealthManager : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
         if (enemyPatrol != null || landEnemyPatrol)
-            StartCoroutine(RunAway());
+        {
+            if (!runningAway)
+            {
+                runningAway = true;
+                StartCoroutine(RunAway());
+            }
+        }
     }
 
     private IEnumerator RunAway()
@@ -151,6 +155,8 @@ public class FishHealthManager : MonoBehaviour
             enemyPatrol.movementSpeed = originalSpeed;
         else if (landEnemyPatrol != null)
             landEnemyPatrol.movementSpeed = originalSpeed;
+
+        runningAway = false;
     }
 
     public void HandleDeath()
