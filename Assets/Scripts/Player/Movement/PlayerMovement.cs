@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
+    public Transform playerFeet;
 
     [HideInInspector] public bool grounded;
     private bool wasGrounded = false;
@@ -84,9 +85,9 @@ public class PlayerMovement : MonoBehaviour
         // Check if we are on the ground
         if (!isSwimming)
         {
-            // Check if we are on the ground :) - MN
-            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-            
+            grounded = IsGrounded(); // New Jump
+            //grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround); // Old Jump
+
             // Check if we landed on the ground
             if (wasGrounded == false && grounded == true)
             {
@@ -103,6 +104,15 @@ public class PlayerMovement : MonoBehaviour
                 rb.drag = groundDrag / 2;
         }
         
+    }
+
+    public bool IsGrounded()
+    {
+        float sphereRadius = 0.4f;
+        Vector3 sphereCenter = playerFeet.position;
+        Collider[] groundColliders = Physics.OverlapSphere(sphereCenter, sphereRadius, whatIsGround);
+
+        return groundColliders.Length > 0;
     }
 
     private void myInput()
@@ -153,7 +163,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (walkParticlePrefab != null)
         {
-            Vector3 spawnPosition = GetFeetPosition();
+            Vector3 spawnPosition = new Vector3(playerFeet.position.x, playerFeet.position.y - 0.3f, playerFeet.position.z);
             GameObject jumpParticleInstance = Instantiate(jumpParticlePrefab, spawnPosition, Quaternion.identity);
             jumpParticleInstance.transform.parent = transform;
         }
@@ -170,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (walkParticlePrefab != null)
                 {
-                    Vector3 spawnPosition = GetFeetPosition();
+                    Vector3 spawnPosition = playerFeet.position;
                     GameObject walkParticleInstance = Instantiate(walkParticlePrefab, spawnPosition, Quaternion.identity);
                     walkParticleInstance.transform.parent = transform;
                 }
@@ -199,19 +209,6 @@ public class PlayerMovement : MonoBehaviour
 
                 walkSoundTimer = 0f;
             }
-        }
-    }
-
-    private Vector3 GetFeetPosition()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, playerHeight, whatIsGround))
-        {
-            return hit.point;
-        }
-        else
-        {
-            return transform.position;
         }
     }
 

@@ -192,8 +192,9 @@ Transform:
   - {fileID: 1873049642776171503}
   - {fileID: 7687243092260039680}
   - {fileID: 7063968324172870769}
+  - {fileID: 2833595533553406101}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5135001688982826863
 Rigidbody:
@@ -248,6 +249,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
+  playerFeet: {fileID: 2833595533553406101}
   grounded: 0
   orientation: {fileID: 7687243092260039680}
   jumpParticlePrefab: {fileID: 5622206542467737136, guid: 41d50ac4cac99c24991dcea00cf218ab,
@@ -259,6 +261,12 @@ MonoBehaviour:
   - walk_sand2
   - walk_sand3
   - walk_sand4
+  woodTag: wood-surface
+  walking_sounds_wood:
+  - walk_wood1
+  - walk_wood2
+  - walk_wood3
+  - walk_wood4
   walkSoundSpawnRate: 0.3
 --- !u!114 &6995076460426175063
 MonoBehaviour:
@@ -276,6 +284,7 @@ MonoBehaviour:
   oxygenDepletionRate: 1
   oxygenRegenRate: 5
   suffocateDamage: 15
+  inSubmarine: 0
   isHeadAboveWater: 1
   oxygenMeter: {fileID: 0}
 --- !u!114 &2845071954360440733
@@ -646,6 +655,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122d00ce3555a544bb44782b80451bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3729390551682272769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2833595533553406101}
+  m_Layer: 0
+  m_Name: Feet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2833595533553406101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3729390551682272769}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.98, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6357236219538041072}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4372125949532520324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,3 +1249,7 @@ MonoBehaviour:
   damageUIPrefab: {fileID: 5210549443229694597, guid: 7443e3e8f4886514c81c152ea7f30b9d,
     type: 3}
   damageUISpawn: {fileID: 0}
+  fishPointsUISpawn: {fileID: 0}
+  orangeFishColor:
+    serializedVersion: 2
+    rgba: 4278201450
