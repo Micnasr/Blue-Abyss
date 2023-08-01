@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CollectiblesManager : MonoBehaviour
 {
     [HideInInspector] public string collectedStatus;
     private int totalCollectibles;
+
+    public TextMeshProUGUI collectibleUI;
 
     [HideInInspector] public List<GameObject> collectibleItems = new List<GameObject>();
 
@@ -26,6 +29,8 @@ public class CollectiblesManager : MonoBehaviour
 
             collectibleItems.Add(collectible);
         }
+
+        LoadUI();
     }
 
     private void LoadCollectedStatus()
@@ -50,11 +55,25 @@ public class CollectiblesManager : MonoBehaviour
             PlayerPrefs.SetString("CollectedStatus", collectedStatus);
             PlayerPrefs.Save();
 
+            LoadUI();
+
         }
         else
         {
             Debug.LogError("Index Out Of Bounds");
         }
+    }
+
+    private void LoadUI()
+    {
+        int foundItems = 0;
+
+        for (int i = 0; i < totalCollectibles; i++)
+            if (collectedStatus[i] == '1')
+                    foundItems++;
+
+        collectibleUI.text = (foundItems.ToString() + "/" + totalCollectibles + " Treasure Found");
+
     }
 }
 

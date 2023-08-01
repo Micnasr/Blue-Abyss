@@ -6,6 +6,9 @@ public class CollectibleItem : MonoBehaviour
 {
     private Transform player;
     private Transform playerCam;
+    private MoneyManager moneyManager;
+
+    public int moneyReward = 300;
 
     private int collectibleIndex;
     private CollectiblesManager collectiblesManager;
@@ -13,7 +16,8 @@ public class CollectibleItem : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerCam = player.gameObject.GetComponentInChildren<PlayerCam>().transform;
+        playerCam = player.GetComponentInChildren<PlayerCam>().transform;
+        moneyManager = FindAnyObjectByType<MoneyManager>();
 
         collectiblesManager = FindObjectOfType<CollectiblesManager>();
 
@@ -42,7 +46,11 @@ public class CollectibleItem : MonoBehaviour
             if (hit.collider.gameObject == gameObject)
             {
                 collectiblesManager.UpdateCollectedStatus(collectibleIndex);
-                //give money
+                FindObjectOfType<AudioManager>().Play("CollectibleFound");
+
+                moneyManager.AddMoney(moneyReward);
+                FindAnyObjectByType<InteractUI>().InteractStop();
+
                 Destroy(gameObject);
             }
         }

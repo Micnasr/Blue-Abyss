@@ -22,6 +22,7 @@ public class BackpackUI : MonoBehaviour
     private List<GameObject> instantiatedObjects = new List<GameObject>();
 
     public GameObject itemHolder;
+    public GameObject collectibleUI;
 
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class BackpackUI : MonoBehaviour
     {
         backgroundPanel.SetActive(false);
         itemHolder.SetActive(false);
+        collectibleUI.SetActive(false);
 
         ConvertStrArray();
         GenerateUI();
@@ -138,12 +140,14 @@ public class BackpackUI : MonoBehaviour
     {
         backgroundPanel.SetActive(false);
         itemHolder.SetActive(false);
+        collectibleUI.SetActive(false);
     }
 
     private void OpenUpgradeUI()
     {
         backgroundPanel.SetActive(true);
         itemHolder.SetActive(true);
+        collectibleUI.SetActive(true);
     }
 
     public void BoughtItem(string item)
