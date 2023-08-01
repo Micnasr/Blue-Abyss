@@ -110,6 +110,10 @@ public class BackpackUI : MonoBehaviour
         {
             GameObject instantiatedPrefab = Instantiate(prefabs[itemsUnlocked[i]], positions[i].position, positions[i].rotation);
             instantiatedPrefab.transform.SetParent(itemHolder.transform);
+
+            Vector3 desiredScale = new Vector3(0.4481792f, 0.4481792f, 0.4481792f);
+            instantiatedPrefab.transform.localScale = desiredScale;
+
             instantiatedObjects.Add(instantiatedPrefab);
         }
 

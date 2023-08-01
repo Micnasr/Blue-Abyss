@@ -40,7 +40,11 @@ public class CollectibleItem : MonoBehaviour
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, 3f))
         {
             if (hit.collider.gameObject == gameObject)
+            {
                 collectiblesManager.UpdateCollectedStatus(collectibleIndex);
+                //give money
+                Destroy(gameObject);
+            }
         }
     }
 }
