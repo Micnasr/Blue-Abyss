@@ -9,7 +9,6 @@ public class Water : MonoBehaviour
 
     public string splashInWater;
 
-
     private void OnTriggerEnter(Collider other)
     {
         Transform parent = other.transform.parent;
