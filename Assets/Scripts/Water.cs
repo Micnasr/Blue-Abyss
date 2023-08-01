@@ -8,6 +8,7 @@ public class Water : MonoBehaviour
     private ParticleSystem activeEffect;
 
     public string splashInWater;
+    public Transform playerFeet;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,7 +29,7 @@ public class Water : MonoBehaviour
             OxygenController oxygenScript = other.GetComponentInParent<OxygenController>();
             oxygenScript.isHeadAboveWater = false;
 
-            FindObjectOfType<AudioManager>().FadeTrack("DeepWaterMusic", "ShallowWaterMusic", 1f);
+            FindObjectOfType<AudioManager>().FadeTrack("ShallowWaterMusic", 1f);
 
             RenderSettings.fog = true;
         }
@@ -43,6 +44,11 @@ public class Water : MonoBehaviour
         {
             PlayerMovement movement = other.GetComponentInParent<PlayerMovement>();
             movement.isSwimming = false;
+
+            SpawnBubbleEffect(playerFeet.transform.position, parent);
+
+            if (splashInWater != "")
+                FindObjectOfType<AudioManager>().Play(splashInWater, 0.96f);
         }
         // If head leaves the water only then we can breathe
         else if (other.CompareTag("PlayerHead"))
@@ -50,7 +56,7 @@ public class Water : MonoBehaviour
             OxygenController oxygenScript = other.GetComponentInParent<OxygenController>();
             oxygenScript.isHeadAboveWater = true;
 
-            FindObjectOfType<AudioManager>().FadeTrack("ShallowWaterMusic", "DeepWaterMusic", 1f);
+            FindObjectOfType<AudioManager>().FadeTrack("DeepWaterMusic", 1f);
             RenderSettings.fog = false;
         }
     }

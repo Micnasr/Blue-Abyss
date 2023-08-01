@@ -71,7 +71,7 @@ public class LifevestLogic : MonoBehaviour
 
     private void ItemON()
     {
-        if (playerMovement.isSwimming)
+        if (playerMovement.isSwimming && player.transform.position.y <= -5)
         {
             Vector3 upForce = transform.up * LifevestFloatStrength;
             rb.AddForce(upForce, ForceMode.Acceleration);

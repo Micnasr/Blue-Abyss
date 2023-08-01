@@ -10,6 +10,8 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
 
     public static AudioManager instance;
+
+    private string currentMusic;
     
     void Awake()
     {
@@ -43,6 +45,7 @@ public class AudioManager : MonoBehaviour
     {
         // Play Starting Music
         Play("DeepWaterMusic");
+        currentMusic = "DeepWaterMusic";
     }
 
     public void Play(string name, float pitch = 1f, GameObject sourceGameObject = null)
@@ -127,13 +130,15 @@ public class AudioManager : MonoBehaviour
         s.source.Stop();
     }
 
-    public void FadeTrack(string currentName, string nextName, float fadeDuration)
+    public void FadeTrack(string nextName, float fadeDuration)
     {
-        Sound currentSoundData = Array.Find(sounds, sound => sound.name == currentName);
+        Sound currentSoundData = Array.Find(sounds, sound => sound.name == currentMusic);
         Sound nextSoundData = Array.Find(sounds, sound => sound.name == nextName);
 
         AudioSource currentSource = FindAudioSourceWithClip(gameObject, currentSoundData.clip);
         AudioSource nextSource = FindAudioSourceWithClip(gameObject, nextSoundData.clip);
+
+        currentMusic = nextName;
 
         StartCoroutine(FadeOutTrack(currentSource, fadeDuration));
         StartCoroutine(FadeInTrack(nextSource, fadeDuration));
@@ -152,7 +157,7 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
 
-        audioSource.Stop();
+        audioSource.volume = 0;
     }
 
     private IEnumerator FadeInTrack(AudioSource audioSource, float fadeDuration)
