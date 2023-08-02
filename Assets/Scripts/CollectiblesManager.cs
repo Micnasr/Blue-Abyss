@@ -8,7 +8,10 @@ public class CollectiblesManager : MonoBehaviour
     [HideInInspector] public string collectedStatus;
     private int totalCollectibles;
 
-    public TextMeshProUGUI collectibleUI;
+    public GameObject collectibleUI;
+    private TextMeshProUGUI collectibleText;
+
+    private BackpackUI backpackUI;
 
     [HideInInspector] public List<GameObject> collectibleItems = new List<GameObject>();
 
@@ -16,6 +19,9 @@ public class CollectiblesManager : MonoBehaviour
     {
         // Determine the number of collectibles based on the number of child GameObjects
         totalCollectibles = transform.childCount;
+
+        collectibleText = collectibleUI.GetComponentInChildren<TextMeshProUGUI>();
+        backpackUI = FindAnyObjectByType<BackpackUI>();
 
         // Load the collected status from PlayerPrefs
         LoadCollectedStatus();
@@ -57,12 +63,47 @@ public class CollectiblesManager : MonoBehaviour
 
             LoadUI();
 
+            if (!backpackUI.openUI)
+                StartCoroutine(FadeOutText());
         }
         else
         {
             Debug.LogError("Index Out Of Bounds");
         }
     }
+
+    private IEnumerator FadeOutText()
+    {
+        // Set the text gameobject to true
+        collectibleUI.SetActive(true);
+
+        // Fade out the text gradually
+        float duration = 1f;
+        float elapsedTime = 0f;
+        Color startColor = collectibleText.color;
+        Color targetColor = new Color(startColor.r, startColor.g, startColor.b, 0f);
+
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+            collectibleText.color = Color.Lerp(startColor, targetColor, t);
+            elapsedTime += Time.deltaTime;
+
+            if (backpackUI.openUI)
+            {
+                collectibleText.color = startColor;
+                yield break;
+            }
+                
+            yield return null;
+        }
+
+        collectibleText.color = targetColor;
+        collectibleUI.SetActive(false);
+
+        collectibleText.color = startColor;
+    }
+
 
     private void LoadUI()
     {
@@ -72,7 +113,7 @@ public class CollectiblesManager : MonoBehaviour
             if (collectedStatus[i] == '1')
                     foundItems++;
 
-        collectibleUI.text = (foundItems.ToString() + "/" + totalCollectibles + " Treasure Found");
+        collectibleText.text = (foundItems.ToString() + "/" + totalCollectibles + " Treasure Found");
 
     }
 }

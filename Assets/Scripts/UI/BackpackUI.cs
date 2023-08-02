@@ -17,7 +17,7 @@ public class BackpackUI : MonoBehaviour
     public Transform[] positions;
     public GameObject[] prefabs;
 
-    private bool openUI = false;
+    [HideInInspector] public bool openUI = false;
 
     private List<GameObject> instantiatedObjects = new List<GameObject>();
 
