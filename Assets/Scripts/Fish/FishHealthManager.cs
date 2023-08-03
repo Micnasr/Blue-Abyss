@@ -26,6 +26,8 @@ public class FishHealthManager : MonoBehaviour
     // Only for land animals
     private LandEnemyPatrol landEnemyPatrol;
 
+    private QuestController questController;
+
     [SerializeField] private float noiseStrength = 0.25f;
     [SerializeField] private float duration = 1.0f;
 
@@ -57,6 +59,8 @@ public class FishHealthManager : MonoBehaviour
         flockUnit = GetComponent<FlockUnit>();
         enemyPatrol = GetComponent<EnemyPatrol>();
         landEnemyPatrol = GetComponent<LandEnemyPatrol>();
+
+        questController = FindAnyObjectByType<QuestController>();
 
         // Calculate Run Away Speed
         if (enemyPatrol != null || landEnemyPatrol != null)
@@ -198,6 +202,10 @@ public class FishHealthManager : MonoBehaviour
         // Give Rewards When Dead
         fishMeter.AddFishDeath(deathPoints);
 
+        // Handle If In Quest
+        questController.KillProgress(gameObject);
+
+        // Remove Bleed Effect
         if (doesBleed && playedEffect)
             Destroy(damageEffect);
 

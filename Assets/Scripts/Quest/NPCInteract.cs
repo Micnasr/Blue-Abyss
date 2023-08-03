@@ -12,6 +12,9 @@ public class NPCInteract : MonoBehaviour
     private WeaponSway weaponSway;
 
     private QuestController questController;
+    
+    public string questName;
+    private Quest npcQuest;
 
     private Dialogue dialogueManager;
 
@@ -29,6 +32,12 @@ public class NPCInteract : MonoBehaviour
     [Header("Text Lines")]
     public string[] lines;
 
+    [Header("Progress Lines")]
+    public string[] progressLines;
+
+    [Header("Completed Lines")]
+    public string[] completedLines;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -40,6 +49,8 @@ public class NPCInteract : MonoBehaviour
 
         dialogueManager = FindAnyObjectByType<Dialogue>();
         questController = FindAnyObjectByType<QuestController>();
+
+        npcQuest = questController.ReturnQuest(questName);
     }
 
     private void Update()
@@ -109,7 +120,20 @@ public class NPCInteract : MonoBehaviour
     {
         talkingWithPlayer = true;
 
-        dialogueManager.StartDialogue(lines, this);
+       
+        
+        if (npcQuest.isCompleted)
+        {
+            dialogueManager.StartDialogue(completedLines, this);
+        } 
+        else if (questController.currentQuest != null && questController.currentQuest.title == questName)
+        {
+            dialogueManager.StartDialogue(progressLines, this);
+        } 
+        else
+        {
+            dialogueManager.StartDialogue(lines, this, true);
+        }
 
         playerMovement.enabled = false;
         playerShoot.enabled = false;
@@ -133,7 +157,7 @@ public class NPCInteract : MonoBehaviour
 
     public void AcceptQuest()
     {
-        questController.QuestWindowOpen();
+        questController.StartQuest(questName);
         CloseDialogue();
     }
 

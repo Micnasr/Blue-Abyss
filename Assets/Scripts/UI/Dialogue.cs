@@ -16,11 +16,16 @@ public class Dialogue : MonoBehaviour
     public GameObject rewardPanel;
 
     private NPCInteract currentNPC;
+    private QuestController questController;
+
+    private bool initiateQuest = false;
 
     private int index;
 
     void Start()
     {
+        questController = FindAnyObjectByType<QuestController>();
+
         gameObject.SetActive(false);
         yesButton.SetActive(false);
         noButton.SetActive(false);
@@ -47,8 +52,9 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    public void StartDialogue(string[] texts, NPCInteract npc)
+    public void StartDialogue(string[] texts, NPCInteract npc, bool isQuest = false)
     {
+        initiateQuest = isQuest;
         currentNPC = npc;
         lines = texts;
         index = 0;
@@ -70,15 +76,24 @@ public class Dialogue : MonoBehaviour
     void NextLine()
     {
         if (index >= lines.Length - 1)
-            return;
+        {
+            if (!initiateQuest)
+                currentNPC.CloseDialogue();
 
-        if (index == lines.Length - 2)
+            return;
+        }
+
+        if (index == lines.Length - 2 && initiateQuest)
         {
             // Show Quest Accept/Deny Buttons
             yesButton.SetActive(true);
             noButton.SetActive(true);
+
             questNamePanel.SetActive(true);
+            questNamePanel.GetComponentInChildren<TextMeshProUGUI>().text = questController.ReturnQuest(currentNPC.questName).title;
+            
             rewardPanel.SetActive(true);
+            rewardPanel.GetComponentInChildren<TextMeshProUGUI>().text = "+$" + questController.ReturnQuest(currentNPC.questName).reward.ToString();
         }
 
         index++;
