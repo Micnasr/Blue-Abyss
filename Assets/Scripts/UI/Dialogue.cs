@@ -12,6 +12,8 @@ public class Dialogue : MonoBehaviour
     // Quest Related
     public GameObject yesButton;
     public GameObject noButton;
+    public GameObject questNamePanel;
+    public GameObject rewardPanel;
 
     private NPCInteract currentNPC;
 
@@ -22,6 +24,8 @@ public class Dialogue : MonoBehaviour
         gameObject.SetActive(false);
         yesButton.SetActive(false);
         noButton.SetActive(false);
+        questNamePanel.SetActive(false);
+        rewardPanel.SetActive(false);
 
         textComponent.text = string.Empty;
     }
@@ -73,6 +77,8 @@ public class Dialogue : MonoBehaviour
             // Show Quest Accept/Deny Buttons
             yesButton.SetActive(true);
             noButton.SetActive(true);
+            questNamePanel.SetActive(true);
+            rewardPanel.SetActive(true);
         }
 
         index++;
@@ -85,6 +91,8 @@ public class Dialogue : MonoBehaviour
         gameObject.SetActive(false);
         yesButton.SetActive(false);
         noButton.SetActive(false);
+        questNamePanel.SetActive(false);
+        rewardPanel.SetActive(false);
     }
 
     public void AcceptQuest()

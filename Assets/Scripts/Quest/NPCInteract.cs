@@ -11,6 +11,8 @@ public class NPCInteract : MonoBehaviour
     private PlayerCam playerCam;
     private WeaponSway weaponSway;
 
+    private QuestController questController;
+
     private Dialogue dialogueManager;
 
     public float interactionDistance = 5f;
@@ -27,7 +29,7 @@ public class NPCInteract : MonoBehaviour
     [Header("Text Lines")]
     public string[] lines;
 
-    private void Start()
+    private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -37,6 +39,7 @@ public class NPCInteract : MonoBehaviour
         weaponSway = player.gameObject.GetComponentInChildren<WeaponSway>();
 
         dialogueManager = FindAnyObjectByType<Dialogue>();
+        questController = FindAnyObjectByType<QuestController>();
     }
 
     private void Update()
@@ -130,6 +133,7 @@ public class NPCInteract : MonoBehaviour
 
     public void AcceptQuest()
     {
+        questController.QuestWindowOpen();
         CloseDialogue();
     }
 
