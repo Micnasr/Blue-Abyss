@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class QuestController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Quest quest;
+    private GameObject player;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 }
