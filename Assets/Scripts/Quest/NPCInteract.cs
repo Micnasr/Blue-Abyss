@@ -57,6 +57,12 @@ public class NPCInteract : MonoBehaviour
         gaveReward = false;
     }
 
+    private void Start()
+    {
+        if (npcQuest.isCompleted)
+            gaveReward = true;
+    }
+
     private void Update()
     {
         // Check if the player is near the NPC

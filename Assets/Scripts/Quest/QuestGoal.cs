@@ -12,6 +12,7 @@ public class QuestGoal
     public int currentAmount;
 
     public GameObject killTarget;
+    public GameObject[] itemTargets;
 
     public bool IsReached()
     {

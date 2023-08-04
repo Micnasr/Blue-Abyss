@@ -1,10 +1,7 @@
-using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class QuestController : MonoBehaviour
@@ -22,8 +19,19 @@ public class QuestController : MonoBehaviour
 
     private MoneyManager moneyManager;
 
+    [HideInInspector] public string completedQuests;
+
     //[HideInInspector]
     public Quest currentQuest;
+
+    private void Awake()
+    {
+        LoadQuestCompleted();
+
+        // Sets Each Quest as Complete or Not
+        for (int i = 0; i < quests.Length; i++)
+            quests[i].isCompleted = completedQuests[i] == '1';
+    }
 
     private void Start()
     {
@@ -41,6 +49,34 @@ public class QuestController : MonoBehaviour
             else
                 CloseQuestPanel();
         }
+    }
+
+    private void LoadQuestCompleted()
+    {
+        string initialStr = string.Empty;
+        for (int i = 0; i < quests.Length; i++)
+            initialStr += 0;
+
+        completedQuests = PlayerPrefs.GetString("Quests", initialStr);
+    }
+
+    public void UpdateCompletedQuest(string name)
+    {
+        int index = -1;
+        for (int i = 0; i < quests.Length; i++)
+            if (quests[i].title == name)
+                index = i;
+
+        if (index == -1)
+            Debug.LogError("Could Not Find Quest: " + name);
+
+        char[] completedArray = completedQuests.ToCharArray();
+        completedArray[index] = '1';
+        completedQuests = new string(completedArray);
+
+        // Save the updated collected status to PlayerPrefs
+        PlayerPrefs.SetString("Quests", completedQuests);
+        PlayerPrefs.Save();
     }
 
     private void OpenQuestPanel()
@@ -61,6 +97,14 @@ public class QuestController : MonoBehaviour
 
         // Reset Progress
         quest.goal.currentAmount = 0;
+
+        if (quest.goal.goalType == GoalType.Gathering)
+        {
+            foreach(GameObject item in quest.goal.itemTargets)
+            {
+                item.SetActive(true);
+            }
+        }
 
         if (quest == null)
             Debug.LogError("Could not find quest with name: " + questName);
@@ -118,16 +162,26 @@ public class QuestController : MonoBehaviour
 
     public void QuestCompleted()
     {
-        Debug.Log("quest completed");
-        moneyManager.AddMoney(currentQuest.reward);;
+        Debug.Log("Quest Completed");
+        moneyManager.AddMoney(currentQuest.reward);
+        UpdateCompletedQuest(currentQuest.title);
         EmptyQuest();
         CloseQuestPanel();
-        
     }
 
     private void EmptyQuest()
     {
         EmptyQuestDisplay();
         currentQuest = null;
+    }
+
+    public void ItemCollected()
+    {
+        currentQuest.goal.currentAmount++;
+        UpdateQuestDisplay();
+        OpenQuestPanel();
+
+        // Check if Quest Completed
+        currentQuest.isCompleted = currentQuest.goal.IsReached();
     }
 }
