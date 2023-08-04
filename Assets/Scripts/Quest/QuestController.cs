@@ -19,6 +19,8 @@ public class QuestController : MonoBehaviour
 
     private MoneyManager moneyManager;
 
+    [HideInInspector] public int finishedQuests = 0;
+
     [HideInInspector] public string completedQuests;
 
     //[HideInInspector]
@@ -31,6 +33,10 @@ public class QuestController : MonoBehaviour
         // Sets Each Quest as Complete or Not
         for (int i = 0; i < quests.Length; i++)
             quests[i].isCompleted = completedQuests[i] == '1';
+
+        for (int i = 0; i < quests.Length; i++)
+            if (quests[i].isCompleted)
+                finishedQuests++;
     }
 
     private void Start()
@@ -121,7 +127,7 @@ public class QuestController : MonoBehaviour
         questNameText.text = currentQuest.title;
         descriptionText.text = currentQuest.description;
 
-        progressText.text = currentQuest.goal.currentAmount.ToString() + '/' + currentQuest.goal.requiredAmount.ToString();
+        progressText.text = currentQuest.goal.currentAmount.ToString() + " / " + currentQuest.goal.requiredAmount.ToString();
 
         rewardText.text = "+$" + currentQuest.reward.ToString();
     }
@@ -163,6 +169,7 @@ public class QuestController : MonoBehaviour
     public void QuestCompleted()
     {
         Debug.Log("Quest Completed");
+        finishedQuests++;
         moneyManager.AddMoney(currentQuest.reward);
         UpdateCompletedQuest(currentQuest.title);
         EmptyQuest();

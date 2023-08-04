@@ -18,6 +18,8 @@ public class NPCInteract : MonoBehaviour
     private Quest npcQuest;
     private bool gaveReward;
 
+    public int levelRequirement = 0;
+
     private Dialogue dialogueManager;
 
     [Header("Interaction Stats")]
@@ -40,6 +42,9 @@ public class NPCInteract : MonoBehaviour
 
     [Header("Completed Lines")]
     public string[] completedLines;
+
+    private string[] underLevelLines = { "Hello, wanderer! While I'm glad to see you exploring our shores, you're still new here.",
+                                        "Gain more experience and knowledge of our realm, then return, and I'll gladly offer you a suitable quest." };
 
     private void Awake()
     {
@@ -130,9 +135,10 @@ public class NPCInteract : MonoBehaviour
     {
         talkingWithPlayer = true;
 
-       
-        
-        if (npcQuest.isCompleted)
+        if (questController.finishedQuests < levelRequirement)
+            dialogueManager.StartDialogue(underLevelLines, this);
+
+        else if (npcQuest.isCompleted)
         {
             dialogueManager.StartDialogue(completedLines, this);
 
