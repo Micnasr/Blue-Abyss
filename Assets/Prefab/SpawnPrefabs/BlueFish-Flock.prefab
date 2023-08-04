@@ -54,7 +54,7 @@ MonoBehaviour:
   _avoidanceDistance: 2
   _alignmentDistance: 2
   _obstacleDistance: 7
-  _boundsDistance: 5
+  _boundsDistance: 1
   _cohesionWeight: 2
   _avoidanceWeight: 1
   _alignmentWeight: 0

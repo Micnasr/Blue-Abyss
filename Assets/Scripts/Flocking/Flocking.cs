@@ -114,7 +114,7 @@ public class Flocking : MonoBehaviour
             FishHealthManager fishHealthManager = unit.GetComponent<FishHealthManager>();
             if (unit != null && !fishHealthManager.isDead)
             {
-                bool isVisible = unit.PlayerInRange(50f) && IsUnitVisible(unit);
+                bool isVisible = unit.PlayerInRange(60f) && IsUnitVisible(unit);
 
                 // Disable or enable the unit's GameObject based on visibility
                 unit.gameObject.SetActive(isVisible);
@@ -131,6 +131,16 @@ public class Flocking : MonoBehaviour
             // Check if any part of the SkinnedMeshRenderer is visibleby any camera
             Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(playerCam);
             Bounds bounds = skinnedMeshRenderer.bounds;
+            return GeometryUtility.TestPlanesAABB(frustumPlanes, bounds);
+        }
+
+        MeshRenderer meshRenderer = unit.GetComponentInChildren<MeshRenderer>();
+
+        if (meshRenderer != null)
+        {
+            // Check if any part of the MeshRenderer is visibleby any camera
+            Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(playerCam);
+            Bounds bounds = meshRenderer.bounds;
             return GeometryUtility.TestPlanesAABB(frustumPlanes, bounds);
         }
 
