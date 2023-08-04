@@ -7,6 +7,8 @@ public class QuestItem : MonoBehaviour
     private Transform player;
     private Transform playerCam;
 
+    private string questFor;
+
     private QuestController questController;
 
     private void Start()
@@ -17,6 +19,21 @@ public class QuestItem : MonoBehaviour
         questController = FindObjectOfType<QuestController>();
 
         gameObject.SetActive(false);
+
+        questFor = "";
+
+        // Find the Quests Its for
+        for (int i = 0; i < questController.quests.Length; i++)
+        {
+            for (int j = 0; j < questController.quests[i].goal.itemTargets.Length; j++)
+            {
+                if (gameObject == questController.quests[i].goal.itemTargets[j])
+                    questFor = questController.quests[i].title;
+            }
+        }
+
+        if (questFor == "")
+            Debug.LogError("Cannot Find Item's Quest");
     }
     private void Update()
     {
@@ -24,6 +41,10 @@ public class QuestItem : MonoBehaviour
         {
             CollectItem();
         }
+
+        // Despawn if Quest is Changed
+        if (questController.currentQuest == null || questController.currentQuest.title != questFor)
+            gameObject.SetActive(false);
     }
 
     private void CollectItem()
