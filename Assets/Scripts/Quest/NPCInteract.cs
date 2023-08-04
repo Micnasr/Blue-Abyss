@@ -12,12 +12,15 @@ public class NPCInteract : MonoBehaviour
     private WeaponSway weaponSway;
 
     private QuestController questController;
-    
+
+    [Header("NPC Quest")]
     public string questName;
     private Quest npcQuest;
+    private bool gaveReward;
 
     private Dialogue dialogueManager;
 
+    [Header("Interaction Stats")]
     public float interactionDistance = 5f;
     public float rotationSpeed = 5f;
 
@@ -51,6 +54,7 @@ public class NPCInteract : MonoBehaviour
         questController = FindAnyObjectByType<QuestController>();
 
         npcQuest = questController.ReturnQuest(questName);
+        gaveReward = false;
     }
 
     private void Update()
@@ -125,6 +129,12 @@ public class NPCInteract : MonoBehaviour
         if (npcQuest.isCompleted)
         {
             dialogueManager.StartDialogue(completedLines, this);
+
+            if (!gaveReward)
+            {
+                questController.QuestCompleted();
+                gaveReward = true;
+            }
         } 
         else if (questController.currentQuest != null && questController.currentQuest.title == questName)
         {
