@@ -20,6 +20,10 @@ public class OxygenController : MonoBehaviour
 
     HealthManager healthManager;
 
+    [Header("Sound Effects")]
+    public string lowOxygen = "OxygenLowBeep";
+    private bool lowOxygenSoundPlayed = false;
+
     private void Awake()
     {
         maxOxygen = PlayerPrefs.GetFloat("MaxOxygen", maxOxygen);
@@ -41,6 +45,8 @@ public class OxygenController : MonoBehaviour
         // Update UI
         oxygenMeter.value = currentOxygen;
 
+        float lowOxygenThreshold = maxOxygen * 0.25f;
+
         // Head under the water
         if (isHeadAboveWater == false && !inSubmarine)
         {
@@ -51,12 +57,26 @@ public class OxygenController : MonoBehaviour
             {
                 HandleOutOfOxygen();
             }
+
+            // Play Sound If Low Oxygen
+            if (currentOxygen <= lowOxygenThreshold && !lowOxygenSoundPlayed)
+            {
+                FindObjectOfType<AudioManager>().Play("OxygenLowBeep");
+                lowOxygenSoundPlayed = true;
+            }
         }
         else
         {
             // Regenerate oxygen when not underwater
             currentOxygen += oxygenRegenRate * Time.deltaTime;
             currentOxygen = Mathf.Clamp(currentOxygen, 0f, maxOxygen);
+
+            // Stop Low Oxygen Sound
+            if (lowOxygenSoundPlayed)
+            {
+                FindObjectOfType<AudioManager>().StopPlaying("OxygenLowBeep");
+                lowOxygenSoundPlayed = false;
+            }
         }
 
         // Disable the UI if we are full :)

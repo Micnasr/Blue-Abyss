@@ -16,6 +16,11 @@ public class HealthManager : MonoBehaviour
 
     private float timeSinceLastDamage;
 
+    [Header("Sound Effects")]
+    public string damageSound = "PlayerDamage";
+    public float damageSoundCooldown = 1f;
+    private float lastDamageSoundTime;
+
     private void Awake()
     {
         maxHealth = PlayerPrefs.GetFloat("MaxHealth", maxHealth);
@@ -29,6 +34,7 @@ public class HealthManager : MonoBehaviour
         healthMeter.value = currentHealth;
         
         timeSinceLastDamage = 0f;
+        lastDamageSoundTime = Time.time;
     }
 
     private void Update()
@@ -61,6 +67,14 @@ public class HealthManager : MonoBehaviour
         else
         {
             healthMeter.value = currentHealth;
+        }
+
+        // Play Player Damage Sound
+        if (Time.time - lastDamageSoundTime >= damageSoundCooldown)
+        {
+            float randomPitch = Random.Range(0.95f, 1.05f);
+            FindObjectOfType<AudioManager>().Play(damageSound, randomPitch);
+            lastDamageSoundTime = Time.time;
         }
     }
 

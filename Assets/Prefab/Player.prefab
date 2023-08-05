@@ -287,6 +287,7 @@ MonoBehaviour:
   inSubmarine: 0
   isHeadAboveWater: 1
   oxygenMeter: {fileID: 0}
+  lowOxygen: OxygenLowBeep
 --- !u!114 &2845071954360440733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +317,8 @@ MonoBehaviour:
   healingAmount: 4
   timeToStartHealing: 5
   updateDuration: 0.5
+  damageSound: PlayerDamage
+  damageSoundCooldown: 1
 --- !u!114 &2891920961101231259
 MonoBehaviour:
   m_ObjectHideFlags: 0

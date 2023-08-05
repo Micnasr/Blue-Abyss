@@ -150,8 +150,8 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _DepthExp: 1
-    - _DepthHorizontal: 0.87
-    - _DepthVertical: 6.1
+    - _DepthHorizontal: 0.08
+    - _DepthVertical: 3.6
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DisableDepthTexture: 0
