@@ -56,6 +56,7 @@ public class QuestItem : MonoBehaviour
             if (hit.collider.gameObject == gameObject)
             {
                 Debug.Log("Collected Quest Item");
+                FindObjectOfType<AudioManager>().Play("CollectibleFound");
                 questController.ItemCollected();
                 FindAnyObjectByType<InteractUI>().InteractStop();
                 gameObject.SetActive(false);

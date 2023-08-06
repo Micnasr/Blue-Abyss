@@ -8,7 +8,8 @@ public class QuestController : MonoBehaviour
 {
     public Quest[] quests;
 
-    public GameObject questPanel;
+    public GameObject openQuestPanel;
+    public GameObject closedQuestPanel;
     private bool openPanel = false;
     public KeyCode toggleKey = KeyCode.Tab;
 
@@ -41,6 +42,9 @@ public class QuestController : MonoBehaviour
 
     private void Start()
     {
+        closedQuestPanel.SetActive(true);
+        openQuestPanel.SetActive(false);
+
         moneyManager = FindAnyObjectByType<MoneyManager>();
         EmptyQuest();
     }
@@ -87,13 +91,15 @@ public class QuestController : MonoBehaviour
 
     private void OpenQuestPanel()
     {
-        questPanel.SetActive(true);
+        openQuestPanel.SetActive(true);
+        closedQuestPanel.SetActive(false);
         openPanel = true;
     }
 
     private void CloseQuestPanel()
     {
-        questPanel.SetActive(false);
+        openQuestPanel.SetActive(false);
+        closedQuestPanel.SetActive(true);
         openPanel = false;
     }
 
