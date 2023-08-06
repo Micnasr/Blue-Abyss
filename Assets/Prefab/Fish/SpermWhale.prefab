@@ -617,7 +617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
-  turningSpeed: 0.2
+  turningSpeed: 0.5
   movementSpeed: 7
   threshold: 12
   angleCheck: 20
@@ -629,7 +629,7 @@ MonoBehaviour:
   isAggressive: 1
   aggressiveDistance: 50
   biteTimer: 2
-  stopDistance: 20.5
+  stopDistance: 16.5
   surfaceLevel: -4.8
   chaseMovementSpeed: 10
   landLayer:
@@ -649,12 +649,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0747cc7cdfda4604f9ea807bc48b4234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 250
+  maxHealth: 500
   currentHealth: 0
-  deathPoints: 50
+  deathPoints: 800
   deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
   shaderTopThreshold: 2
-  shaderBottomThreshold: 3
+  shaderBottomThreshold: 4
   doesBleed: 1
   bloodHeightOffset: 0
   noiseStrength: 0.25
