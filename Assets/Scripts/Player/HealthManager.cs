@@ -9,6 +9,10 @@ public class HealthManager : MonoBehaviour
     private float currentHealth;
     public Slider healthMeter;
 
+    public Image healthImage;
+    private float maxAlpha = 10f;
+    private float minAlpha = 0f;
+
     [Header("Healing Properties")]
     public float healingAmount;
     public float timeToStartHealing;
@@ -50,6 +54,13 @@ public class HealthManager : MonoBehaviour
         {
             StartHealingOverTime();
         }
+
+        // Handle the Red UI (How Red the Screen Becomes)
+        float healthPercentage = currentHealth / maxHealth;
+        float targetAlpha = Mathf.Lerp(maxAlpha, minAlpha, healthPercentage);
+        Color newColor = healthImage.color;
+        newColor.a = targetAlpha / 100f;
+        healthImage.color = newColor;
     }
 
     public void TakeDamage(float damage, float duration = 0.5f)

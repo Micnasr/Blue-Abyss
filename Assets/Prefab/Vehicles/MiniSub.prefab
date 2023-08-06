@@ -412,8 +412,8 @@ MonoBehaviour:
   diveKey: 306
   riseKey: 32
   sonarEffect: MiniSubSonar
-  RiseDiveSpeed: 10000
-  LowestDepth: -30
+  RiseDiveSpeed: 20000
+  LowestDepth: -245
   hasHeadlights: 1
   leftHeadlight: {fileID: 5419219923028102913}
   rightHeadlight: {fileID: 4912822787865150604}
