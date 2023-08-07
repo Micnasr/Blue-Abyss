@@ -147,10 +147,6 @@ public class BoatSellerLogic : MonoBehaviour
 
     public void SpawnBoat(int boatIndex)
     {
-        // CHANGE LOGIC FOR FUTURE
-        if (boatIndex == 2)
-            return;
-
         if (currentBoat != null)
             Destroy(currentBoat);
 
