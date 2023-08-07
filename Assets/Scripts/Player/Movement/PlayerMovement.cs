@@ -300,7 +300,5 @@ public class PlayerMovement : MonoBehaviour
         Vector3 gravityForce = -transform.up * gravity / 2;
         rb.AddForce(gravityForce, ForceMode.Acceleration);
     }
-
-
 }
 
