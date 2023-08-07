@@ -627,7 +627,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 768
   isAggressive: 1
-  aggressiveDistance: 50
+  aggressiveDistance: 40
   biteTimer: 2
   stopDistance: 16.5
   surfaceLevel: -4.8
