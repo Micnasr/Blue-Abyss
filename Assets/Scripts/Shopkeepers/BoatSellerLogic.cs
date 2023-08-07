@@ -19,6 +19,9 @@ public class BoatSellerLogic : MonoBehaviour
 
     private MoneyManager moneyManager;
 
+    private QuestController questController;
+    private bool scientistQuestDone = false;
+
     [Header("Page Data")]  
     public GameObject[] fullNames;
     public GameObject[] fullPics;
@@ -40,6 +43,7 @@ public class BoatSellerLogic : MonoBehaviour
     void Start()
     {
         moneyManager = FindObjectOfType<MoneyManager>();
+        questController = FindObjectOfType<QuestController>();
 
         UpdateUI();
     }
@@ -47,6 +51,10 @@ public class BoatSellerLogic : MonoBehaviour
     private void Update()
     {
         UpdatePriceColor();
+
+        // Check if ProfessorX's quest is completed
+        if (questController.completedQuests[5] == '1')
+            scientistQuestDone = true;
     }
 
     private void UpdateUI()
@@ -80,8 +88,18 @@ public class BoatSellerLogic : MonoBehaviour
                 }
                 else
                 {
-                    textPriceOfItems[i].text = "$" + priceOfItems[i].ToString();
-                    spawnButtons[i].SetActive(false);
+                    if (i != 2)
+                    {
+                        textPriceOfItems[i].text = "$" + priceOfItems[i].ToString();
+                        spawnButtons[i].SetActive(false);
+                    }
+                    else
+                    {
+                        purchaseButtons[i].SetActive(scientistQuestDone);
+                        textPriceOfItems[i].text = "$" + priceOfItems[i].ToString();
+                        textPriceOfItems[i].gameObject.SetActive(scientistQuestDone);
+                    }
+                   
                 }
             }
         }
