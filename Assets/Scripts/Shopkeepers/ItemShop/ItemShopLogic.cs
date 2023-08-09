@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class ItemShopLogic : MonoBehaviour
 {
+    /* This was the first shop I coded so it is not very modular. I have improved so much over the past months it hurts to look at this code sometimes haha */
+
     [Header("Price Of Items: Anchor -> Lifevest -> Light -> Jacket")]
     public int[] priceOfItems;
 
@@ -80,9 +82,10 @@ public class ItemShopLogic : MonoBehaviour
         {
             moneyManager.RemoveMoney(priceOfItems[index]);
 
-            //Give Item to Player
+            // Give Item to Player
             backpackUI.BoughtItem(name);
             UpdateUI();
+            backpackUI.OpenBackpack();
         }
         else
         {
@@ -107,6 +110,7 @@ public class ItemShopLogic : MonoBehaviour
             //Give Item to Player
             backpackUI.BoughtItem(name);
             UpdateUI();
+            backpackUI.OpenBackpack();
         }
         else
         {
@@ -131,6 +135,7 @@ public class ItemShopLogic : MonoBehaviour
             //Give Item to Player
             backpackUI.BoughtItem(name);
             UpdateUI();
+            backpackUI.OpenBackpack();
         }
         else
         {
@@ -155,6 +160,7 @@ public class ItemShopLogic : MonoBehaviour
             //Give Item to Player
             backpackUI.BoughtItem(name);
             UpdateUI();
+            backpackUI.OpenBackpack();
         }
         else
         {

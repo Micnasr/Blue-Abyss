@@ -12,6 +12,7 @@ TagManager:
   - shield
   - FxTemporaire
   - wood-surface
+  - ice-surface
   layers:
   - Default
   - TransparentFX

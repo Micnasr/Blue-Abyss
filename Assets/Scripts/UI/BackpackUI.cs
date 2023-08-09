@@ -126,28 +126,27 @@ public class BackpackUI : MonoBehaviour
     {
         if (Input.GetKeyDown(openKey))
         {
-            openUI = !openUI;
-
-            if (openUI)
-               OpenUpgradeUI();
+            if (!openUI)
+               OpenBackpack();
             else
-                CloseUpgradeUI();
-            
+                CloseBackpack();   
         }
     }
 
-    private void CloseUpgradeUI()
+    private void CloseBackpack()
     {
         backgroundPanel.SetActive(false);
         itemHolder.SetActive(false);
         collectibleUI.SetActive(false);
+        openUI = false;
     }
 
-    private void OpenUpgradeUI()
+    public void OpenBackpack()
     {
         backgroundPanel.SetActive(true);
         itemHolder.SetActive(true);
         collectibleUI.SetActive(true);
+        openUI = true;
     }
 
     public void BoughtItem(string item)

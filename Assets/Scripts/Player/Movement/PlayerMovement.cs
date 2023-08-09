@@ -212,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private string GetSurfaceType()
+    public string GetSurfaceType()
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, playerHeight, whatIsGround))
