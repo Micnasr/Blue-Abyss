@@ -1273,9 +1273,9 @@ MonoBehaviour:
   - {fileID: 6432209236656059888}
   interactKey: 101
   moveSpeed: 40000
-  rotationSpeed: 20000
+  rotationSpeed: 30000
   minVolume: 0
-  maxVolume: 0.3
+  maxVolume: 0.7
   maxSpeed: 9
   engineSoundEffect: MiniSubEngineNoise
   boatParticleSystem: {fileID: 6746204880199182429}
@@ -1284,7 +1284,7 @@ MonoBehaviour:
   riseKey: 32
   sonarEffect: MiniSubSonar
   RiseDiveSpeed: 55000
-  LowestDepth: -1000
+  LowestDepth: -3000
   hasHeadlights: 1
   leftHeadlight: {fileID: 3737392976540333683}
   rightHeadlight: {fileID: 3737392976540333683}

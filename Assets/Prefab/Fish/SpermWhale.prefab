@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   biteCooldown: 2
-  biteDamage: 50
+  biteDamage: 100
 --- !u!1 &2712805467874153712
 GameObject:
   m_ObjectHideFlags: 0
