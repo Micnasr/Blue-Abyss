@@ -43,8 +43,8 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         // Play Starting Music
-        Play("DeepWaterMusic");
-        currentMusic = "DeepWaterMusic";
+        Play("SurfaceMusic");
+        currentMusic = "SurfaceMusic";
     }
 
     public void Play(string name, float pitch = 1f, GameObject sourceGameObject = null)
@@ -140,7 +140,7 @@ public class AudioManager : MonoBehaviour
         currentMusic = nextName;
 
         StartCoroutine(FadeOutTrack(currentSource, fadeDuration));
-        StartCoroutine(FadeInTrack(nextSource, fadeDuration));
+        StartCoroutine(FadeInTrack(nextSource, fadeDuration, nextSoundData.volume));
     }
 
     private IEnumerator FadeOutTrack(AudioSource audioSource, float fadeDuration)
@@ -159,13 +159,12 @@ public class AudioManager : MonoBehaviour
         audioSource.volume = 0;
     }
 
-    private IEnumerator FadeInTrack(AudioSource audioSource, float fadeDuration)
+    private IEnumerator FadeInTrack(AudioSource audioSource, float fadeDuration, float targetVolume)
     {
         audioSource.volume = 0f;
         audioSource.Play();
 
         float startVolume = 0f;
-        float targetVolume = 1f;
         float startTime = Time.time;
 
         while (Time.time < startTime + fadeDuration)

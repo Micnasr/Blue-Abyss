@@ -671,7 +671,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   animatorDistance: 130
-  fishSounds: []
+  fishSounds:
+  - SpermWhaleClicking1
+  - SpermWhaleClicking2
 --- !u!114 &3313894064708368992
 MonoBehaviour:
   m_ObjectHideFlags: 0

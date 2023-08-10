@@ -1275,7 +1275,7 @@ MonoBehaviour:
   moveSpeed: 40000
   rotationSpeed: 30000
   minVolume: 0
-  maxVolume: 0.7
+  maxVolume: 0.9
   maxSpeed: 9
   engineSoundEffect: MiniSubEngineNoise
   boatParticleSystem: {fileID: 6746204880199182429}
