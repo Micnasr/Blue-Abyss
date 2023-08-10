@@ -686,7 +686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 500
   currentHealth: 0
-  deathPoints: 800
+  deathPoints: 100
   deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
   shaderTopThreshold: 2
   shaderBottomThreshold: 4

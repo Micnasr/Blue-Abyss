@@ -422,15 +422,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0747cc7cdfda4604f9ea807bc48b4234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
-  deathPoints: 1
+  maxHealth: 35
+  currentHealth: 0
+  deathPoints: 2
   deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
   shaderTopThreshold: 0.2
   shaderBottomThreshold: 0.7
   doesBleed: 0
+  bloodHeightOffset: 0
   noiseStrength: 0.25
   duration: 1
   damageEffect: {fileID: 0}
+  runAwayMultiplier: 2
   isDead: 0
   criticalSound: 
 --- !u!95 &2694599710638350451
