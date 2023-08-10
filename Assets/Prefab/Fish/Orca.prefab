@@ -116,15 +116,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 250
+  currentHealth: 0
   deathPoints: 50
   deathMaterial: {fileID: 2100000, guid: b15dfd58ef0cbce499d87aafafd56fcc, type: 2}
   shaderTopThreshold: 2
   shaderBottomThreshold: 3
   doesBleed: 1
+  bloodHeightOffset: 0
   noiseStrength: 0.25
   duration: 1
   damageEffect: {fileID: 3027278326694109150, guid: dd2a9939b435be543b2c8eedd7291fc8,
     type: 3}
+  runAwayMultiplier: 2
   isDead: 0
   criticalSound: OrcaCritical
 --- !u!95 &5837924285796106720
@@ -481,7 +484,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7755769425734573519}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
