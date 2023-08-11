@@ -97,12 +97,15 @@ public class PlayerMovement : MonoBehaviour
             wasGrounded = grounded;
             SpeedControl();
 
-            // Handle Drag
+            // Handle Drag On the Ground / Air
             if (grounded)
                 rb.drag = groundDrag;
             else
                 rb.drag = groundDrag / 2;
         }
+        // Handle Drag in the Water
+        else
+            rb.drag = groundDrag / 2;
         
     }
 

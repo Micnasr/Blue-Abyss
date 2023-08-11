@@ -11,15 +11,17 @@ public class BiteDetector : MonoBehaviour
     private float lastBiteTime;
 
     private HealthManager healthManager;
+    private DeathManager deathManager;
 
     private void Start()
     {
         healthManager = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthManager>();
+        deathManager = GameObject.FindGameObjectWithTag("Player").GetComponent<DeathManager>();
     }
 
     private void Update()
     {
-        if (isPlayerInside && canBite && Time.time - lastBiteTime >= biteCooldown)
+        if (!deathManager.isPlayerDead && isPlayerInside && canBite && Time.time - lastBiteTime >= biteCooldown)
         {
             Debug.Log("Player bit!");
             healthManager.TakeDamage(biteDamage);
@@ -32,6 +34,11 @@ public class BiteDetector : MonoBehaviour
 
             // Start the bite cooldown timer
             StartCoroutine(BiteCooldown());
+        }
+        else if (deathManager.isPlayerDead)
+        {
+            if (!canBite)
+                canBite = true;
         }
     }
 

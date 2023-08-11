@@ -110,4 +110,10 @@ public class OxygenController : MonoBehaviour
         maxOxygen = newMaxOxygen;
         oxygenMeter.maxValue = maxOxygen;
     }
+
+    public void ResetOxygen()
+    {
+        currentOxygen = maxOxygen;
+        oxygenMeter.value = currentOxygen;
+    }
 }

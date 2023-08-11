@@ -18,10 +18,8 @@ public class Water : MonoBehaviour
         {
             PlayerMovement movement = other.GetComponentInParent<PlayerMovement>();
             movement.isSwimming = true;
-
-            if (splashInWater != "")
-                FindObjectOfType<AudioManager>().Play(splashInWater);
             
+            FindObjectOfType<AudioManager>().Play(splashInWater);
             SpawnBubbleEffect(other.transform.position, parent);
         }
         else if (other.CompareTag("PlayerHead"))
@@ -44,11 +42,9 @@ public class Water : MonoBehaviour
         {
             PlayerMovement movement = other.GetComponentInParent<PlayerMovement>();
             movement.isSwimming = false;
-
+                       
             SpawnBubbleEffect(playerFeet.transform.position, parent);
-
-            if (splashInWater != "")
-                FindObjectOfType<AudioManager>().Play(splashInWater, 0.96f);
+            FindObjectOfType<AudioManager>().Play(splashInWater, 0.96f);     
         }
         // If head leaves the water only then we can breathe
         else if (other.CompareTag("PlayerHead"))

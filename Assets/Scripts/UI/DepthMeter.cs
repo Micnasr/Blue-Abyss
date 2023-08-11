@@ -7,7 +7,7 @@ public class DepthMeter : MonoBehaviour
     private Transform player;
     private TextMeshProUGUI depthText;
 
-    private float initialYPosition = -4.0f;
+    private float initialYPosition = -4.8f;
 
     private void Start()
     {

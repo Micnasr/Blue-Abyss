@@ -25,6 +25,8 @@ public class HealthManager : MonoBehaviour
     public float damageSoundCooldown = 1f;
     private float lastDamageSoundTime;
 
+    private DeathManager deathManager;
+
     private void Awake()
     {
         maxHealth = PlayerPrefs.GetFloat("MaxHealth", maxHealth);
@@ -32,6 +34,8 @@ public class HealthManager : MonoBehaviour
 
     private void Start()
     {
+        deathManager = GetComponent<DeathManager>();
+
         currentHealth = maxHealth;
 
         healthMeter.maxValue = maxHealth;
@@ -56,11 +60,7 @@ public class HealthManager : MonoBehaviour
         }
 
         // Handle the Red UI (How Red the Screen Becomes)
-        float healthPercentage = currentHealth / maxHealth;
-        float targetAlpha = Mathf.Lerp(maxAlpha, minAlpha, healthPercentage);
-        Color newColor = healthImage.color;
-        newColor.a = targetAlpha / 100f;
-        healthImage.color = newColor;
+        VisualBloodUI();
     }
 
     public void TakeDamage(float damage, float duration = 0.5f)
@@ -120,7 +120,7 @@ public class HealthManager : MonoBehaviour
 
     public void HandleDeath()
     {
-        // Handle how player dies, either respawn scene or respawn player only
+        deathManager.PlayerDied();
     }
 
     public void NewMaxHealth(float newMaxHealth)
@@ -130,5 +130,21 @@ public class HealthManager : MonoBehaviour
 
         PlayerPrefs.SetFloat("MaxHealth", newMaxHealth);
         PlayerPrefs.Save();
+    }
+
+    private void VisualBloodUI()
+    {
+        float healthPercentage = currentHealth / maxHealth;
+        float targetAlpha = Mathf.Lerp(maxAlpha, minAlpha, healthPercentage);
+        Color newColor = healthImage.color;
+        newColor.a = targetAlpha / 100f;
+        healthImage.color = newColor;
+    }
+
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        StopAllCoroutines();
+        healthMeter.value = currentHealth;
     }
 }
