@@ -334,7 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minGValue: 50
   maxGValue: 170
-  minFog: 20
+  minFog: 30
   maxFog: 70
   minDepth: -400
   maxDepth: -3

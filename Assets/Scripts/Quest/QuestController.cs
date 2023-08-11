@@ -154,7 +154,7 @@ public class QuestController : MonoBehaviour
     public void KillProgress(GameObject animal)
     {
         // Not on a Quest or Wrong Type
-        if (currentQuest == null || currentQuest.reward == 0 || (currentQuest.goal.goalType != GoalType.Kill))
+        if (currentQuest == null || currentQuest.isCompleted || currentQuest.reward == 0 || (currentQuest.goal.goalType != GoalType.Kill))
             return;
 
         // Get the name of the animal GameObject and the name of the kill target

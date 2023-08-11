@@ -13,6 +13,8 @@ public class NPCInteract : MonoBehaviour
 
     private QuestController questController;
 
+    public bool isWaterNPC = false;
+
     [Header("NPC Quest")]
     public string questName;
     private Quest npcQuest;
@@ -75,7 +77,8 @@ public class NPCInteract : MonoBehaviour
         {
             RotateNPC();
 
-            if (Input.GetKeyDown(interactKey) && playerMovement.grounded && LookingAtNPC())
+            // Check if we can talk to NPC
+            if (Input.GetKeyDown(interactKey) && (playerMovement.grounded || isWaterNPC) && LookingAtNPC())
             {
                 if (!talkingWithPlayer)
                 {
@@ -85,13 +88,12 @@ public class NPCInteract : MonoBehaviour
         }
         
         // Handle Interact UI Render
-        if (!interactedOn && (Vector3.Distance(playerCam.transform.position, transform.position) <= interactionDistance) && LookingAtNPC() && !talkingWithPlayer && playerMovement.grounded)
+        if (!interactedOn && (Vector3.Distance(playerCam.transform.position, transform.position) <= interactionDistance) && LookingAtNPC() && !talkingWithPlayer && (playerMovement.grounded || isWaterNPC))
         {
             FindAnyObjectByType<InteractUI>().InteractWith(interactMessage);
             interactedOn = true;
-
         }
-        else if (interactedOn && (!playerMovement.grounded || talkingWithPlayer || Vector3.Distance(playerCam.transform.position, transform.position) >= interactionDistance || !LookingAtNPC()))
+        else if (interactedOn && (!(playerMovement.grounded || isWaterNPC) || talkingWithPlayer || Vector3.Distance(playerCam.transform.position, transform.position) >= interactionDistance || !LookingAtNPC()))
         {
             FindAnyObjectByType<InteractUI>().InteractStop();
             interactedOn = false;
