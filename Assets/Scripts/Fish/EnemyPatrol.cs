@@ -22,6 +22,7 @@ public class EnemyPatrol : MonoBehaviour
     public LayerMask obstacleLayer;
 
     [Header("Aggressive Behavior")]
+    public bool inCombat = false;
     public bool isAggressive;
     public float aggressiveDistance;
     public float biteTimer;
@@ -53,7 +54,9 @@ public class EnemyPatrol : MonoBehaviour
         if (isAggressive)
         {
             // Check if Player is In the Range and not on land
-            if (PlayerInRange(aggressiveDistance) && !IsPlayerOnLand() && !oxygenController.inSubmarine)
+            inCombat = PlayerInRange(aggressiveDistance) && !IsPlayerOnLand() && !oxygenController.inSubmarine;
+            
+            if (inCombat)
             {
                 // Chase Player Down
                 MoveTowardsPlayer();

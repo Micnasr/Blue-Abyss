@@ -13,10 +13,21 @@ public class BiteDetector : MonoBehaviour
     private HealthManager healthManager;
     private DeathManager deathManager;
 
+    private EnemyPatrol enemyPatrol;
+    private float originalTurningSpeed;
+    private bool isIncreasingTurningSpeed = false;
+
+    private float maxTurningSpeedIncrease;
+    private float turningSpeedIncreaseRate = 0.2f; 
+
     private void Start()
     {
         healthManager = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthManager>();
         deathManager = GameObject.FindGameObjectWithTag("Player").GetComponent<DeathManager>();
+
+        enemyPatrol = transform.parent.GetComponent<EnemyPatrol>();
+        originalTurningSpeed = enemyPatrol.turningSpeed;
+        maxTurningSpeedIncrease = originalTurningSpeed * 4f;
     }
 
     private void Update()
@@ -29,8 +40,12 @@ public class BiteDetector : MonoBehaviour
             // Set the last bite time
             lastBiteTime = Time.time;
 
-            // Set canBite to false to prevent repeated biting
+            // Reset canBite to prevent repeated biting
             canBite = false;
+
+            // Reset turning speed and flag when bit
+            enemyPatrol.turningSpeed = originalTurningSpeed;
+            isIncreasingTurningSpeed = false;
 
             // Start the bite cooldown timer
             StartCoroutine(BiteCooldown());
@@ -40,6 +55,17 @@ public class BiteDetector : MonoBehaviour
             if (!canBite)
                 canBite = true;
         }
+
+        // Check if in combat and increase turning speed gradually
+        if (enemyPatrol.inCombat && !isIncreasingTurningSpeed)
+        {
+            StartCoroutine(IncreaseTurningSpeed());
+        } 
+        else if (!enemyPatrol.inCombat)
+        {
+            enemyPatrol.turningSpeed = originalTurningSpeed;
+            isIncreasingTurningSpeed = false;
+        }
     }
 
     private IEnumerator BiteCooldown()
@@ -48,6 +74,20 @@ public class BiteDetector : MonoBehaviour
 
         // Reset canBite to allow biting again
         canBite = true;
+    }
+
+    private IEnumerator IncreaseTurningSpeed()
+    {
+        isIncreasingTurningSpeed = true;
+
+        // Slowly Increase the Turning Speed When In Combat
+        while (enemyPatrol.inCombat && enemyPatrol.turningSpeed < originalTurningSpeed * maxTurningSpeedIncrease)
+        {
+            enemyPatrol.turningSpeed += turningSpeedIncreaseRate;
+            yield return new WaitForSeconds(1f);
+        }
+
+        isIncreasingTurningSpeed = false;
     }
 
     private void OnTriggerEnter(Collider other)
