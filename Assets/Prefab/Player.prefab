@@ -354,6 +354,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpawner: {fileID: 0}
+  crosshair: {fileID: 0}
+  deathTitleSpawner: {fileID: 0}
+  deathPrefab: {fileID: 1465344485412972741, guid: 5a815d53c73a26846897176d2a3ec98a,
+    type: 3}
+  healthImage: {fileID: 0}
   isPlayerDead: 0
 --- !u!1 &1072415295382214231
 GameObject:
@@ -901,7 +906,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 1000
+  far clip plane: 700
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1252,6 +1257,7 @@ MonoBehaviour:
   muzzle: {fileID: 1128077903629659498}
   playerCam: {fileID: 2423798104463690300}
   gunController: {fileID: 8704481598023831646}
+  defaultGunDamage: 10
   shieldEffectColor: {r: 0.36311856, g: 0.8062839, b: 0.9056604, a: 1}
   obstacleLayers:
     serializedVersion: 2

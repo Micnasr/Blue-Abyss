@@ -107,7 +107,7 @@ public class Flocking : MonoBehaviour
             respawning = false;
     }
 
-        private void CheckInView()
+    private void CheckInView()
     {
         foreach (var unit in allUnits)
         {

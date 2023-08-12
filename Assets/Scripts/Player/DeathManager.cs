@@ -17,6 +17,11 @@ public class DeathManager : MonoBehaviour
     private PlayerCam playerCam;
     private FishMeter fishMeter;
 
+    public GameObject crosshair;
+
+    public Transform deathTitleSpawner;
+    public GameObject deathPrefab;
+
     public Image healthImage;
 
     public bool isPlayerDead = false;
@@ -50,6 +55,8 @@ public class DeathManager : MonoBehaviour
 
         RedUI();
 
+        ShowDeathText();
+
         Time.timeScale = 0.2f;
 
         yield return new WaitForSecondsRealtime(delay);
@@ -75,6 +82,19 @@ public class DeathManager : MonoBehaviour
         isPlayerDead = false;
     }
 
+    private void ShowDeathText()
+    {
+        GameObject deathUIInstance = Instantiate(deathPrefab, deathTitleSpawner.position, deathTitleSpawner.rotation);
+        deathUIInstance.transform.SetParent(deathTitleSpawner);
+        StartCoroutine(DestroyAfterAnimation(0.7f, deathUIInstance));
+    }
+
+    private IEnumerator DestroyAfterAnimation(float duration, GameObject objToDestroy)
+    {
+        yield return new WaitForSeconds(duration);
+        Destroy(objToDestroy);
+    }
+
     private void PlayerScriptsState(bool active)
     {
         playerMovement.enabled = active;
@@ -83,6 +103,8 @@ public class DeathManager : MonoBehaviour
         playerShoot.enabled = active;
         weaponSway.enabled = active;
         playerCam.enabled = active;
+
+        crosshair.SetActive(active);
     }
 
     private void RedUI()

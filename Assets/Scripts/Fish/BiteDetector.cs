@@ -87,16 +87,9 @@ public class BiteDetector : MonoBehaviour
 
         isIncreasingTurningSpeedCoroutineRunning = true;
 
-        Debug.Log("before loop");
-
-        Debug.Log(enemyPatrol.turningSpeed);
-        Debug.Log(originalTurningSpeed * maxTurningSpeedIncrease);
-
-
         // Slowly Increase the Turning Speed When In Combat
         while (enemyPatrol.inCombat && enemyPatrol.turningSpeed < maxTurningSpeedIncrease)
         {
-            Debug.Log("increasing");
             enemyPatrol.turningSpeed += turningSpeedIncreaseRate;
             yield return new WaitForSeconds(2f);
         }

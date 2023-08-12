@@ -111,9 +111,10 @@ public class UpgradeDamageLogic : MonoBehaviour
         // Make sure we do not go out of bounds
         if (nextStage < maxStage)
         {
-            // Update Damage (Its stored in scriptable objects so it is already saved)
             gunData.damage = damageStages[nextStage];
-           
+            PlayerPrefs.SetFloat("GunDamage", damageStages[nextStage]);
+            PlayerPrefs.Save();
+
             nextStage++;
             UpdateUI();
         }

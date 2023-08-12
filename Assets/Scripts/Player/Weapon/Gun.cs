@@ -14,6 +14,8 @@ public class Gun : MonoBehaviour
 
     public Animator gunController;
 
+    public float defaultGunDamage = 10f;
+
     float timeSinceLastShot;
 
     public Color shieldEffectColor;
@@ -37,6 +39,11 @@ public class Gun : MonoBehaviour
     [Header("FishPointsUI Data")]
     public Transform fishPointsUISpawn;
     public Color32 orangeFishColor;
+
+    private void Awake()
+    {
+        gunData.damage = PlayerPrefs.GetFloat("GunDamage", defaultGunDamage);
+    }
 
     private void Start()
     {
@@ -250,7 +257,6 @@ public class Gun : MonoBehaviour
         {
             textMeshPro.text = "+" + points.ToString();
             textMeshPro.color = orangeFishColor;
-            //textMeshPro.fontSize = 40;
         }
 
 
