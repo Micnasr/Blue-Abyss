@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 4603501388209255148}
   - component: {fileID: 4906168021543082105}
   - component: {fileID: 7345896359802022686}
+  - component: {fileID: 2150001405821482728}
   m_Layer: 5
   m_Name: LightUI
   m_TagString: Untagged
@@ -293,6 +294,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2150001405821482728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5968080966243941504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc7b0bc927f938544b79cbe1363ef6c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BeepSound: MetalDetectorBeep
+  toggleKey: 102
+  onColor: {r: 0.007843138, g: 0.6901961, b: 0.003921569, a: 1}
+  offColor: {r: 0.6117647, g: 0.10980392, b: 0, a: 1}
 --- !u!1 &6361828697342323373
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,8 +422,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.7953, y: 1.237}
-  m_SizeDelta: {x: 41.6123, y: 38.2154}
+  m_AnchoredPosition: {x: 0.9, y: 0.000025392}
+  m_SizeDelta: {x: 37.9906, y: 34.8893}
   m_Pivot: {x: 0.4867427, y: 0.5}
 --- !u!222 &6544728341815580383
 CanvasRenderer:
@@ -436,7 +453,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 71606c61e8c4b5e4d9e2cef7524f8585, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fc28639ad89a7444e8a43a9c8f97986d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
