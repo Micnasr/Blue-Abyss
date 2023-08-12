@@ -84,8 +84,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 6.743202
-  m_Center: {x: 0, y: 0.4837923, z: 1.7380219}
+  m_Radius: 4.893248
+  m_Center: {x: -0.11026621, y: -0.491153, z: 1.738022}
 --- !u!114 &1141045346793399086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,10 +661,11 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 768
+  inCombat: 0
   isAggressive: 1
   aggressiveDistance: 40
   biteTimer: 2
-  stopDistance: 10
+  stopDistance: 11
   surfaceLevel: -4.8
   chaseMovementSpeed: 10
   landLayer:

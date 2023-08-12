@@ -15,10 +15,9 @@ public class BiteDetector : MonoBehaviour
 
     private EnemyPatrol enemyPatrol;
     private float originalTurningSpeed;
-    private bool isIncreasingTurningSpeed = false;
-
+    private bool isIncreasingTurningSpeedCoroutineRunning = false;
     private float maxTurningSpeedIncrease;
-    private float turningSpeedIncreaseRate = 0.2f; 
+    private float turningSpeedIncreaseRate; 
 
     private void Start()
     {
@@ -27,7 +26,8 @@ public class BiteDetector : MonoBehaviour
 
         enemyPatrol = transform.parent.GetComponent<EnemyPatrol>();
         originalTurningSpeed = enemyPatrol.turningSpeed;
-        maxTurningSpeedIncrease = originalTurningSpeed * 4f;
+        maxTurningSpeedIncrease = originalTurningSpeed * 2f;
+        turningSpeedIncreaseRate = originalTurningSpeed / 5f;
     }
 
     private void Update()
@@ -45,7 +45,6 @@ public class BiteDetector : MonoBehaviour
 
             // Reset turning speed and flag when bit
             enemyPatrol.turningSpeed = originalTurningSpeed;
-            isIncreasingTurningSpeed = false;
 
             // Start the bite cooldown timer
             StartCoroutine(BiteCooldown());
@@ -53,18 +52,20 @@ public class BiteDetector : MonoBehaviour
         else if (deathManager.isPlayerDead)
         {
             if (!canBite)
+            {
                 canBite = true;
+                isPlayerInside = false;
+            }
         }
 
         // Check if in combat and increase turning speed gradually
-        if (enemyPatrol.inCombat && !isIncreasingTurningSpeed)
+        if (enemyPatrol.inCombat)
         {
             StartCoroutine(IncreaseTurningSpeed());
         } 
         else if (!enemyPatrol.inCombat)
         {
             enemyPatrol.turningSpeed = originalTurningSpeed;
-            isIncreasingTurningSpeed = false;
         }
     }
 
@@ -78,17 +79,31 @@ public class BiteDetector : MonoBehaviour
 
     private IEnumerator IncreaseTurningSpeed()
     {
-        isIncreasingTurningSpeed = true;
-
-        // Slowly Increase the Turning Speed When In Combat
-        while (enemyPatrol.inCombat && enemyPatrol.turningSpeed < originalTurningSpeed * maxTurningSpeedIncrease)
+        // If the coroutine is already running, exit the new coroutine
+        if (isIncreasingTurningSpeedCoroutineRunning)
         {
-            enemyPatrol.turningSpeed += turningSpeedIncreaseRate;
-            yield return new WaitForSeconds(1f);
+            yield break; 
         }
 
-        isIncreasingTurningSpeed = false;
+        isIncreasingTurningSpeedCoroutineRunning = true;
+
+        Debug.Log("before loop");
+
+        Debug.Log(enemyPatrol.turningSpeed);
+        Debug.Log(originalTurningSpeed * maxTurningSpeedIncrease);
+
+
+        // Slowly Increase the Turning Speed When In Combat
+        while (enemyPatrol.inCombat && enemyPatrol.turningSpeed < maxTurningSpeedIncrease)
+        {
+            Debug.Log("increasing");
+            enemyPatrol.turningSpeed += turningSpeedIncreaseRate;
+            yield return new WaitForSeconds(2f);
+        }
+
+        isIncreasingTurningSpeedCoroutineRunning = false;
     }
+
 
     private void OnTriggerEnter(Collider other)
     {

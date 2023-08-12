@@ -22,7 +22,7 @@ public class EnemyPatrol : MonoBehaviour
     public LayerMask obstacleLayer;
 
     [Header("Aggressive Behavior")]
-    public bool inCombat = false;
+    [HideInInspector] public bool inCombat = false;
     public bool isAggressive;
     public float aggressiveDistance;
     public float biteTimer;
