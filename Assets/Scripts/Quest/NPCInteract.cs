@@ -10,6 +10,8 @@ public class NPCInteract : MonoBehaviour
     private PlayerShoot playerShoot;
     private PlayerCam playerCam;
     private WeaponSway weaponSway;
+    private DeathManager deathManager;
+    private PauseLogic pauseLogic;
 
     private QuestController questController;
 
@@ -56,9 +58,11 @@ public class NPCInteract : MonoBehaviour
         playerShoot = player.gameObject.GetComponent<PlayerShoot>();
         playerCam = player.gameObject.GetComponentInChildren<PlayerCam>();
         weaponSway = player.gameObject.GetComponentInChildren<WeaponSway>();
+        deathManager = player.gameObject.GetComponent<DeathManager>();
 
         dialogueManager = FindAnyObjectByType<Dialogue>();
         questController = FindAnyObjectByType<QuestController>();
+        pauseLogic = FindAnyObjectByType<PauseLogic>();
 
         npcQuest = questController.ReturnQuest(questName);
         gaveReward = false;
@@ -78,7 +82,7 @@ public class NPCInteract : MonoBehaviour
             RotateNPC();
 
             // Check if we can talk to NPC
-            if (Input.GetKeyDown(interactKey) && (playerMovement.grounded || isWaterNPC) && LookingAtNPC())
+            if (Input.GetKeyDown(interactKey) && (playerMovement.grounded || isWaterNPC) && LookingAtNPC() && !deathManager.isPlayerDead && !pauseLogic.pauseMenuOpen)
             {
                 if (!talkingWithPlayer)
                 {

@@ -30,6 +30,11 @@ public class DeathManager : MonoBehaviour
 
     public bool isPlayerDead = false;
 
+    public void Awake()
+    {
+        dialogue = FindAnyObjectByType<Dialogue>();
+    }
+
     public void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -40,7 +45,7 @@ public class DeathManager : MonoBehaviour
         weaponSway = GetComponentInChildren<WeaponSway>();
         playerCam = GetComponentInChildren<PlayerCam>();
         fishMeter = FindAnyObjectByType<FishMeter>();
-        dialogue = FindAnyObjectByType<Dialogue>();
+        
         pauseLogic = FindAnyObjectByType<PauseLogic>();
     }
 
@@ -97,6 +102,9 @@ public class DeathManager : MonoBehaviour
         // Reset
         healthManager.ResetHealth();
         oxygenController.ResetOxygen();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         isPlayerDead = false;
     }

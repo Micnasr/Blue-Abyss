@@ -82,4 +82,10 @@ public class PauseLogic : MonoBehaviour
         weaponSway.enabled = active;
         playerCam.enabled = active;
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+        Debug.Log("Exit Game");
+    }
 }
