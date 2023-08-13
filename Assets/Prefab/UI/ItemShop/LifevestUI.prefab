@@ -295,9 +295,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'T
-
-'
+  m_text: X
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 76e3afb263d1dc84c83641fdfb8578a1, type: 2}
   m_sharedMaterial: {fileID: 631904314007999108, guid: 76e3afb263d1dc84c83641fdfb8578a1,
@@ -325,7 +323,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11
+  m_fontSize: 11.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -461,6 +459,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toggledON: 0
   LifevestFloatStrength: 7
-  toggleKey: 116
+  toggleKey: 120
   onColor: {r: 0.007843138, g: 0.6901961, b: 0.003921569, a: 1}
   offColor: {r: 0.6117647, g: 0.10980392, b: 0, a: 1}

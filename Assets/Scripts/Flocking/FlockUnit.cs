@@ -46,6 +46,12 @@ public class FlockUnit : MonoBehaviour
     {
         MoveUnit();
         PerformanceAnimations();
+
+        // In Case Fish Goes Above Water
+        if (transform.position.y > -4.2f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void AssignFlock(Flocking flock)
