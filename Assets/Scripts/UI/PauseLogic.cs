@@ -7,18 +7,17 @@ public class PauseLogic : MonoBehaviour
 {
     public bool pauseMenuOpen = false;
     public GameObject pauseMenuUI;
+    public GameObject backdrop;
 
     public KeyCode pauseKey = KeyCode.N; //todo change to esc
 
     private CursorLockMode previousCursorLockMode;
     private bool previousCursorVisibility;
-    //private bool previousPlayerMovementState;
     private bool previousPlayerShootState;
     private bool previousPlayerSwayState;
     private bool previousPlayerCam;
 
     private GameObject player;
-    //private PlayerMovement playerMovement;
     private PlayerShoot playerShoot;
     private PlayerCam playerCam;
     private WeaponSway weaponSway;
@@ -26,7 +25,6 @@ public class PauseLogic : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        //playerMovement = player.GetComponent<PlayerMovement>();
         playerShoot = player.GetComponent<PlayerShoot>();
         weaponSway = player.GetComponentInChildren<WeaponSway>();
         playerCam = player.GetComponentInChildren<PlayerCam>();
@@ -45,7 +43,6 @@ public class PauseLogic : MonoBehaviour
 
     private void OpenPauseMenu()
     {
-        //previousPlayerMovementState = playerMovement.enabled;
         previousPlayerCam = playerCam.enabled;
         previousPlayerShootState = playerShoot.enabled;
         previousPlayerSwayState = weaponSway.enabled;
@@ -60,14 +57,12 @@ public class PauseLogic : MonoBehaviour
         Cursor.visible = true;
 
         pauseMenuUI.SetActive(true);
+        backdrop.SetActive(true);
         pauseMenuOpen = true;
     }
 
     public void ClosePauseMenu()
     {
-        Debug.Log("CLOSE");
-
-        //playerMovement.enabled = previousPlayerMovementState;
         playerShoot.enabled = previousPlayerShootState;
         weaponSway.enabled = previousPlayerSwayState;
         playerCam.enabled = previousPlayerCam;
@@ -76,13 +71,13 @@ public class PauseLogic : MonoBehaviour
         Cursor.visible = previousCursorVisibility;
 
         pauseMenuUI.SetActive(false);
+        backdrop.SetActive(false);
         pauseMenuOpen = false;
     }
 
 
     private void PlayerScriptsState(bool active)
     {
-        //playerMovement.enabled = active;
         playerShoot.enabled = active;
         weaponSway.enabled = active;
         playerCam.enabled = active;
