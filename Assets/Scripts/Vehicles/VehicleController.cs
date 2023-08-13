@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class VehicleController : MonoBehaviour
@@ -387,4 +386,24 @@ public class VehicleController : MonoBehaviour
         FindObjectOfType<AudioManager>().Play(sonarEffect, 1f, gameObject);
     }
 
+    public void PlayerDied()
+    {
+        // If we die in a vehicle, reenable respective scripts
+        if (isDriving)
+        {
+            isDriving = false;
+            player.SetParent(null);
+
+            //ReEnable Scripts
+            playerMovement.enabled = true;
+            playerShoot.enabled = true;
+            playerMainCollider.enabled = true;
+
+            weaponSway.enabled = true;
+            weaponHolster.SetActive(true);
+
+            if (isSubmarine)
+                oxygenController.inSubmarine = false;
+        }
+    }
 }

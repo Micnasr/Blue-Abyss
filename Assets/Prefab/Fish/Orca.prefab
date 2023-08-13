@@ -91,6 +91,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 768
+  inCombat: 0
   isAggressive: 1
   aggressiveDistance: 30
   biteTimer: 2
@@ -347,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   biteCooldown: 2
-  biteDamage: 50
+  biteDamage: 60
 --- !u!1 &4604013045371798788
 GameObject:
   m_ObjectHideFlags: 0

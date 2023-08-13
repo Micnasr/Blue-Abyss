@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,13 +53,13 @@ public class DeathManager : MonoBehaviour
         PlayerScriptsState(false);
 
         RedUI();
-
         ShowDeathText();
 
         Time.timeScale = 0.2f;
 
         yield return new WaitForSecondsRealtime(delay);
 
+        FindAnyObjectByType<VehicleController>().PlayerDied();
         TeleportPlayer(playerSpawner.position);
 
         // Reset Bag
