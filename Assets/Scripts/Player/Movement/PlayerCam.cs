@@ -1,17 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCam : MonoBehaviour
 {
     //Mouse Sensitivity
-    public float sensX;
-    public float sensY;
+    public float sens;
 
     public Transform orientation;
 
     float xRotation;
     float yRotation;
+
+    public Slider sensSlider;
+
+    private void Awake()
+    {
+        sens = PlayerPrefs.GetFloat("MouseSensitivity", sens);
+        sensSlider.value = sens;
+    }
 
     void Start()
     {
@@ -20,11 +28,20 @@ public class PlayerCam : MonoBehaviour
         Cursor.visible = false;
     }
 
+    public void UpdateSensitivity(float newSensitivity)
+    {
+        // Update Mouse Sensitivity
+        sens = newSensitivity;
+        PlayerPrefs.SetFloat("MouseSensitivity", sens);
+        PlayerPrefs.Save();
+    }
+
+
     // Update is called once per frame (apparently time.delta time for camera movement is very bad)
     void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * sensY;
+        float mouseX = Input.GetAxisRaw("Mouse X") * sens;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * sens;
 
         yRotation += mouseX;
 

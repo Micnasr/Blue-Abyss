@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PauseLogic : MonoBehaviour
@@ -42,8 +41,6 @@ public class PauseLogic : MonoBehaviour
             else
                 ClosePauseMenu();
         }
-
-        Debug.Log(Cursor.visible);
     }
 
     private void OpenPauseMenu()

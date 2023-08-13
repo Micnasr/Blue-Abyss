@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  sensitivityMultiplier: 4
+  playerCam: {fileID: 822525217232812650}
 --- !u!1 &755658171415758426
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,9 +990,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59891115010ae034f9b7d840392901bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 2
-  sensY: 2
+  sens: 1
   orientation: {fileID: 7687243092260039680}
+  sensSlider: {fileID: 0}
 --- !u!65 &3455411823506007225
 BoxCollider:
   m_ObjectHideFlags: 0
