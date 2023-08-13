@@ -45,6 +45,7 @@ public class VehicleController : MonoBehaviour
     private WeaponSway weaponSway;
     private OxygenController oxygenController;
     private PauseLogic pauseLogic;
+    private DeathManager deathManager;
 
     private bool isTeleporting = false;
 
@@ -71,14 +72,11 @@ public class VehicleController : MonoBehaviour
         weaponSway = player.gameObject.GetComponentInChildren<WeaponSway>();
         weaponHolster = weaponSway.gameObject;
         playerMainCollider = player.gameObject.GetComponentInChildren<CapsuleCollider>();
+        deathManager = player.gameObject.GetComponent<DeathManager>();
+
         pauseLogic = FindAnyObjectByType<PauseLogic>();
 
         boatRigidbody = GetComponent<Rigidbody>();
-        if (boatRigidbody == null)
-        {
-            boatRigidbody = gameObject.AddComponent<Rigidbody>();
-            boatRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        }
 
         if (isSubmarine)
         {
@@ -90,7 +88,7 @@ public class VehicleController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDriving && !pauseLogic.pauseMenuOpen)
+        if (isDriving && !pauseLogic.pauseMenuOpen && !deathManager.isPlayerDead)
         {
             HandleDriving();
 
@@ -113,13 +111,13 @@ public class VehicleController : MonoBehaviour
 
     private void Update()
     {
-        if (!isDriving)
+        if (!isDriving && !deathManager.isPlayerDead)
         {
             HandleLookingAtVehicle();
         }
-        else
+        else if (!deathManager.isPlayerDead)
         {
-            // Rigidbody On Player Is Causing Problems so use This To TP
+            // Rigidbody On Player Is Causing Problems so use This To Teleport Player To Seat
             player.transform.position = driverSeat.transform.position;
 
             // Check if the player presses the interact key to exit the vehicle
@@ -153,7 +151,7 @@ public class VehicleController : MonoBehaviour
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, maxInteractDistance))
         {
             // Check if the raycast hits the vehicle's collider
-            if (hit.collider.gameObject.transform.parent.gameObject == gameObject)
+            if (hit.collider.gameObject.transform.parent != null && hit.collider.gameObject.transform.parent.gameObject == gameObject)
             {
                 return true;
             }
@@ -177,7 +175,7 @@ public class VehicleController : MonoBehaviour
         // Move the player to the driver seat position and rotate them to face the boat's forward direction
         player.position = driverSeat.position;
         player.rotation = driverSeat.rotation;
-        player.SetParent(driverSeat);
+        //player.SetParent(driverSeat);
 
         isDriving = true;
         
@@ -292,7 +290,7 @@ public class VehicleController : MonoBehaviour
         }
 
         isDriving = false;
-        player.SetParent(null);
+        //player.SetParent(null);
 
         // Re-enable scripts and components
         playerMovement.enabled = true;
@@ -392,8 +390,9 @@ public class VehicleController : MonoBehaviour
         // If we die in a vehicle, reenable respective scripts
         if (isDriving)
         {
+            Debug.Log("death called");
             isDriving = false;
-            player.SetParent(null);
+            //player.SetParent(null);
 
             //ReEnable Scripts
             playerMovement.enabled = true;

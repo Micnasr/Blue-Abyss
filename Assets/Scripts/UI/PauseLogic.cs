@@ -9,7 +9,7 @@ public class PauseLogic : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject backdrop;
 
-    public KeyCode pauseKey = KeyCode.N; //todo change to esc
+    public KeyCode pauseKey = KeyCode.Escape;
 
     private CursorLockMode previousCursorLockMode;
     private bool previousCursorVisibility;

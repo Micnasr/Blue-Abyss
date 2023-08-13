@@ -19,6 +19,8 @@ public class DeathManager : MonoBehaviour
     private Dialogue dialogue;
     private PauseLogic pauseLogic;
 
+    private GameObject deathText;
+
     public GameObject crosshair;
 
     public Transform deathTitleSpawner;
@@ -72,11 +74,16 @@ public class DeathManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(delay);
 
+        // Reset time scale even if there was an issue with the coroutine
+        Time.timeScale = 1f;
+
         VehicleController vehicleController = FindAnyObjectByType<VehicleController>();
         if (vehicleController != null)
             vehicleController.PlayerDied();
 
         TeleportPlayer(playerSpawner.position);
+
+        Destroy(deathText);
 
         // Reset Bag
         fishMeter.ResetFishDeaths();
@@ -91,23 +98,13 @@ public class DeathManager : MonoBehaviour
         healthManager.ResetHealth();
         oxygenController.ResetOxygen();
 
-        // Reset time scale even if there was an issue with the coroutine
-        Time.timeScale = 1f;
-
         isPlayerDead = false;
     }
 
     private void ShowDeathText()
     {
-        GameObject deathUIInstance = Instantiate(deathPrefab, deathTitleSpawner.position, deathTitleSpawner.rotation);
-        deathUIInstance.transform.SetParent(deathTitleSpawner);
-        StartCoroutine(DestroyAfterAnimation(0.7f, deathUIInstance));
-    }
-
-    private IEnumerator DestroyAfterAnimation(float duration, GameObject objToDestroy)
-    {
-        yield return new WaitForSeconds(duration);
-        Destroy(objToDestroy);
+        deathText = Instantiate(deathPrefab, deathTitleSpawner.position, deathTitleSpawner.rotation);
+        deathText.transform.SetParent(deathTitleSpawner);
     }
 
     private void PlayerScriptsState(bool active)
@@ -132,6 +129,7 @@ public class DeathManager : MonoBehaviour
     private void TeleportPlayer(Vector3 newPosition)
     {
         // Move the player using Rigidbody's MovePosition method
+        playerRigidbody.velocity = Vector3.zero;
         playerRigidbody.MovePosition(newPosition);
     }
 }
