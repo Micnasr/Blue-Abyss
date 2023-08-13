@@ -125,12 +125,13 @@ public class UpgradeDamageLogic : MonoBehaviour
         // Check if player can afford
         if (moneyManager.currentMoney >= prices[nextStage])
         {
+            FindObjectOfType<AudioManager>().Play("UIClick");
             moneyManager.RemoveMoney(prices[nextStage]);
             AdvanceStage();
         } 
         else
         {
-            Debug.Log("No Money :(");
+            FindObjectOfType<AudioManager>().Play("UIError");
         }
     }
 }

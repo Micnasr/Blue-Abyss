@@ -21,6 +21,7 @@ public class MoneyManager : MonoBehaviour
 
     public void AddMoney(int amount)
     {
+        FindObjectOfType<AudioManager>().Play("MoneySound");
         currentMoney += amount;
         UpdateUI();
 

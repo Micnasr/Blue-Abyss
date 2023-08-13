@@ -130,6 +130,7 @@ public class BoatSellerLogic : MonoBehaviour
 
         if (moneyManager.currentMoney >= priceOfItems[boatIndex])
         {
+            FindObjectOfType<AudioManager>().Play("UIClick");
             moneyManager.RemoveMoney(priceOfItems[boatIndex]);
 
             ownedBoatsStr += (names[boatIndex] + "-");
@@ -141,7 +142,7 @@ public class BoatSellerLogic : MonoBehaviour
         }
         else
         {
-            Debug.Log("No Money :(");
+            FindObjectOfType<AudioManager>().Play("UIError");
         }
     }
 
@@ -150,6 +151,7 @@ public class BoatSellerLogic : MonoBehaviour
         if (currentBoat != null)
             Destroy(currentBoat);
 
+        FindObjectOfType<AudioManager>().Play("UIClick");
         currentBoat = Instantiate(boatPrefabs[boatIndex], boatSpawnLocation[boatIndex].position, boatSpawnLocation[boatIndex].rotation);
     }
 }

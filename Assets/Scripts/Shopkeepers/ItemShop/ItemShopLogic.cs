@@ -80,6 +80,7 @@ public class ItemShopLogic : MonoBehaviour
 
         if (moneyManager.currentMoney >= priceOfItems[index])
         {
+            FindObjectOfType<AudioManager>().Play("UIClick");
             moneyManager.RemoveMoney(priceOfItems[index]);
 
             // Give Item to Player
@@ -89,7 +90,7 @@ public class ItemShopLogic : MonoBehaviour
         }
         else
         {
-            Debug.Log("No Money :(");
+            FindObjectOfType<AudioManager>().Play("UIError");
         }
     }
 

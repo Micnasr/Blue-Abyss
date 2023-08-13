@@ -2,6 +2,7 @@ using UnityEngine.Audio;
 using System;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -10,7 +11,11 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
+    private float globalVolume = 1f;
+
     private string currentMusic;
+
+    public Slider volumeSlider;
     
     void Awake()
     {
@@ -38,6 +43,9 @@ public class AudioManager : MonoBehaviour
                 s.source.spatialBlend = s.spatialBlend;
             }
         }
+
+        globalVolume = PlayerPrefs.GetFloat("GlobalVolume", globalVolume);
+        volumeSlider.value = globalVolume;
     }
 
     private void Start()
@@ -176,5 +184,12 @@ public class AudioManager : MonoBehaviour
         }
 
         audioSource.volume = targetVolume;
+    }
+
+    public void ChangeGlobalVolume(float newVolume)
+    {
+        AudioListener.volume = newVolume;
+        PlayerPrefs.SetFloat("GlobalVolume", newVolume);
+        PlayerPrefs.Save();
     }
 }
