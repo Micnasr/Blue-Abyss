@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class DeathManager : MonoBehaviour
 {
+    // All Dependent Scripts
     public Transform playerSpawner;
     private PlayerMovement playerMovement;
     private OxygenController oxygenController;
@@ -15,6 +16,7 @@ public class DeathManager : MonoBehaviour
     private WeaponSway weaponSway;
     private PlayerCam playerCam;
     private FishMeter fishMeter;
+    private Dialogue dialogue;
 
     public GameObject crosshair;
 
@@ -35,6 +37,7 @@ public class DeathManager : MonoBehaviour
         weaponSway = GetComponentInChildren<WeaponSway>();
         playerCam = GetComponentInChildren<PlayerCam>();
         fishMeter = FindAnyObjectByType<FishMeter>();
+        dialogue = FindAnyObjectByType<Dialogue>();
     }
 
     public void PlayerDied()
@@ -50,6 +53,10 @@ public class DeathManager : MonoBehaviour
 
     private IEnumerator StopTimeForDelay(float delay)
     {
+        // Stop Conversation If We Die While Talking
+        if (dialogue.currentNPC != null)
+            dialogue.currentNPC.CloseDialogue();
+
         PlayerScriptsState(false);
 
         RedUI();
@@ -59,7 +66,10 @@ public class DeathManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(delay);
 
-        FindAnyObjectByType<VehicleController>().PlayerDied();
+        VehicleController vehicleController = FindAnyObjectByType<VehicleController>();
+        if (vehicleController != null)
+            vehicleController.PlayerDied();
+
         TeleportPlayer(playerSpawner.position);
 
         // Reset Bag

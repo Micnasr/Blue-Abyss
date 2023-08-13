@@ -24,7 +24,6 @@ public class QuestController : MonoBehaviour
 
     [HideInInspector] public string completedQuests;
 
-    //[HideInInspector]
     public Quest currentQuest;
 
     private void Awake()

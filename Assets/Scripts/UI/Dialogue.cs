@@ -15,7 +15,7 @@ public class Dialogue : MonoBehaviour
     public GameObject questNamePanel;
     public GameObject rewardPanel;
 
-    private NPCInteract currentNPC;
+    public NPCInteract currentNPC;
     private QuestController questController;
 
     private bool initiateQuest = false;
