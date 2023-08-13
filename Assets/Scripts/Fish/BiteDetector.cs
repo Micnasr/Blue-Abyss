@@ -34,7 +34,6 @@ public class BiteDetector : MonoBehaviour
     {
         if (!deathManager.isPlayerDead && isPlayerInside && canBite && Time.time - lastBiteTime >= biteCooldown)
         {
-            Debug.Log("Player bit!");
             healthManager.TakeDamage(biteDamage);
 
             // Set the last bite time

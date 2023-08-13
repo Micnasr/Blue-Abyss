@@ -173,7 +173,6 @@ public class QuestController : MonoBehaviour
 
     public void QuestCompleted()
     {
-        Debug.Log("Quest Completed");
         finishedQuests++;
         moneyManager.AddMoney(currentQuest.reward);
         UpdateCompletedQuest(currentQuest.title);

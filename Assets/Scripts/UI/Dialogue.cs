@@ -17,6 +17,7 @@ public class Dialogue : MonoBehaviour
 
     public NPCInteract currentNPC;
     private QuestController questController;
+    private PauseLogic pauseLogic;
 
     private bool initiateQuest = false;
 
@@ -25,6 +26,7 @@ public class Dialogue : MonoBehaviour
     void Start()
     {
         questController = FindAnyObjectByType<QuestController>();
+        pauseLogic = FindAnyObjectByType<PauseLogic>();
 
         gameObject.SetActive(false);
         yesButton.SetActive(false);
@@ -38,7 +40,7 @@ public class Dialogue : MonoBehaviour
     void Update()
     {
         // Fast Forward Dialogue
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !pauseLogic.pauseMenuOpen)
         {
             if (textComponent.text == lines[index])
             {

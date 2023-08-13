@@ -17,6 +17,7 @@ public class DeathManager : MonoBehaviour
     private PlayerCam playerCam;
     private FishMeter fishMeter;
     private Dialogue dialogue;
+    private PauseLogic pauseLogic;
 
     public GameObject crosshair;
 
@@ -38,6 +39,7 @@ public class DeathManager : MonoBehaviour
         playerCam = GetComponentInChildren<PlayerCam>();
         fishMeter = FindAnyObjectByType<FishMeter>();
         dialogue = FindAnyObjectByType<Dialogue>();
+        pauseLogic = FindAnyObjectByType<PauseLogic>();
     }
 
     public void PlayerDied()
@@ -56,6 +58,10 @@ public class DeathManager : MonoBehaviour
         // Stop Conversation If We Die While Talking
         if (dialogue.currentNPC != null)
             dialogue.currentNPC.CloseDialogue();
+
+        // If Pause Screen is Open, Close it
+        if (pauseLogic.pauseMenuOpen)
+            pauseLogic.ClosePauseMenu();
 
         PlayerScriptsState(false);
 

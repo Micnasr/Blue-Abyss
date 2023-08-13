@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform orientation;
 
+    private PauseLogic pauseLogic;
+
     float horizonInput;
     float verticalInput;
 
@@ -64,17 +66,25 @@ public class PlayerMovement : MonoBehaviour
         isSwimming = false;
 
         oxygenController = GetComponent<OxygenController>();
+        pauseLogic = FindAnyObjectByType<PauseLogic>();
     }
 
     private void FixedUpdate()
     {
+        if (!pauseLogic.pauseMenuOpen)
+            if (!isSwimming)
+            {
+                MoveGround();
+            }
+            else
+            {
+                MoveSwim();
+            }
+
+        // Apply Gravity
         if (!isSwimming)
         {
-            MoveGround();
-        }
-        else
-        {
-            MoveSwim();
+            ApplyCustomGravity();
         }
     }
 
@@ -137,8 +147,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveGround()
     {
-        ApplyCustomGravity();
-
         moveDirection = orientation.forward * verticalInput + orientation.right * horizonInput;
 
         if (grounded)

@@ -44,6 +44,7 @@ public class VehicleController : MonoBehaviour
     private PlayerCam playerCam;
     private WeaponSway weaponSway;
     private OxygenController oxygenController;
+    private PauseLogic pauseLogic;
 
     private bool isTeleporting = false;
 
@@ -70,6 +71,7 @@ public class VehicleController : MonoBehaviour
         weaponSway = player.gameObject.GetComponentInChildren<WeaponSway>();
         weaponHolster = weaponSway.gameObject;
         playerMainCollider = player.gameObject.GetComponentInChildren<CapsuleCollider>();
+        pauseLogic = FindAnyObjectByType<PauseLogic>();
 
         boatRigidbody = GetComponent<Rigidbody>();
         if (boatRigidbody == null)
@@ -88,7 +90,7 @@ public class VehicleController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDriving)
+        if (isDriving && !pauseLogic.pauseMenuOpen)
         {
             HandleDriving();
 
@@ -139,7 +141,6 @@ public class VehicleController : MonoBehaviour
         // Check if the player is looking at the vehicle and presses the interact key (E)
         if (Input.GetKeyDown(interactKey) && CanEnterVehicle())
         {
-            Debug.Log("Entering Vehicle");
             EnterVehicle();
         }
     }

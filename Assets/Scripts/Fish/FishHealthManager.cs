@@ -171,8 +171,6 @@ public class FishHealthManager : MonoBehaviour
         // Set the flag to indicate the fish has died
         isDead = true;
 
-        Debug.Log("DEAD: " + gameObject.transform.name);
-
         // Create a unique instance of the death material
         Material uniqueDeathMaterial = Instantiate(deathMaterial);
 

@@ -150,7 +150,6 @@ public class BoatSellerLogic : MonoBehaviour
         if (currentBoat != null)
             Destroy(currentBoat);
 
-        Debug.Log("SpawningBoat");
         currentBoat = Instantiate(boatPrefabs[boatIndex], boatSpawnLocation[boatIndex].position, boatSpawnLocation[boatIndex].rotation);
     }
 }
