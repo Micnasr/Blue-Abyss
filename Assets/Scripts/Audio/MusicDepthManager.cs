@@ -19,34 +19,39 @@ public class MusicDepthManager : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+            player = playerObj.transform;
     }
 
     private void Update()
     {
         // Handle Music Depending On Player Depth >:)
 
-        float playerY = player.position.y;
+        if (player != null)
+        {
+            float playerY = player.position.y;
 
-        if (playerY <= deepZoneY && !reachedDeepZone && !reachedAbyssZone)
-        {
-            FindObjectOfType<AudioManager>().FadeTrack(deepMusic, 1f);
-            reachedDeepZone = true;
-        }
-        else if (playerY <= abyssZoneY && !reachedAbyssZone && reachedDeepZone)
-        {
-            FindObjectOfType<AudioManager>().FadeTrack(abyssMusic, 1f);
-            reachedAbyssZone = true;
-        }
-        else if (playerY > abyssZoneY && reachedAbyssZone)
-        {
-            FindObjectOfType<AudioManager>().FadeTrack(deepMusic, 1f);
-            reachedAbyssZone = false;
-        }
-        else if (playerY > deepZoneY && reachedDeepZone)
-        {
-            FindObjectOfType<AudioManager>().FadeTrack(shallowMusic, 1f);
-            reachedDeepZone = false;
+            if (playerY <= deepZoneY && !reachedDeepZone && !reachedAbyssZone)
+            {
+                FindObjectOfType<AudioManager>().FadeTrack(deepMusic, 1f);
+                reachedDeepZone = true;
+            }
+            else if (playerY <= abyssZoneY && !reachedAbyssZone && reachedDeepZone)
+            {
+                FindObjectOfType<AudioManager>().FadeTrack(abyssMusic, 1f);
+                reachedAbyssZone = true;
+            }
+            else if (playerY > abyssZoneY && reachedAbyssZone)
+            {
+                FindObjectOfType<AudioManager>().FadeTrack(deepMusic, 1f);
+                reachedAbyssZone = false;
+            }
+            else if (playerY > deepZoneY && reachedDeepZone)
+            {
+                FindObjectOfType<AudioManager>().FadeTrack(shallowMusic, 1f);
+                reachedDeepZone = false;
+            }
         }
     }
 }

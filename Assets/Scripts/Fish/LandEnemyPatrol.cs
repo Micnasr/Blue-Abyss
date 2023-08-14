@@ -25,7 +25,11 @@ public class LandEnemyPatrol : MonoBehaviour
     private void Start()
     {
         SetRandomWaypoint();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+            player = playerObject.transform;
+
         animator = GetComponent<Animator>();
     }
 

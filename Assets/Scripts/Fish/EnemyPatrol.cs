@@ -44,8 +44,13 @@ public class EnemyPatrol : MonoBehaviour
     private void Start()
     {
         SetRandomWaypoint();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        oxygenController = player.GetComponent<OxygenController>();
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+            oxygenController = player.GetComponent<OxygenController>();
+        }
         animator = GetComponent<Animator>();
     }
 
@@ -83,7 +88,8 @@ public class EnemyPatrol : MonoBehaviour
             MoveTowardsWaypoint();
         }
 
-        PerformanceAnimations();
+        if (player != null)
+            PerformanceAnimations();
     }
 
     private void SetRandomWaypoint()

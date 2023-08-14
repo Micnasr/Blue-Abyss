@@ -31,7 +31,8 @@ public class AISpawner : MonoBehaviour
 
     private void Update()
     {
-        PerformanceRender();
+        if (player != null)
+            PerformanceRender();
 
         // Check if the current fish is dead and not already respawning
         if (currentFish == null && !isRespawning)
