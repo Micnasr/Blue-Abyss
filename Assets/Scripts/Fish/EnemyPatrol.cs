@@ -40,6 +40,7 @@ public class EnemyPatrol : MonoBehaviour
 
     [Header("Sounds")]
     public string[] fishSounds;
+    public int customSoundChance = 5;
 
     private void Start()
     {
@@ -294,7 +295,7 @@ public class EnemyPatrol : MonoBehaviour
             return;
 
         // % Chance to Play the Audio (To Avoid Spam)
-        if (Random.Range(0, 5) != 0)
+        if (Random.Range(0, customSoundChance) != 0)
             return;
  
         int randomIndex = Random.Range(0, fishSounds.Length);

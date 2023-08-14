@@ -47,7 +47,7 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         //Subscribing to Event
-        PlayerShoot.shootInput += Shoot;
+        //PlayerShoot.shootInput += Shoot;
     }
 
     private bool CanShoot() => timeSinceLastShot > 1f / (gunData.fireRate / 60f);

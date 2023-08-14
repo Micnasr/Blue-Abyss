@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseLogic : MonoBehaviour
 {
@@ -85,7 +86,7 @@ public class PauseLogic : MonoBehaviour
 
     public void ExitGame()
     {
-        Application.Quit();
-        Debug.Log("Exit Game");
+        FindAnyObjectByType<AudioManager>().FadeTrack("SurfaceMusic", 0.4f);
+        SceneManager.LoadScene("Menu");
     }
 }

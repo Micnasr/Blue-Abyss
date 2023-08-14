@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 8381478848916375725}
   - component: {fileID: 2891920961101231259}
   - component: {fileID: 7221599572404409790}
+  - component: {fileID: 3491322520965857700}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -195,7 +196,7 @@ Transform:
   - {fileID: 7063968324172870769}
   - {fileID: 2833595533553406101}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5135001688982826863
 Rigidbody:
@@ -360,6 +361,19 @@ MonoBehaviour:
     type: 3}
   healthImage: {fileID: 0}
   isPlayerDead: 0
+--- !u!114 &3491322520965857700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942630516093076900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c58273b83b279b84ea1ae1234437048e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 0}
 --- !u!1 &1072415295382214231
 GameObject:
   m_ObjectHideFlags: 0

@@ -482,7 +482,7 @@ Transform:
   - {fileID: 7069215285117332766}
   - {fileID: 7614788489997633244}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &8871296016596546125
 MonoBehaviour:
@@ -506,6 +506,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 768
+  inCombat: 0
   isAggressive: 0
   aggressiveDistance: 0
   biteTimer: 0
@@ -518,6 +519,7 @@ MonoBehaviour:
   animatorDistance: 150
   fishSounds:
   - SeagulSound1
+  customSoundChance: 6
 --- !u!114 &3388114030181392478
 MonoBehaviour:
   m_ObjectHideFlags: 0

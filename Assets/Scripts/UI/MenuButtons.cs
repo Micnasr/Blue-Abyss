@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuButtons : MonoBehaviour
 {
-    public GameObject startButton;
-    public GameObject exitButton;
+    public GameObject menu;
 
     public void StartGame()
     {
@@ -21,7 +20,6 @@ public class MenuButtons : MonoBehaviour
 
     public void ShowButtons()
     {
-        startButton.SetActive(true);
-        exitButton.SetActive(true);
+        menu.SetActive(true);
     }
 }
