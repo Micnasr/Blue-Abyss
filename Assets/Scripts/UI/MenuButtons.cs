@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuButtons : MonoBehaviour
 {
     public GameObject menu;
+    public GameObject credit;
 
     public void StartGame()
     {
@@ -21,5 +22,6 @@ public class MenuButtons : MonoBehaviour
     public void ShowButtons()
     {
         menu.SetActive(true);
+        credit.SetActive(true);
     }
 }
