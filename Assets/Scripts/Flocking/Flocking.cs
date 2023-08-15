@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using UnityEngine;
 
 public class Flocking : MonoBehaviour
@@ -81,7 +79,10 @@ public class Flocking : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
             playerCam = player.GetComponentInChildren<Camera>();
+    }
 
+    private void Awake()
+    {
         GenerateUnits();
     }
 
