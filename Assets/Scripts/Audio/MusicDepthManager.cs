@@ -17,15 +17,12 @@ public class MusicDepthManager : MonoBehaviour
 
     private Transform player;
 
-    private void Start()
+    private void Update()
     {
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
             player = playerObj.transform;
-    }
 
-    private void Update()
-    {
         // Handle Music Depending On Player Depth >:)
 
         if (player != null)

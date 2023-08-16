@@ -86,6 +86,7 @@ public class PauseLogic : MonoBehaviour
 
     public void ExitGame()
     {
+        FindAnyObjectByType<AudioManager>().TurnOffSounds();
         FindAnyObjectByType<AudioManager>().FadeTrack("SurfaceMusic", 0.4f);
         SceneManager.LoadScene("Menu");
     }

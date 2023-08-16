@@ -178,4 +178,17 @@ public class AudioManager : MonoBehaviour
 
         audioSource.volume = targetVolume;
     }
+
+    public void TurnOffSounds()
+    {
+        AudioSource[] audioSources = GetComponentsInChildren<AudioSource>();
+
+        foreach (AudioSource source in audioSources)
+        {
+            if (source.isPlaying)
+            {
+                source.Stop();
+            }
+        }
+    }
 }
