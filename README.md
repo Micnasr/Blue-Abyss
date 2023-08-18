@@ -10,6 +10,7 @@ Dive into the enigmatic depths of the ocean in **Blue Abyss** – an immersive u
 1. [Gameplay](#gameplay)
 2. [Development Journey](#development-journey)
 3. [Fish Behaviour Script](#fish-behaviour-script)
+    - [Example Code](#example-code)
 4. [Screenshots](#screenshots)
 5. [How to Play](#how-to-play)
 6. [Credits](#credits)
