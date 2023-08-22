@@ -2,7 +2,8 @@
 
 Dive into the enigmatic depths of the ocean in **Blue Abyss** – an immersive underwater exploration game where you'll embark on a captivating journey to uncover the mysteries of the deep sea. Explore the breathtaking underwater world, hunt mesmerizing marine life, and trade your treasures as you navigate the aquatic realm. Experience the challenges and wonders of underwater exploration as you venture into the boundless Blue Abyss.
 
-![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/a191f685-f692-4560-8ff7-f27d5cc90244)
+![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/95a6208e-5733-4599-adf5-187b6dbc3a1b)
+
 
 <br>
 
@@ -35,7 +36,7 @@ Dive into the enigmatic depths of the ocean in **Blue Abyss** – an immersive u
 
 With a focus on quest-driven progression and a rich underwater world to explore, **Blue Abyss** provides an immersive gameplay experience that combines action, strategy, and discovery.
 
-![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/b6cb9906-9631-40ef-9849-7ccb56618049)
+![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/3691770f-906b-488e-8ec0-6be6d8a94d8b)
 
 <br>
 
@@ -47,11 +48,9 @@ As the project's scope expanded, I delved deep into mastering the Unity engine. 
 
 Amidst this journey, I ventured into the realm of 3D modeling and animation, acquiring proficiency in Blender to create complex 3D models and breathe life into them through animation. This comprehensive approach enabled me to incorporate great visuals and engaging interactions into the game, elevating the player's immersion in the mysterious depths of the ocean.
 
-![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/8e18c422-7ee6-4bdd-acaf-fd14c6c43aa8)
+![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/a8e74b17-8cf9-4daf-888e-01a941baad6a)
 
 Throughout, I used Trello to maintain organization and structure, streamlining the development process. Moreover, optimizing performance became a significant challenge. I invested substantial effort to ensure the open-world game runs smoothly on a wide range of hardware, delivering an enjoyable experience to players across different machines.
-
-![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/c7113b15-d3c0-489f-bfc0-0265b585be4d)
 
 At every point, I worked hard to come up with the best ways to add new features. It wasn't just about making a great game; it was also important to keep the code organized and clear, so that I can easily make improvements and changes later on.
 
@@ -70,18 +69,22 @@ Central to the fish AI is the dynamic checkpoint system, offering a nuanced arra
 
 A notable feature of the fish AI is its sophisticated obstacle avoidance mechanism. By projecting three lines from the front of each fish, obstacles are detected in real-time. If an obstacle is encountered, the fish gracefully adjusts its course by rotating until a clear path is ensured, enriching the realism and authenticity of their underwater navigation.
 
-![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/356dfca6-439a-4d2e-8e88-728316cee034)
+![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/ddaa6009-4e13-4f0a-85df-932356cb4f44)
 
 Moreover, the fish AI system demonstrates intelligent optimization strategies. Fish are dynamically despawned when they venture far from the player's vicinity, ensuring computational resources are allocated where they matter most. Furthermore, animations are selectively disabled for fish that are at a considerable distance from the player, maintaining a harmonious balance between performance and visual fidelity.
 
 <br>
 
 ## Screenshots
-![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/7ec32c25-e9b0-4cd3-adb3-f5b4eadfe0d5)
-![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/c6d46769-2479-4a8b-875c-51224251224f)
-![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/12facedf-78c4-45c8-b95d-ba1425283998)
-![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/f376dff1-edfb-4c95-ad64-14aa6bcd6063)
-![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/d4a31bb4-cb91-4258-9847-62f230f900a8)
+![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/1a91265c-1a93-40a2-bb3a-42fd62e1388b)
+![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/80dc9d7f-a850-4713-8252-b11a606aad0d)
+![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/ab180dbb-3197-4f9e-9a6e-55885649fe10)
+![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/e2897351-4255-4dc4-9842-1d0bf5b0ff6c)
+![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/53067cb2-191a-4dac-b505-072a31bc1543)
+![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/b215326b-7eb3-4c8d-ba07-4bf12b6d8463)
+![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/56702926-c9d9-4f00-a84c-11109d853a86)
+![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/25e6b6be-33ea-4d36-9b6d-51f9be16f672)
+![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/f8a47546-0729-4a91-8159-d5a10fdcee12)
 
 <br>
 
