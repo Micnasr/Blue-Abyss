@@ -1,9 +1,8 @@
 # Blue Abyss
 
-Dive into the enigmatic depths of the ocean in **Blue Abyss** – an immersive underwater exploration game where you'll embark on a captivating journey to uncover the mysteries of the deep sea. Explore the breathtaking underwater world, hunt mesmerizing marine life, and trade your treasures as you navigate the aquatic realm. Experience the challenges and wonders of underwater exploration as you venture into the boundless Blue Abyss.
+Dive into the depths of the ocean in **Blue Abyss** – an immersive underwater exploration game where you'll embark on a journey to uncover the mysteries of the deep sea. Explore the breathtaking underwater world, hunt marine life, and trade your treasures as you navigate the aquatic realm.
 
 ![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/95a6208e-5733-4599-adf5-187b6dbc3a1b)
-
 
 <br>
 
@@ -20,9 +19,9 @@ Dive into the enigmatic depths of the ocean in **Blue Abyss** – an immersive u
 
 ## Gameplay
 
-**Blue Abyss** offers a thrilling underwater adventure where you take on the role of an intrepid explorer delving into the ocean's secrets. Immerse yourself in a dynamic and engaging gameplay experience with the following features:
+**Blue Abyss** offers a thrilling underwater adventure where you take on the role of an explorer delving into the ocean's secrets.
 
-- **Hunt and Gather:** Venture into the depths to hunt exotic marine life. Use your skills to catch a variety of fish species and reap rewards.
+- **Hunt and Gather:** Venture into the depths to hunt exotic marine life. Use your skills to catch a variety of fish species.
 
 - **Trade and Profit:** Visit the local butcher to sell your hard-earned catch. Accumulate wealth to upgrade your equipment and unlock new opportunities.
 
@@ -33,8 +32,6 @@ Dive into the enigmatic depths of the ocean in **Blue Abyss** – an immersive u
 - **Embark on Quests:** Engage with unique characters and undertake quests that unravel the story. Complete missions to earn the trust of a renowned professor who can build you a specialized vessel for deeper exploration.
 
 - **Unlock the Abyss:** Conquer challenges, solve puzzles, and meet the professor's criteria to unlock the ultimate goal—a state-of-the-art vessel that grants you access to the abyss.
-
-With a focus on quest-driven progression and a rich underwater world to explore, **Blue Abyss** provides an immersive gameplay experience that combines action, strategy, and discovery.
 
 ![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/3691770f-906b-488e-8ec0-6be6d8a94d8b)
 
@@ -65,9 +62,9 @@ At every point, I worked hard to come up with the best ways to add new features.
 
 The **Fish Behaviour** script plays a pivotal role in bringing the underwater world of "Blue Abyss" to life. One of the key decisions behind its design was the implementation of a transform-based movement system. This approach prioritizes using transforms over physics rigidbodies, resulting in enhanced performance, particularly when a multitude of fish inhabit the expansive ocean environment. With the potential for hundreds of fish in the game, this decision greatly contributes to ensuring a seamlessly fluid and immersive gameplay experience.
 
-Central to the fish AI is the dynamic checkpoint system, offering a nuanced array of behaviors that breathe life into each aquatic inhabitant. Parameters such as turning radius, movement speed, and aggression levels dictate the unique characteristics of each fish. This results in a mesmerizing diversity of swimming patterns and interactions as the underwater ecosystem comes to life.
+Central to the fish AI is the dynamic checkpoint system, offering a unique array of behaviors that breathe life into each animal. Parameters such as turning radius, movement speed, and aggression levels dictate the unique characteristics of each fish. This results in a diversity of swimming patterns and interactions as the underwater ecosystem comes to life.
 
-A notable feature of the fish AI is its sophisticated obstacle avoidance mechanism. By projecting three lines from the front of each fish, obstacles are detected in real-time. If an obstacle is encountered, the fish gracefully adjusts its course by rotating until a clear path is ensured, enriching the realism and authenticity of their underwater navigation.
+A notable feature of the fish AI is its sophisticated obstacle avoidance mechanism. By projecting three lines from the front of each fish, obstacles are detected in real-time. If an obstacle is encountered, the fish gracefully adjusts its course by rotating until a clear path is ensured.
 
 ![image](https://github.com/Micnasr/Blue-Abyss/assets/44876651/ddaa6009-4e13-4f0a-85df-932356cb4f44)
 
